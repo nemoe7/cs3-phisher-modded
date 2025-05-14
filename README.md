@@ -1,5 +1,3 @@
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fphisher98%2FPhisher98%2F&count_bg=%23060606&title_bg=%23FC6005&icon=mediafire.svg&icon_color=%23FFFFFF&title=Avg+%2F+Hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
 Shortcode: phisherrepo
 
 ## Phisher Cloudstream Plugin Server
@@ -30,8 +28,8 @@ These extensions are Free: You can use, study, share and modify it at your will.
 
 ### DMCA
 We hereby issue this notice to inform you that these extensions just function like an ordinary browser (like your browser) that fetch video files from internet,
-and do not violate the provisions of the Digital Millennium Copyright Act (DMCA). 
-The Content these extensions may access is not hosted by us or the Cloudstream 3 application but the websites they are browsing in their autonomous mode. It is sole responsibility 
+and do not violate the provisions of the Digital Millennium Copyright Act (DMCA).
+The Content these extensions may access is not hosted by us or the Cloudstream 3 application but the websites they are browsing in their autonomous mode. It is sole responsibility
 of the user and his/her countries' or states' law. If you think they are violating any intellectual property then please contact the actual file hosts not the owners of this repository or the CloudStream 3 app.
 
 Thank You.
