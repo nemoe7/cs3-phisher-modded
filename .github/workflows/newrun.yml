@@ -41,7 +41,7 @@ jobs:
           java-version: 17
 
       - name: Gradle Cache
-        uses: burrunan/gradle-cache-action@rel/3.0.1
+        uses: burrunan/gradle-cache-action@v3
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3.2.2
