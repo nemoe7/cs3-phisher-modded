@@ -40,6 +40,9 @@ jobs:
           distribution: "adopt"
           java-version: 17
 
+      - name: Gradle Cache
+        uses: burrunan/gradle-cache-action@rel/3.0.1
+
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3.2.2
 
