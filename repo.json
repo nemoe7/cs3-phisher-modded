@@ -1,0 +1,8 @@
+{
+    "name": "Phisher Repo (nemoe7)",
+    "description": "Modded version of phisher98's cloudstream extensions repo",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/refs/heads/builds/plugins.json"
+    ]
+  }
