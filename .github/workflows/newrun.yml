@@ -40,7 +40,7 @@ jobs:
           distribution: "adopt"
           java-version: 17
 
-      - name: Gradle Cache
+      - name: Setup Gradle Cache
         uses: burrunan/gradle-cache-action@v3
         with:
           build-root-directory: "src"
