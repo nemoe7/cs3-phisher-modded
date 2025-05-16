@@ -3604,11 +3604,11 @@ object StreamPlayExtractor : StreamPlay() {
         fun decode(input: String): String = java.net.URLDecoder.decode(input, "utf-8")
         paths.map {
             val quality = getIndexQuality(it.first)
-            val tags = getIndexQualityTags(it.first)
+            // val tags = getIndexQualityTags(it.first)
             callback.invoke(
                 newExtractorLink(
                     "DahmerMovies",
-                    "DahmerMovies $tags",
+                    "DahmerMovies",
                     url = decode((url + it.second).encodeUrl())
                 ) {
                     this.referer = ""
@@ -4494,8 +4494,8 @@ object StreamPlayExtractor : StreamPlay() {
             epData.sources.forEach {
                 callback(
                     newExtractorLink(
-                        "FlixHQ ${server.uppercase()}",
-                        "FlixHQ ${server.uppercase()}",
+                        "FlixHQ [${server.capitalize().replace("cloud", "Cloud")}]",
+                        "FlixHQ [${server.capitalize().replace("cloud", "Cloud")}]",
                         url = it.url,
                         ExtractorLinkType.M3U8
                     ) {
@@ -4624,10 +4624,15 @@ object StreamPlayExtractor : StreamPlay() {
                                     source.url.substringAfter("m3u8-proxy?url=").substringBefore("&headers="),
                                     "UTF-8"
                                 )
+                                val name = generateSourceName(
+                                    "RiveStream [${source.source}]",
+                                    href,
+                                    Qualities.P1080.value
+                                )
                                 callback.invoke(
                                     newExtractorLink(
-                                        "RiveStream ${source.source} ${source.quality}",
-                                        "RiveStream ${source.source} ${source.quality}",
+                                        name,
+                                        name,
                                         url = href,
                                         type = ExtractorLinkType.M3U8
                                     ) {
@@ -4643,10 +4648,15 @@ object StreamPlayExtractor : StreamPlay() {
                                         INFER_TYPE
                                     }
 
+                                val name = generateSourceName(
+                                    "RiveStream [${source.source}]",
+                                    source.url,
+                                    Qualities.P1080.value
+                                )
                                 callback.invoke(
                                     newExtractorLink(
-                                        "RiveStream ${source.source} ${source.quality} (VLC)",
-                                        "RiveStream ${source.source} ${source.quality} (VLC)",
+                                        name,
+                                        name,
                                         url = source.url,
                                         type = linkType
                                     ) {
@@ -5160,9 +5170,12 @@ object StreamPlayExtractor : StreamPlay() {
                     val iframeSource =
                         app.get("$Player4uApi$subLink", timeout = 10, referer = Player4uApi)
                             .document.select("iframe").attr("src")
-
                     getPlayer4uUrl(
-                        nameFormatted,
+                        generateSourceName(
+                            "Player4U",
+                            "https://uqloads.xyz/e/$iframeSource",
+                            selectedQuality
+                        ),
                         selectedQuality,
                         "https://uqloads.xyz/e/$iframeSource",
                         Player4uApi,

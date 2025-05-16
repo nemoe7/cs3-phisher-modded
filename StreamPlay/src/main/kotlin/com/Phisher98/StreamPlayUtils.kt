@@ -1,6 +1,5 @@
 package com.phisher98
 
-import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import app.cash.quickjs.QuickJs
@@ -29,6 +28,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import okhttp3.FormBody
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Interceptor
@@ -103,6 +104,21 @@ val mimeType = arrayOf(
     "video/mp4",
     "video/x-msvideo"
 )
+
+val nameCountMap = mutableMapOf<String, Int>()
+val nameCountMapMutex = Mutex()
+
+suspend fun resetNameCount() {
+    nameCountMapMutex.withLock { nameCountMap.clear() }
+}
+
+suspend fun generateSourceName(name: String, url: String, quality: Int): String {
+    nameCountMapMutex.withLock {
+        val count = (nameCountMap["$name $quality"] ?: 0) + 1
+        nameCountMap["$name $quality"] = count
+        return name + if (count != 1) " (\u200B$count)" else ""
+    }
+}
 
 fun Document.getMirrorLink(): String? {
     return this.select("div.mb-4 a").randomOrNull()
@@ -1015,10 +1031,23 @@ suspend fun loadSourceNameExtractor(
 ) {
     loadExtractor(url, referer, subtitleCallback) { link ->
         CoroutineScope(Dispatchers.IO).launch {
+
+            var provider = "[${link.source}]"
+
+            listOf("Driveleech", "Driveseed").firstOrNull {
+                link.source.contains(
+                    it, ignoreCase = true
+                )
+            }?.let { provider = "[$it]" }
+
+            if (link.source.contains("Download", ignoreCase = true)) provider += " [Download]"
+
+            val name = generateSourceName("$source $provider", link.url, link.quality)
+
             callback.invoke(
                 newExtractorLink(
-                    "$source[${link.source}]",
-                    "$source[${link.source}]",
+                    name,
+                    name,
                     link.url,
                 ) {
                     this.quality = link.quality
@@ -1936,8 +1965,7 @@ fun loadHindMoviezLinks(
                     linkElements.forEach { linkItem ->
                         callback.invoke(
                             newExtractorLink(
-                                "HindMoviez [H-Cloud] [$size]",
-                                "HindMoviez [H-Cloud] [$size]",
+                                "HindMoviez [H-Cloud]", "HindMoviez [H-Cloud]",
                                 url = linkItem.attr("href")
                             ) {
                                 this.quality = quality
@@ -1951,8 +1979,7 @@ fun loadHindMoviezLinks(
                         if (linkItem.text().contains("HCloud")) {
                             callback.invoke(
                                 newExtractorLink(
-                                    "HindMoviez [H-Cloud] [$size]",
-                                    "HindMoviez [H-Cloud] [$size]",
+                                    "HindMoviez [H-Cloud]", "HindMoviez [H-Cloud]",
                                     url = linkItem.attr("href")
                                 ) {
                                     this.quality = quality
@@ -1969,8 +1996,7 @@ fun loadHindMoviezLinks(
                                 }
                                 callback.invoke(
                                     newExtractorLink(
-                                        "HindMoviez [$host] [$size]",
-                                        "HindMoviez [$host] [$size]",
+                                        "HindMoviez [$host]", "HindMoviez [$host]",
                                         url = item.attr("href")
                                     ) {
                                         this.quality = quality
@@ -1987,8 +2013,7 @@ fun loadHindMoviezLinks(
                             val link = doc.select("a")
                             callback.invoke(
                                 newExtractorLink(
-                                    "HindMoviez [GDirect] [$size]",
-                                    "HindMoviez [GDirect] [$size]",
+                                    "HindMoviez [GDirect]", "HindMoviez [GDirect]",
                                     url = link.attr("href")
                                 ) {
                                     this.quality = quality
@@ -2132,14 +2157,21 @@ suspend fun invokeExternalSource(
                     if (source.type == "video/mp4") ExtractorLinkType.VIDEO else ExtractorLinkType.M3U8
                 val label = if (format == ExtractorLinkType.M3U8) "Hls" else "Mp4"
                 if (!(source.label == "AUTO" || format == ExtractorLinkType.VIDEO)) return@org
+                val url = source.file?.replace("\\/", "/") ?: return@org
+                val quality =
+                    getIndexQuality(if (format == ExtractorLinkType.M3U8) fileList.fileName else source.label)
+
+                val name = generateSourceName(
+                    "SuperStream [Server ${index + 1}]", "$url${source.size}", quality
+                )
 
                 callback.invoke(
                     ExtractorLink(
-                        "⌜ SuperStream ⌟ ${source.size}",
-                        "⌜ SuperStream ⌟ [Server ${index + 1}] ${source.size}",
-                        source.file?.replace("\\/", "/") ?: return@org,
+                        name,
+                        name,
+                        url,
                         "",
-                        getIndexQuality(if (format == ExtractorLinkType.M3U8) fileList.fileName else source.label),
+                        quality,
                         type = format,
                     )
                 )

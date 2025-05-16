@@ -471,6 +471,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val res = parseJson<LinkData>(data)
+        resetNameCount()
         runAllAsync(
             {
                 invokeEmbedsu(res.imdbId, res.season, res.episode,callback)

@@ -1088,10 +1088,11 @@ class HubCloud : ExtractorApi() {
             when {
                 link.contains("www-google-com") -> Log.d("Error:", "Not Found")
                 link.contains("technorozen.workers.dev") -> {
+                    val name = generateSourceName("$source [10GB Server]", getGBurl(link), quality)
                     callback.invoke(
                         newExtractorLink(
-                            "$source [10GB Server]",
-                            "$source [10GB Server] [$size]",
+                            name,
+                            name,
                             url = getGBurl(link)
                         ) {
                             this.quality = quality
@@ -1099,10 +1100,11 @@ class HubCloud : ExtractorApi() {
                     )
                 }
                 link.contains("pixeldra.in") || link.contains("pixeldrain") -> {
+                    val name = generateSourceName("$source [Pixeldrain]", link, quality)
                     callback.invoke(
                         newExtractorLink(
-                            "$source [Pixeldrain]",
-                            "$source [Pixeldrain] [$size]",
+                            name,
+                            name,
                             url = link
                         ) {
                             this.quality = quality
@@ -1110,10 +1112,12 @@ class HubCloud : ExtractorApi() {
                     )
                 }
                 link.contains("buzzheavier") -> {
+                    val name =
+                        generateSourceName("$source [Buzzheavier]", "$link/download", quality)
                     callback.invoke(
                         newExtractorLink(
-                            "$source [Buzzheavier]",
-                            "$source [Buzzheavier] [$size]",
+                            name,
+                            name,
                             url = "$link/download"
                         ) {
                             this.quality = quality
@@ -1122,10 +1126,11 @@ class HubCloud : ExtractorApi() {
                 }
 
                 link.contains(".dev") -> {
+                    val name = generateSourceName("$source [Hub-Cloud]", link, quality)
                     callback.invoke(
                         newExtractorLink(
-                            "$source [Hub-Cloud]",
-                            "$source [Hub-Cloud] [$size]",
+                            name,
+                            name,
                             url = link
                         ) {
                             this.quality = quality
@@ -1133,10 +1138,11 @@ class HubCloud : ExtractorApi() {
                     )
                 }
                 link.contains("fastdl.lol") -> {
+                    val name = generateSourceName("$source [Hub-Cloud] [FSL?]", link, quality)
                     callback.invoke(
                         newExtractorLink(
-                            "$source [FSL] Hub-Cloud",
-                            "$source [FSL] Hub-Cloud [$size]",
+                            name,
+                            name,
                             url = link
                         ) {
                             this.quality = quality
@@ -1144,10 +1150,11 @@ class HubCloud : ExtractorApi() {
                     )
                 }
                 link.contains("hubcdn.xyz") -> {
+                    val name = generateSourceName("$source [Hub-Cloud] [Download]", link, quality)
                     callback.invoke(
                         newExtractorLink(
-                            "$source [File] Hub-Cloud",
-                            "$source [File] Hub-Cloud [$size]",
+                            name,
+                            name,
                             url = link
                         ) {
                             this.quality = quality
