@@ -1,0 +1,46 @@
+name: Sync with Upstream
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # allow pushing back to the PR branch
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add & fetch upstream
+        run: |
+          git remote add upstream https://github.com/phisher98/cloudstream-extensions-phisher.git
+          git fetch upstream
+
+      - name: Merge upstream/main into PR branch
+        run: |
+          git merge upstream/main --no-edit || true
+
+      - name: Auto-resolve delete/modify conflicts (keep deletions)
+        run: |
+          git diff --name-status --diff-filter=UD \
+            | awk '{print $2}' \
+            | while read file; do
+              git rm "$file"
+            done
+          git commit -am "chore: auto-resolve delete/modify conflicts" || echo "Nothing to commit"
+
+      - name: Push changes back to PR
+        run: |
+          git push origin HEAD:${{ github.head_ref }}
