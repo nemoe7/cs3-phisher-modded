@@ -10,7 +10,7 @@ android {
     defaultConfig {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
-        buildConfigField("String", "HianimeAPI", "\"${properties.getProperty("HianimeAPI")}\"")
+        buildConfigField("String", "HianimeAPInjiefnjferjne", "\"${properties.getProperty("HianimeAPI")}\"")
     }
 }
 
