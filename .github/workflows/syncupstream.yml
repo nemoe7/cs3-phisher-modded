@@ -29,6 +29,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           # Run merge script
+          chmod +x ./.github/scripts/merge.sh
           ./.github/scripts/merge.sh
 
           # Commit merge changes (if any)
