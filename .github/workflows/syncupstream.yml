@@ -20,15 +20,9 @@ jobs:
           ref: master
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Sync with upstream and handle changes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set upstream and check if ahead
+        id: set-upstream
         run: |
-          set -e
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
           # Add upstream remote if it doesn't exist
           if ! git rev-parse --quiet --verify upstream/master > /dev/null; then
             git remote add upstream https://github.com/phisher98/cloudstream-extensions-phisher.git || true
@@ -38,12 +32,21 @@ jobs:
           git fetch upstream
 
           # Check if upstream is ahead
-          UPSTREAM_HASH=$(git rev-parse upstream/master)
-          ORIGIN_HASH=$(git rev-parse origin/master)
-          if [ "$UPSTREAM_HASH" = "$ORIGIN_HASH" ]; then
-            echo "Upstream is not ahead. Exiting."
-            exit 0
+          if [ $(git fetch upstream; git rev-list --left-right --count upstream/master...origin/master | awk '{print $1}') -ne 0 ]; then
+            echo "is_ahead=true" >> $GITHUB_OUTPUT
+          else
+            echo "Upstream is not ahead of origin."
+            echo "is_ahead=false" >> $GITHUB_OUTPUT
           fi
+
+      - name: Sync with upstream and handle deletions
+        id: sync-upstream
+        if: steps.set-upstream.outputs.is_ahead == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
           # Run merge script
           chmod +x ./.github/scripts/merge.sh
@@ -52,17 +55,36 @@ jobs:
           # Commit merge changes (if any)
           git commit -m "Merge upstream changes" || true
 
+      - name: Check for merge conflicts
+        if: steps.sync-upstream.outcome == 'success'
+        id: check-merge-conflicts
+        run: |
           # Check for merge conflicts or changes
           if git ls-files -u | grep .; then
             echo "There are merge conflicts. Please resolve them manually."
+            echo "merge_conflicts=true" >> $GITHUB_OUTPUT
             exit 1
+          else
+            echo "merge_conflicts=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Check for changes
+        if: steps.check-merge-conflicts.outcome == 'success'
+        id: check-changes
+        run: |
           if git diff --quiet origin/master...HEAD; then
             echo "No changes to merge. Nothing to PR."
-            exit 0
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Push changes and create PR
+        if: |
+          steps.check-changes.outcome == 'success'
+          && steps.check-merge-conflicts.outputs.merge_conflicts == 'false'
+          && steps.check-changes.outputs.changes == 'true'
+        run: |
           # Push sync-upstream branch and create PR if needed
           git push -u origin sync-upstream --force
           gh repo set-default nemoe7/cs3-phisher-modded
