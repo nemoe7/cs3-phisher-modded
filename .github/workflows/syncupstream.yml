@@ -1,4 +1,5 @@
 # Generated with assistance from Copilot Chat on 2025-05-20.
+# /.github/workflows/syncupstream.yml
 
 name: Sync Fork with Upstream
 
@@ -28,6 +29,22 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          # Add upstream remote if it doesn't exist
+          if ! git rev-parse --quiet --verify upstream/master > /dev/null; then
+            git remote add upstream https://github.com/phisher98/cloudstream-extensions-phisher.git || true
+          fi
+
+          # Fetch upstream changes
+          git fetch upstream
+
+          # Check if upstream is ahead
+          UPSTREAM_HASH=$(git rev-parse upstream/master)
+          ORIGIN_HASH=$(git rev-parse origin/master)
+          if [ "$UPSTREAM_HASH" = "$ORIGIN_HASH" ]; then
+            echo "Upstream is not ahead. Exiting."
+            exit 0
+          fi
+
           # Run merge script
           chmod +x ./.github/scripts/merge.sh
           ./.github/scripts/merge.sh
@@ -38,12 +55,12 @@ jobs:
           # Check for merge conflicts or changes
           if git ls-files -u | grep .; then
             echo "There are merge conflicts. Please resolve them manually."
-            exit 78
+            exit 1
           fi
 
           if git diff --quiet origin/master...HEAD; then
             echo "No changes to merge. Nothing to PR."
-            exit 78
+            exit 0
           fi
 
           # Push sync-upstream branch and create PR if needed
