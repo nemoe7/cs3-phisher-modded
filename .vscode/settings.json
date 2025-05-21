@@ -14,8 +14,5 @@
         "adb logcat -b all -c; adb logcat --pid=$(adb shell pidof -s com.lagradost.cloudstream3.prerelease)"
       ]
     }
-  },
-  "editor.detectIndentation": false,
-  "editor.indentSize": "tabSize",
-  "editor.tabSize": 4
+  }
 }
