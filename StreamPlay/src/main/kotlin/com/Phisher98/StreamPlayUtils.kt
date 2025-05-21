@@ -1,5 +1,6 @@
 package com.phisher98
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import app.cash.quickjs.QuickJs
