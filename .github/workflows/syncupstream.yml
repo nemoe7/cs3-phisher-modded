@@ -42,8 +42,6 @@ jobs:
       - name: Sync with upstream and handle deletions
         id: sync-upstream
         if: steps.set-upstream.outputs.is_ahead == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -80,6 +78,8 @@ jobs:
           fi
 
       - name: Push changes and create PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: |
           steps.check-changes.outcome == 'success'
           && steps.check-merge-conflicts.outputs.merge_conflicts == 'false'
