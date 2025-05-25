@@ -1,4 +1,4 @@
-Shortcode: phisherrepo
+Shortcode: phisherrepo-nemo
 
 ## Phisher Cloudstream Plugin Server
 [![Discord](https://invidget.switchblade.xyz/3VmSzGeCTz)](https://discord.com/invite/3VmSzGeCTz)
