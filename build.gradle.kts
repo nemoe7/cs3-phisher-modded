@@ -7,12 +7,14 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        // mavenLocal()
         maven("https://jitpack.io")
     }
 
     dependencies {
         classpath("com.android.tools.build:gradle:8.7.3")
         classpath("com.github.nemoe7:cs3-gradle-plugin:master-SNAPSHOT")
+        // classpath("com.lagradost.cloudstream3:gradle:local-SNAPSHOT")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
     }
 }
