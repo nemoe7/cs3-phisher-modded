@@ -20,16 +20,19 @@ Shortcode: phisherrepo-nemo
 
 
 ### License
-[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
+[![GNU AGPLv3 Image](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
-These extensions are Free: You can use, study, share and modify it at your will. They can be redistributed and/or modified under the terms of the
-[GNU General Public License](https://www.gnu.org/licenses/gpl.html) version 3 or later published by the Free Software Foundation.
+These extensions are Free Software: You can use, study, share, and modify them at your will.  
+They are distributed under the terms of the  
+[GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html), **version 3 only**, as published by the Free Software Foundation.
 
+### DMCA / Copyright Notice
+This repository provides software that operates similarly to a standard web browser. It does not host, store, upload, or distribute any media content. All content accessed through this software is retrieved from publicly available third-party websites at the sole discretion of the user.
 
-### DMCA
-We hereby issue this notice to inform you that these extensions just function like an ordinary browser (like your browser) that fetch video files from internet,
-and do not violate the provisions of the Digital Millennium Copyright Act (DMCA).
-The Content these extensions may access is not hosted by us or the Cloudstream 3 application but the websites they are browsing in their autonomous mode. It is sole responsibility
-of the user and his/her countries' or states' law. If you think they are violating any intellectual property then please contact the actual file hosts not the owners of this repository or the CloudStream 3 app.
+The maintainers of this project and the Cloudstream 3 application do not control, own, or upload any external content. Accordingly, we disclaim all responsibility for any copyrighted material that may be accessed through third-party sources using this software.
 
-Thank You.
+If you are a copyright holder and believe that specific content accessible through this software infringes your rights, please direct your takedown request to the website or hosting provider where the content is actually located. We do not have access to or authority over third-party hosted material, and as such, are unable to remove or restrict it.
+
+We respect the intellectual property laws of all jurisdictions and will review any valid legal inquiries directed at us that fall within our scope of responsibility.
+
+Thank you for your understanding and cooperation.

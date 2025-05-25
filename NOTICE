@@ -1,0 +1,27 @@
+cs3-phisher-modded
+
+These extensions are Free Software: You can use, study, share, and modify them at your will.
+They are distributed under the terms of the GNU Affero General Public License, version 3 only,
+as published by the Free Software Foundation.
+
+---
+
+Components and their licenses:
+
+1. CloudStream Extensions by Phisher98 (GPL-3.0)
+   - Original work copyright (C) 2024 Phisher98
+   - Source: https://github.com/phisher98/cloudstream-extensions-phisher
+   - This is a modified version of the original work
+
+2. Anime API by nattadasu (AGPL-3.0-only)
+   - Copyright (C) 2024 nattadasu
+   - Source: https://github.com/nattadasu/animeApi
+   - Licensed under AGPL-3.0-only
+
+---
+
+This project is distributed under AGPL-3.0-only in compliance with the most restrictive license of its components.
+
+---
+
+For the full license text, please see the LICENSE file.
