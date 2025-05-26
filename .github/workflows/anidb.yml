@@ -1,0 +1,53 @@
+name: AniDB Delta
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 08:00 Asia/Manila (UTC+8) → 00:00 UTC
+    - cron: '0 0 * * *'
+
+concurrency:
+  group: "build"
+
+jobs:
+  anidb-delta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch (builds)
+        uses: actions/checkout@v4
+        with:
+          ref: builds
+
+      - name: Retrieve anidb dump
+        id: retrieve-anidb-dump
+        run: |
+          curl -O http://anidb.net/api/anime-titles.dat.gz
+          curl -O http://anidb.net/api/anime-titles.xml.gz
+
+          gzip -d anime-titles.dat.gz
+          gzip -d anime-titles.xml.gz
+
+          mkdir -p raw/anidb
+          mv anime-titles.dat raw/anidb/titles.dat
+          mv anime-titles.xml raw/anidb/titles.xml
+
+      - name: Check for changes
+        if: steps.retrieve-anidb-dump.outcome == 'success'
+        id: check-changes
+        run: |
+          if git diff --quiet raw/anidb/titles.dat raw/anidb/titles.xml; then
+            echo "No changes detected in anidb dump."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "github-actions[bot]@users.noreply.github.com"
+
+          git add raw/anidb/titles.dat raw/anidb/titles.xml
+          git commit -m "AniDB Delta Update" || exit 0
+          git push --force
