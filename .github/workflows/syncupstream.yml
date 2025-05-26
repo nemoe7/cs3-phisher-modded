@@ -18,7 +18,6 @@ jobs:
         with:
           fetch-depth: 0
           ref: master
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set upstream and check if ahead
         id: set-upstream
@@ -43,8 +42,8 @@ jobs:
         id: sync-upstream
         if: steps.set-upstream.outputs.is_ahead == 'true'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "actions@github.com"
+          git config --local user.name "github-actions[bot]@users.noreply.github.com"
 
           # Run merge script
           chmod +x ./.github/scripts/merge.sh
