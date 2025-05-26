@@ -5,6 +5,11 @@ on:
   schedule:
     # 08:00 Asia/Manila (UTC+8) → 00:00 UTC
     - cron: '0 0 * * *'
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/anidb.yml'
 
 concurrency:
   group: "build"
@@ -21,11 +26,14 @@ jobs:
       - name: Retrieve anidb dump
         id: retrieve-anidb-dump
         run: |
-          curl -O http://anidb.net/api/anime-titles.dat.gz
-          curl -O http://anidb.net/api/anime-titles.xml.gz
+          curl -LO -A "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" http://anidb.net/api/anime-titles.dat.gz
+          curl -LO -A "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" http://anidb.net/api/anime-titles.xml.gz
 
           gzip -d anime-titles.dat.gz
           gzip -d anime-titles.xml.gz
+
+          sed -i '1,3d' anime-titles.dat
+          sort -t'|' -k1,1n -o anime-titles.dat{,}
 
           mkdir -p raw/anidb
           mv anime-titles.dat raw/anidb/titles.dat
@@ -35,7 +43,8 @@ jobs:
         if: steps.retrieve-anidb-dump.outcome == 'success'
         id: check-changes
         run: |
-          if git diff --quiet raw/anidb/titles.dat raw/anidb/titles.xml; then
+          git add raw/anidb/titles.dat raw/anidb/titles.xml
+          if git diff --quiet --cached raw/anidb/titles.dat raw/anidb/titles.xml; then
             echo "No changes detected in anidb dump."
             echo "changes=false" >> $GITHUB_OUTPUT
           else
