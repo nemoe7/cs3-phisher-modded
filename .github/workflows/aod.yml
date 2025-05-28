@@ -10,6 +10,8 @@ on:
       - master
     paths:
       - '.github/workflows/aod.yml'
+      - '.github/scripts/python/aod.py'
+      - '.github/scripts/python/requirements.txt'
 
 concurrency:
   group: "build"
