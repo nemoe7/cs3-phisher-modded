@@ -256,7 +256,7 @@ def strip_data(data):
     for url in anime.get("sources", []):
       key, val = extract_id(url)
       if key and val:
-        ids[key] = val
+        ids[key] = int(val)
     if ids:
       new_entry["ids"] = ids
 
