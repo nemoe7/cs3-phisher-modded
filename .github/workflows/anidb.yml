@@ -54,8 +54,8 @@ jobs:
       - name: Commit and push changes
         if: steps.check-changes.outputs.changes == 'true'
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
 
           git add raw/anidb/titles.dat raw/anidb/titles.xml
           git commit -m "AniDB Delta Update" || exit 0
