@@ -26,8 +26,8 @@ jobs:
       - name: Retrieve AOD
         id: retrieve-AOD-dump
         run: |
-          pip install -r .github/scripts/python/requirements.txt
-          python3 .github/scripts/python/aod.py
+          pip install -r https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/master/.github/scripts/python/requirements.txt
+          curl -s https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/refs/heads/master/.github/scripts/python/aod.py | python3
 
           mkdir -p raw/aod
           mv anime-offline-database-trimmed.json raw/aod/aod.json
@@ -36,9 +36,9 @@ jobs:
         if: steps.retrieve-aod-dump.outcome == 'success'
         id: check-changes
         run: |
-          git add raw/anidb/titles.dat raw/anidb/titles.xml
-          if git diff --quiet --cached raw/anidb/titles.dat raw/anidb/titles.xml; then
-            echo "No changes detected in anidb dump."
+          git add raw/aod/aod.json
+          if git diff --quiet --cached raw/aod/aod.json; then
+            echo "No changes detected in aod dump."
             echo "changes=false" >> $GITHUB_OUTPUT
           else
             echo "changes=true" >> $GITHUB_OUTPUT
@@ -50,6 +50,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
-          git add raw/anidb/titles.dat raw/anidb/titles.xml
-          git commit -m "AniDB Delta Update" || exit 0
+          git add raw/aod/aod.json
+          git commit -m "AOD Delta Update" || exit 0
           git push --force
