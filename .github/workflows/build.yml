@@ -10,9 +10,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - '.github/workflows/newrun.yml'
-      - '**'
     paths-ignore:
       - '*.md'
       - '.github/**'
