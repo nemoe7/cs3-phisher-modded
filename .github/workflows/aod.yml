@@ -1,0 +1,55 @@
+name: AOD Delta
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 08:00 Asia/Manila (UTC+8) → 00:00 UTC
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/aod.yml'
+
+concurrency:
+  group: "build"
+
+jobs:
+  anidb-delta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch (builds)
+        uses: actions/checkout@v4
+        with:
+          ref: builds
+
+      - name: Retrieve AOD
+        id: retrieve-AOD-dump
+        run: |
+          pip install -r .github/scripts/python/requirements.txt
+          python3 .github/scripts/python/aod.py
+
+          mkdir -p raw/aod
+          mv anime-offline-database-trimmed.json raw/aod/aod.json
+
+      - name: Check for changes
+        if: steps.retrieve-aod-dump.outcome == 'success'
+        id: check-changes
+        run: |
+          git add raw/anidb/titles.dat raw/anidb/titles.xml
+          if git diff --quiet --cached raw/anidb/titles.dat raw/anidb/titles.xml; then
+            echo "No changes detected in anidb dump."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git add raw/anidb/titles.dat raw/anidb/titles.xml
+          git commit -m "AniDB Delta Update" || exit 0
+          git push --force
