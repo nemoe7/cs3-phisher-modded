@@ -1,0 +1,29 @@
+{
+  "name": "cs3-phisher-modded",
+  "version": "1.0.0",
+  "description": "Shortcode: phisherrepo-nemo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen-anilist": "graphql-codegen --config NemoUtils/AniListAPI/codegen.yml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nemoe7/cs3-phisher-modded.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nemoe7/cs3-phisher-modded/issues"
+  },
+  "homepage": "https://github.com/nemoe7/cs3-phisher-modded#readme",
+  "dependencies": {
+    "graphql": "^16.11.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.6",
+    "@graphql-codegen/kotlin": "^3.0.2"
+  }
+}

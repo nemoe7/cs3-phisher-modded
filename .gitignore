@@ -12,3 +12,4 @@ local.properties
 .vscodetest.txt
 venv
 .kotlin
+node_modules

@@ -1,0 +1,3 @@
+cloudstream {
+    isLibrary = true
+}
