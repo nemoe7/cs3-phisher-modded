@@ -20,10 +20,10 @@ class AnimePahe : MainAPI() {
         const val MAIN_URL = "https://animepahe.ru"
         val headers = mapOf("Cookie" to "__ddg2_=1234567890")
         //var cookies: Map<String, String> = mapOf()
-        private fun getType(t: String): TvType {
-            return if (t.contains("OVA") || t.contains("Special")) TvType.OVA
-            else if (t.contains("Movie")) TvType.AnimeMovie
-            else TvType.Anime
+        private fun getType(rawType: String): TvType = when {
+            rawType.contains("OVA") || rawType.contains("Special") -> TvType.OVA
+            rawType.contains("Movie") -> TvType.AnimeMovie
+            else -> TvType.Anime
         }
     }
 
