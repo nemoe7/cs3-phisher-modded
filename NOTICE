@@ -8,15 +8,15 @@ as published by the Free Software Foundation.
 
 Components and their licenses:
 
-1. CloudStream Extensions by Phisher98 (GPL-3.0)
-   - Original work copyright (C) 2024 Phisher98
+1. CloudStream Extensions by Phisher98 (GPL-3.0-or-later)
    - Source: https://github.com/phisher98/cloudstream-extensions-phisher
+   - Licensed under GNU General Public License v3.0 or later
    - This is a modified version of the original work
 
-2. Anime API by nattadasu (AGPL-3.0-only)
-   - Copyright (C) 2024 nattadasu
-   - Source: https://github.com/nattadasu/animeApi
-   - Licensed under AGPL-3.0-only
+2. Anime Offline Database (ODbL 1.0 / DbCL 1.0)
+   - Source: https://github.com/manami-project/anime-offline-database
+   - Licensed under Open Database License 1.0 (ODbL 1.0)
+   - Database Contents License 1.0 (DbCL 1.0)
 
 ---
 
