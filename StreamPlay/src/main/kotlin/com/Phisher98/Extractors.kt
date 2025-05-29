@@ -34,6 +34,7 @@ import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorApi
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.M3u8Helper
+import com.lagradost.cloudstream3.utils.M3u8Helper.Companion.generateM3u8
 import com.lagradost.nicehttp.RequestBodyTypes
 import com.phisher98.StreamPlay.Companion.getMegaKeys
 import com.phisher98.StreamPlay.Companion.modflixAPI
@@ -52,6 +53,7 @@ import java.security.SecureRandom
 import java.util.Base64
 import javax.crypto.BadPaddingException
 import javax.crypto.Cipher
+import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
@@ -610,11 +612,6 @@ class Alions : Ridoo() {
     override val defaulQuality = Qualities.Unknown.value
 }
 
-class UqloadsXyz : Filesim() {
-    override val name = "Uqloads"
-    override var mainUrl = "https://uqloads.xyz"
-}
-
 class Pixeldra : PixelDrain() {
     override val mainUrl = "https://pixeldra.in"
 }
@@ -753,14 +750,17 @@ open class Chillx : ExtractorApi() {
             val res = app.get(url, referer = referer ?: mainUrl, headers = headers).toString()
 
             // Extract encoded string from response
-            val encodedString = Regex("(?:const|let|var|window\\.\\w+)\\s+\\w*\\s*=\\s*'(.*?)'").find(res)
+            val encodedString = Regex("(?:const|let|var|window\\.\\w+)\\s+\\w*\\s*=\\s*'([^']{30,})'").find(res)
                 ?.groupValues?.get(1)?.trim() ?: ""
             if (encodedString.isEmpty()) {
                 throw Exception("Encoded string not found")
             }
 
-            val password = "#w8pukc]MoiBhH1{QlwOFF^I7pU]N9q^"
-            val decryptedData = decryptAESCBC(encodedString, password)
+            // Get Password from pastebin(Shareable, Auto-Update)
+            val keyUrl = "https://chillx.supe2372.workers.dev/getKey"
+            val passwordHex = app.get(keyUrl, headers = mapOf("Referer" to "https://github.com/")).text
+            val password = passwordHex.chunked(2).map { it.toInt(16).toChar() }.joinToString("")
+            val decryptedData = decryptData(encodedString, password)
                 ?: throw Exception("Decryption failed")
 
             // Extract m3u8 URL
@@ -809,33 +809,44 @@ open class Chillx : ExtractorApi() {
     }
 
     @SuppressLint("NewApi")
-    fun decryptAESCBC(encryptedData: String, password: String): String? {
+    fun decryptData(encryptedData: String, password: String): String? {
+        val decodedBytes = Base64.getDecoder().decode(encryptedData)
+        val keyBytes = password.toByteArray(Charsets.UTF_8)
+        val secretKey = SecretKeySpec(keyBytes, "AES")
+
+        // Try AES-CBC decryption first (assumes IV is 16 bytes)
         try {
-            // Base64 decode the encrypted data
-            val decodedBytes = Base64.getDecoder().decode(encryptedData)
+            val ivBytesCBC = decodedBytes.copyOfRange(0, 16)
+            val encryptedBytesCBC = decodedBytes.copyOfRange(16, decodedBytes.size)
 
-            // Extract IV (first 16 bytes) and encrypted data (remaining bytes)
-            val ivBytes = decodedBytes.copyOfRange(0, 16)
-            val encryptedBytes = decodedBytes.copyOfRange(16, decodedBytes.size)
-
-            // Prepare key
-            val keyBytes = password.toByteArray(Charsets.UTF_8)
-            val secretKey = SecretKeySpec(keyBytes, "AES")
-            val ivSpec = IvParameterSpec(ivBytes)
-
-            // Decrypt using AES-CBC
+            val ivSpec = IvParameterSpec(ivBytesCBC)
             val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivSpec)
 
-            val decryptedBytes = cipher.doFinal(encryptedBytes)
+            val decryptedBytes = cipher.doFinal(encryptedBytesCBC)
             return String(decryptedBytes, Charsets.UTF_8)
+        } catch (e: Exception) {
+            println("CBC decryption failed, trying AES-GCM...")
+        }
 
+        // Fallback to AES-GCM decryption (assumes IV is 12 bytes)
+        return try {
+            val ivBytesGCM = decodedBytes.copyOfRange(0, 12)
+            val encryptedBytesGCM = decodedBytes.copyOfRange(12, decodedBytes.size)
+
+            val gcmSpec = GCMParameterSpec(128, ivBytesGCM)
+            val cipher = Cipher.getInstance("AES/GCM/NoPadding")
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, gcmSpec)
+            cipher.updateAAD("GGMM&^_FOZ[kFPf1".toByteArray(Charsets.UTF_8))
+
+            val decryptedBytes = cipher.doFinal(encryptedBytesGCM)
+            String(decryptedBytes, Charsets.UTF_8)
         } catch (e: BadPaddingException) {
             println("Decryption failed: Bad padding or incorrect password.")
-            return null
+            null
         } catch (e: Exception) {
             e.printStackTrace()
-            return null
+            null
         }
     }
 
@@ -1978,4 +1989,51 @@ class Gofile : ExtractorApi() {
     }
 }
 
+class UqloadsXyz : ExtractorApi() {
+    override val name = "Uqloadsxyz"
+    override val mainUrl = "https://uqloads.xyz"
+    override val requiresReferer = true
 
+    override suspend fun getUrl(
+        url: String,
+        referer: String?,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        var response = app.get(url.replace("/download/", "/e/"), referer = referer)
+        val iframe = response.document.selectFirst("iframe")
+        if (iframe != null) {
+            response = app.get(
+                iframe.attr("src"), headers = mapOf(
+                    "Accept-Language" to "en-US,en;q=0.5",
+                    "Sec-Fetch-Dest" to "iframe"
+                ), referer = response.url
+            )
+        }
+
+        val script = if (!getPacked(response.text).isNullOrEmpty()) {
+            getAndUnpack(response.text)
+        } else {
+            response.document.selectFirst("script:containsData(sources:)")?.data()
+        } ?: return
+        val regex = Regex("""hls2":"(?<hls2>[^"]+)"|hls4":"(?<hls4>[^"]+)"""")
+        val links = regex.findAll(script)
+            .mapNotNull { matchResult ->
+                val hls2 = matchResult.groups["hls2"]?.value
+                val hls4 = matchResult.groups["hls4"]?.value
+                when {
+                    hls2 != null -> hls2
+                    hls4 != null -> "https://uqloads.xyz$hls4"
+                    else -> null
+                }
+            }.toList()
+        links.forEach { m3u8->
+            generateM3u8(
+                name,
+                m3u8,
+                mainUrl
+            ).forEach(callback)
+        }
+
+    }
+}

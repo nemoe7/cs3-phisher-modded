@@ -5269,6 +5269,51 @@ object StreamPlayExtractor : StreamPlay() {
             )
         }
     }
+
+    suspend fun invokeElevenmovies(
+        id: Int? = null,
+        season: Int? = null,
+        episode: Int? = null,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit,
+    ) {
+        val url = if (season == null) {
+            "$Elevenmovies/movie/$id"
+        } else {
+            "$Elevenmovies/tv/$id/$season/$episode"
+        }
+        val encodedtoken= app.get(url).document.selectFirst("script[type=application/json]")?.data()?.trim()?.substringAfter("{\"data\":\"")?.substringBefore("\",")
+        if (encodedtoken != null) {
+            val token = elevenmoviestoken(encodedtoken)
+            val sourceurl = Elevenmovies + token
+
+            val headers = mapOf(
+                "content-type" to "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                "x-requested-with" to "XMLHttpRequest"
+            )
+
+            val res = app.get(
+                url = sourceurl,
+                headers = headers,
+            ).parsedSafe<Elevenmoviesres>()
+
+            val m3u8 = res?.url ?: return
+            M3u8Helper.generateM3u8(
+                "Eleven Movies",
+                m3u8,
+                ""
+            ).forEach(callback)
+
+            res.tracks.forEach { sub->
+                    subtitleCallback.invoke(
+                        SubtitleFile(
+                            sub.label,
+                            sub.file
+                        )
+                    )
+            }
+        }
+    }
 }
 
 

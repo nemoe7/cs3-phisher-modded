@@ -2964,3 +2964,67 @@ suspend fun <T> retryIO(
     }
     return block() // last attempt, let it throw
 }
+
+
+fun elevenmoviestoken(input: String): String {
+    // AES Key and IV from JS code
+    val s = byteArrayOf(
+        174.toByte(), 111, 42, 40, 137.toByte(), 191.toByte(), 142.toByte(), 202.toByte(),
+        39, ((-64).toByte()), (-39).toByte(), (-15).toByte(), 54, (-12).toByte(), (-10).toByte(), 80,
+        (-127).toByte(), (-57).toByte(), 123, 41, 64, 74, (-9).toByte(), 126, 59, (-114).toByte(),
+        (-41).toByte(), (-37).toByte(), 96, (-11).toByte(), 65, (-94).toByte()
+    )
+    val l = byteArrayOf(
+        (-1).toByte(), (-118).toByte(), 66, (-98).toByte(), 80, (-19).toByte(), 37, 122,
+        (-54).toByte(), (-45).toByte(), 37, (-107).toByte(), 68, (-120).toByte(), 57, (-18).toByte()
+    )
+
+    val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+    val keySpec = SecretKeySpec(s, "AES")
+    val ivSpec = IvParameterSpec(l)
+    cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec)
+
+    val encryptedBytes = cipher.doFinal(input.toByteArray(Charsets.UTF_8))
+
+    val c = encryptedBytes.joinToString("") { "%02x".format(it) }
+
+    // XOR obfuscation key from JS
+    val u = byteArrayOf(24, 2, (-48).toByte(), 72, (-101).toByte(), 78, 5, (-94).toByte(), 27,
+        (-125).toByte()
+    )
+
+    // Apply XOR obfuscation on hex string c
+    val d = buildString {
+        for (i in c.indices) {
+            val charCode = c[i].code
+            val keyByte = u[i % u.size].toInt() and 0xFF
+            if ((charCode xor keyByte xor keyByte) == charCode) {
+                append((charCode xor keyByte).toChar())
+            } else {
+                append(c[i])
+            }
+        }
+    }
+
+    val p = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_".toList()
+    val h = listOf(
+        'C', 'q', 't', 'Y', '3', 'K', '8', 'j', 'w', 'u', 'f', 'G', 'Z', 'n', 'c', 'B',
+        'W', '_', 'm', 'T', 'b', 'O', 'N', '2', 'M', 'y', 'J', 'i', 'X', '6', 'r', 'p',
+        'R', 'x', 'o', '9', 'S', 'I', 'E', '4', 'g', 'h', 'L', 'a', 'e', 'v', 'k', 'P',
+        'Q', '1', 'F', 'H', '7', '-', 'U', 's', '0', '5', 'd', 'z', 'D', 'V', 'l', 'A'
+    )
+
+    val base64str = Base64.getEncoder().encodeToString(d.toByteArray(Charsets.UTF_8))
+        .replace("+", "-")
+        .replace("/", "_")
+        .replace("=", "")
+
+    val m = base64str.map { ch ->
+        val idx = p.indexOf(ch)
+        if (idx == -1) ch else h[idx]
+    }.joinToString("")
+
+    val g = "coc/6cb5a820/1000059358189026"
+    return "/$g/$m"
+}
+
