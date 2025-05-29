@@ -48,7 +48,7 @@ subprojects {
             minSdk = 21
             compileSdkVersion(35)
             targetSdk = 35
-
+            testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
         }
 
         compileOptions {
@@ -74,7 +74,6 @@ subprojects {
         val cloudstream by configurations
         cloudstream("com.lagradost:cloudstream3:pre-release")
 
-        // Other dependencies
         implementation(kotlin("stdlib"))
         implementation("com.github.Blatzar:NiceHttp:0.4.11")
         implementation("org.jsoup:jsoup:1.18.3")
@@ -87,6 +86,33 @@ subprojects {
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
         implementation("app.cash.quickjs:quickjs-android:0.9.2")
         implementation("com.github.vidstige:jadb:v1.2.1")
+
+        val testImplementation by configurations
+        testImplementation(kotlin("test"))
+        testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+        testImplementation("io.mockk:mockk:1.13.4")
+        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
+
+        val runtimeOnly by configurations
+        runtimeOnly("org.slf4j:slf4j-nop:2.0.9")
+
+        val androidTestImplementation by configurations
+        androidTestImplementation("androidx.benchmark:benchmark-junit4:1.2.0")
+        androidTestImplementation("androidx.test.ext:junit:1.1.5")
+        androidTestImplementation("androidx.test:runner:1.5.2")
+        androidTestImplementation("androidx.test:rules:1.5.0")
+        androidTestImplementation("androidx.test:core:1.5.0")
+        androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
+
+
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+        jvmArgs("-XX:+EnableDynamicAgentLoading")
     }
 }
 
