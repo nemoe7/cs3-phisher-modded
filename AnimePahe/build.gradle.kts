@@ -33,7 +33,6 @@ cloudstream {
     )
     iconUrl = "https://www.google.com/s2/favicons?domain=animepahe.ru/&sz=%size%"
     requiresResources = true
-    isCrossPlatform = true
 }
 
 dependencies {
