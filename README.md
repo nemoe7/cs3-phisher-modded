@@ -1,23 +1,37 @@
-Shortcode: phisherrepo-nemo
+[![Kotlin][kotlin-shield]][kotlin-url]
+[![Android Studio][android-studio-shield]][android-studio-url]
+[![Gradle][gradle-shield]][gradle-url]
+[![GitHub][github-shield]][github-url]
+[![GitHub Actions][github-actions-shield]][github-actions-url]
 
-## Phisher Cloudstream Plugin Server
+---
+
+[![Contributors][contributors-shield]][contributors-url]
+[![License][license-shield]][license-url]
+
+---
+
+###### shortcode: phisherrepo-nemo
+
+## 🛠 My Modifications
+
+### AnimePahe
+- Separated subbed and dubbed sections
+- Added toggle for Romaji titles
+
+### StreamPlay
+- Cleaned up source names for better recognition in CloudStream
+
+### Other
+- Modified gradle plugin to support JVM testing, instrumented testing, and cross-module dependency resolution/packaging. [View source](https://github.com/nemoe7/cs3-gradle-plugin)
+
+---
+
+### Phisher Cloudstream Plugin Server
 [![Discord](https://invidget.switchblade.xyz/3VmSzGeCTz)](https://discord.com/invite/3VmSzGeCTz)
 
-## Cloudstream Plugin Server
+### Cloudstream Plugin Server
 [![Discord](https://invidget.switchblade.xyz/JrGk2MjX7S)](https://discord.com/invite/JrGk2MjX7S)
-
-
-### 🕹 Tools and Programming languages used :
-<p align="left">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=kotlin,androidstudio,gradle,github,githubactions&theme=light&perline=5" />
-  </a>
-</p>
-
-## Feedback
-![image](https://github.com/user-attachments/assets/9f7dfe73-f11d-41fe-996c-072de0f6853b)
-
-
 
 ### License
 [![GNU AGPLv3 Image](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.en.html)
@@ -36,3 +50,18 @@ If you are a copyright holder and believe that specific content accessible throu
 We respect the intellectual property laws of all jurisdictions and will review any valid legal inquiries directed at us that fall within our scope of responsibility.
 
 Thank you for your understanding and cooperation.
+
+[contributors-shield]: https://img.shields.io/github/contributors/nemoe7/cs3-phisher-modded.svg?style=for-the-badge
+[contributors-url]: https://github.com/nemoe7/cs3-phisher-modded/graphs/contributors
+[license-shield]: https://img.shields.io/github/license/nemoe7/cs3-phisher-modded.svg?style=for-the-badge
+[license-url]: https://github.com/nemoe7/cs3-phisher-modded/blob/master/LICENSE
+[kotlin-shield]: https://img.shields.io/badge/kotlin-7F52FF?style=for-the-badge&logo=nextdotjs&logoColor=white
+[kotlin-url]: https://kotlinlang.org
+[android-studio-shield]: https://img.shields.io/badge/android%20studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white
+[android-studio-url]: https://developer.android.com/studio
+[gradle-shield]: https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white
+[gradle-url]: https://gradle.org
+[github-shield]: https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white
+[github-url]: https://github.com/
+[github-actions-shield]: https://img.shields.io/badge/github%20actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white
+[github-actions-url]: https://github.com/features/actions
