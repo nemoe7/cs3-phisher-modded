@@ -1,6 +1,15 @@
 // use an integer for version numbers
 version = 8
 
+android {
+    buildFeatures {
+        buildConfig = true
+    }
+
+    defaultConfig {
+        // android.defaults.buildfeatures.buildconfig=true
+    }
+}
 
 cloudstream {
     language = "en"
@@ -23,6 +32,11 @@ cloudstream {
         "OVA",
     )
     iconUrl = "https://www.google.com/s2/favicons?domain=animepahe.ru/&sz=%size%"
-
+    requiresResources = true
     isCrossPlatform = true
+}
+
+dependencies {
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
 }

@@ -1,5 +1,6 @@
 package com.phisher98
 
+import android.content.SharedPreferences
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.lagradost.api.Log
 import com.lagradost.cloudstream3.*
@@ -17,7 +18,7 @@ import kotlinx.coroutines.sync.withPermit
 import org.jsoup.nodes.Element
 
 
-class AnimePahe : MainAPI() {
+class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
 
     companion object {
         const val MAIN_URL = "https://animepahe.ru"
@@ -48,12 +49,12 @@ class AnimePahe : MainAPI() {
         data class LatestReleasesEntry(
             // @JsonProperty("id") val id: Int,
             // @JsonProperty("anime_id") val animeId: Int,
-            @JsonProperty("anime_title") val animeTitle: String,
+            @JsonProperty("anime_title") val title: String,
             // @JsonProperty("anime_slug") val animeSlug: String,
             @JsonProperty("episode") val episode: Int?,
             @JsonProperty("snapshot") val snapshot: String?,
             @JsonProperty("created_at") val createdAt: String?,
-            @JsonProperty("anime_session") val animeSession: String,
+            @JsonProperty("anime_session") val session: String,
         )
 
         data class LatestReleasesResponse(
@@ -62,10 +63,20 @@ class AnimePahe : MainAPI() {
         )
 
         val res = app.get(request.data + page, headers = headers).text
-        val episodes = parseJson<LatestReleasesResponse>(res).data.map { entry ->
+        val episodes = parseJson<LatestReleasesResponse>(res).data.amap { entry ->
+
+            var title: String = entry.title.ifBlank { "404: Not Found" }
+
+            val preferJpTitle = sharedPref?.getBoolean("jpTitle", false) ?: false
+            if (preferJpTitle || title.isBlank()) {
+                val html = app.get("https://animepahe.ru/anime/${entry.session}", headers = headers).text
+                val doc = Jsoup.parse(html)
+                title = doc.selectFirst("h2.japanese")?.text() ?: title
+            }
+
             newAnimeSearchResponse(
-                entry.animeTitle,
-                Session(entry.animeSession, unixTime, entry.animeTitle).toJson(),
+                title,
+                Session(entry.session, unixTime, entry.title).toJson(),
                 fix = false
             ) {
                 this.posterUrl = entry.snapshot
@@ -107,9 +118,19 @@ class AnimePahe : MainAPI() {
         val res = app.get(searchUrl, headers = headers).text
         val data = parseJson<SearchResponse>(res).data
 
-        return data.map { entry ->
+        return data.amap { entry ->
+
+            var title: String = entry.title.ifBlank { "404: Not Found" }
+
+            val preferJpTitle = sharedPref?.getBoolean("jpTitle", false) ?: false
+            if (preferJpTitle || title.isBlank()) {
+                val html = app.get("https://animepahe.ru/anime/${entry.session}", headers = Companion.headers).text
+                val doc = Jsoup.parse(html)
+                title = doc.selectFirst("h2.japanese")?.text() ?: title
+            }
+
             newAnimeSearchResponse(
-                entry.title,
+                title,
                 Session(entry.session, unixTime, entry.title).toJson(),
                 fix = false
             ) {
@@ -265,9 +286,14 @@ class AnimePahe : MainAPI() {
             val html = app.get("https://animepahe.ru/anime/$session", headers = headers).text
             val doc = Jsoup.parse(html)
             val jpTitle = doc.selectFirst("h2.japanese")?.text()
-            val mainTitle = doc.selectFirst("span.sr-only.unselectable")?.text()
+            val mainTitle = doc.selectFirst("h1.user-select-none span")?.text()
             val poster = doc.selectFirst(".anime-poster a")?.attr("href")
             val tvType = doc.selectFirst("""a[href*="/anime/type/"]""")?.text()
+
+
+            val preferJpTitle = sharedPref?.getBoolean("jpTitle", false) ?: false
+            var title = mainTitle.takeUnless { it.isNullOrBlank() } ?: "404: Not Found"
+            if (preferJpTitle) title = jpTitle ?: title
 
             val subEpisodes = buildEpisodeList(session)
 
@@ -308,7 +334,7 @@ class AnimePahe : MainAPI() {
                 ?.let { ArrayList(it) }
 
             newAnimeLoadResponse(
-                mainTitle ?: jpTitle ?: "", url, getType(tvType.toString())
+                title, url, getType(tvType.toString())
             ) {
                 engName = mainTitle
                 japName = jpTitle

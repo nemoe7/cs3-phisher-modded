@@ -13,3 +13,4 @@ local.properties
 venv
 .kotlin
 node_modules
+ExampleProvider
