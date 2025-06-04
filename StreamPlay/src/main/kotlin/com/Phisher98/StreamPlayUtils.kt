@@ -2967,10 +2967,10 @@ suspend fun <T> retryIO(
 
 
 @SuppressLint("NewApi")
-fun elevenMoviesTokenV2(rawData: String): String {
-    // AES key and IV in hex (from Python)
-    val keyHex = "92602fba85ae08969373a50448391cdbccadeb40be09abb17007861049944842"
-    val ivHex = "1e933f03e2fb9d2e77f457ac1645f33d"
+suspend fun elevenMoviesTokenV2(rawData: String): String {
+    val json= app.get("https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/output.json").parsedSafe<Elevenmoviesjson>() ?: return ""
+    val keyHex = json.keyHex
+    val ivHex = json.ivHex
 
     val aesKey = keyHex.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
     val aesIv = ivHex.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
@@ -2985,7 +2985,7 @@ fun elevenMoviesTokenV2(rawData: String): String {
     val hexString = encrypted.joinToString("") { "%02x".format(it) }
 
     // XOR key from hex string
-    val xorKeyHex = "edc5e93586d7"
+    val xorKeyHex = json.xorKey
     val xorKey = xorKeyHex.chunked(2)
         .map { it.toInt(16).toByte() }
         .toByteArray()
@@ -2998,8 +2998,8 @@ fun elevenMoviesTokenV2(rawData: String): String {
         }
     }
 
-    val src = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
-    val dst = "2xwYJGjOibPtCBu3lUNzL_HrQTVK0gFymven4RShWA6f71IcXs-MZ5EaoqkD8pd9"
+    val src = json.src
+    val dst = json.dst
     val translationMap = src.zip(dst).toMap()
 
     val base64Encoded = Base64.getEncoder()
@@ -3008,7 +3008,6 @@ fun elevenMoviesTokenV2(rawData: String): String {
         .replace("/", "_")
         .replace("=", "")
 
-    // Apply custom translation
     val finalEncoded = base64Encoded.map { translationMap[it] ?: it }.joinToString("")
     return finalEncoded
 }
