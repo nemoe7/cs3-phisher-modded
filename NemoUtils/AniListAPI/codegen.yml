@@ -1,6 +1,0 @@
-schema: https://graphql.anilist.co
-documents: ./src/main/graphql/**/*.graphql
-generates:
-  ./src/main/kotlin/com/nemo/api/Types.kt:
-    plugins:
-      - kotlin
