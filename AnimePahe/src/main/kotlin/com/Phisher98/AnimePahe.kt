@@ -298,7 +298,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
             val subEpisodes = buildEpisodeList(session)
 
             // Copy subEpisodes but change dubType to dub
-            val dubEpisodes = buildEpisodeList(session).map { episode ->
+            val dubEpisodes = subEpisodes.map { episode ->
                 val dubData = parseJson<EpisodeLinkData>(episode.data).apply { dubType = "dub" }
                 episode.copy(data = dubData.toJson())
             }
