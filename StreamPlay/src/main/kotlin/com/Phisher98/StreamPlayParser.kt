@@ -1851,14 +1851,41 @@ data class Headers(
 data class AnichiVideoApiResponse(@JsonProperty("links") val links: List<AnichiLinks>)
 
 
+typealias ElevenmoviesServer = List<ElevenmoviesServerEntry>
 
-data class Elevenmoviesres(
-    val noReferrer: Boolean,
-    val url: String,
-    val tracks: List<ElevenmovieTrack>,
+data class ElevenmoviesServerEntry(
+    val name: String,
+    val description: String,
+    val image: String,
+    val data: String,
 )
 
-data class ElevenmovieTrack(
-    val file: String,
-    val label: String,
+data class ElevenmoviesStreamResponse(
+    val url: String?,
+    val tracks: List<ElevenmoviesSubtitle>?
 )
+
+data class ElevenmoviesSubtitle(
+    val label: String?,
+    val file: String?
+)
+
+data class Elevenmoviesjson(
+    val src: String,
+    val dst: String,
+    @JsonProperty("static_path")
+    val staticPath: String,
+    @JsonProperty("http_method")
+    val httpMethod: String,
+    @JsonProperty("key_hex")
+    val keyHex: String,
+    @JsonProperty("iv_hex")
+    val ivHex: String,
+    @JsonProperty("xor_key")
+    val xorKey: String,
+    @JsonProperty("csrf_token")
+    val csrfToken: String,
+    @JsonProperty("content_types")
+    val contentTypes: String,
+)
+

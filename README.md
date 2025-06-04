@@ -23,7 +23,7 @@
 - Cleaned up source names for better recognition in CloudStream
 
 ### Other
-- Modified gradle plugin to support JVM testing, instrumented testing, and cross-module dependency resolution/packaging. [View source](https://github.com/nemoe7/cs3-gradle-plugin)
+- Modified gradle plugin to support JVM testing, instrumented testing, cross-module dependency resolution/packaging, and r8/proguard support. [View source](https://github.com/nemoe7/cs3-gradle-plugin)
 
 ---
 
