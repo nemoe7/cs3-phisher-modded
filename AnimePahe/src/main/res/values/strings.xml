@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="jp_title_string">Prefer Romaji Titles (Slightly Slower)</string>
+    <string name="source_a_string">Enable Source A</string>
+    <string name="source_b_string">Enable Source B</string>
 </resources>

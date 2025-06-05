@@ -9,6 +9,13 @@ android {
     defaultConfig {
         // android.defaults.buildfeatures.buildconfig=true
     }
+
+    buildTypes{
+        release {
+            isMinifyEnabled = true
+            proguardFiles("proguard-rules.pro")
+        }
+    }
 }
 
 cloudstream {
@@ -16,7 +23,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
     description = "Animes (SUB/DUB)"
-    authors = listOf("Cloudburst,Lorem Ipsum,Phisher98")
+    authors = listOf("Phisher98", "nemoe7")
 
     /**
      * Status int as the following:

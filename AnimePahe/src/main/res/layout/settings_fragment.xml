@@ -6,12 +6,41 @@
     android:padding="16dp"
     tools:context="com.phisher98.settings.SettingsFragment">
 
-    <Switch
-        android:id="@+id/jpTitleSwitch"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/jp_title_string"
-        android:textSize="17sp" />
+        android:orientation="vertical">
 
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/jpTitleSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/jp_title_string"
+            android:textSize="17sp" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/sourceASwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/source_a_string"
+            android:textSize="17sp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/sourceBSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/source_b_string"
+            android:textSize="17sp" />
+
+
+    </LinearLayout>
 </ScrollView>

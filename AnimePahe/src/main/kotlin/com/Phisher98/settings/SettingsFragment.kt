@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.phisher98.AnimePaheProviderPlugin
 import com.phisher98.BuildConfig
 
@@ -64,13 +64,33 @@ class SettingsFragment(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val jpTitleSwitch = view.findView<Switch>("jpTitleSwitch")
+        val jpTitleSwitch = view.findView<MaterialSwitch>("jpTitleSwitch")
         jpTitleSwitch.isChecked = sharedPref.getBoolean("jpTitle", false)
         jpTitleSwitch.text = getString("jp_title_string")
         jpTitleSwitch.setOnClickListener {
             val isChecked = jpTitleSwitch.isChecked
             sharedPref.edit()?.apply {
                 putBoolean("jpTitle", isChecked)
+                apply()
+            }
+        }
+        val sourceASwitch = view.findView<MaterialSwitch>("sourceASwitch")
+        sourceASwitch.isChecked = sharedPref.getBoolean("sourceAEnabled", false)
+        sourceASwitch.text = getString("source_a_string")
+        sourceASwitch.setOnClickListener {
+            val isChecked = sourceASwitch.isChecked
+            sharedPref.edit()?.apply {
+                putBoolean("sourceAEnabled", isChecked)
+                apply()
+            }
+        }
+        val sourceBSwitch = view.findView<MaterialSwitch>("sourceBSwitch")
+        sourceBSwitch.isChecked = sharedPref.getBoolean("sourceBEnabled", false)
+        sourceBSwitch.text = getString("source_b_string")
+        sourceBSwitch.setOnClickListener {
+            val isChecked = sourceBSwitch.isChecked
+            sharedPref.edit()?.apply {
+                putBoolean("sourceBEnabled", isChecked)
                 apply()
             }
         }

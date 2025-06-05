@@ -378,29 +378,34 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
             return Triple(type, source, quality)
         }
 
-        doc.select("#resolutionMenu button").amap {
+        val sourceAEnabled = sharedPref?.getBoolean("sourceAEnabled", true) ?: true
+        val sourceBEnabled = sharedPref?.getBoolean("sourceBEnabled", true) ?: true
 
-            val (type, source, quality) = extractInfo(it)
+        if (sourceAEnabled) {
+            doc.select("#resolutionMenu button").amap {
 
-            if (episodeLinkData.dubType.equals(type, ignoreCase = true)) {
-                val href = it.attr("data-src")
-                @Suppress("SpellCheckingInspection") if ("kwik.si" in href) {
-                    loadCustomExtractor(
-                        "AnimePahe A [$source]", url = href, "", subtitleCallback, callback, quality
-                    )
+                val (type, source, quality) = extractInfo(it)
+
+                if (episodeLinkData.dubType.equals(type, ignoreCase = true)) {
+                    val href = it.attr("data-src")
+                    @Suppress("SpellCheckingInspection") if ("kwik.si" in href) {
+                        loadCustomExtractor(
+                            "AnimePahe A [$source]", url = href, "", subtitleCallback, callback, quality
+                        )
+                    }
                 }
             }
         }
 
-        doc.select("div#pickDownload > a").amap {
-
-            val (type, source, quality) = extractInfo(it)
-
-            if (episodeLinkData.dubType.equals(type, ignoreCase = true)) {
-                val href = it.attr("href")
-                loadCustomExtractor(
-                    "AnimePahe B [$source]", href, "", subtitleCallback, callback, quality
-                )
+        if (sourceBEnabled) {
+            doc.select("div#pickDownload > a").amap {
+                val (type, source, quality) = extractInfo(it)
+                if (episodeLinkData.dubType.equals(type, ignoreCase = true)) {
+                    val href = it.attr("href")
+                    loadCustomExtractor(
+                        "AnimePahe B [$source]", href, "", subtitleCallback, callback, quality
+                    )
+                }
             }
         }
 
