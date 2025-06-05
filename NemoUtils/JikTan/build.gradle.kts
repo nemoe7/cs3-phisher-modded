@@ -1,3 +1,0 @@
-cloudstream {
-    isLibrary = true
-}
