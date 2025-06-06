@@ -18,6 +18,7 @@
 ### AnimePahe
 - Separated subbed and dubbed sections
 - Added toggle for Romaji titles
+- Added toggle for sources (A: Web Player, B: MP4)
 
 ### StreamPlay
 - Cleaned up source names for better recognition in CloudStream
