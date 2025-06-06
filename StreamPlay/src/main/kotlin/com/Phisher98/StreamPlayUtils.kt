@@ -2752,7 +2752,7 @@ internal class AnimekaiDecoder {
             decodedString = String(o, Charsets.ISO_8859_1)
         }
 
-        return URLDecoder.decode(decodedString)
+        return ""
     }
 }
 
