@@ -1,8 +1,6 @@
 package com.phisher98
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
@@ -45,10 +43,8 @@ import org.mozilla.javascript.Scriptable
 import java.net.URI
 import java.time.Instant
 import java.util.Locale
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.net.URLDecoder
-import java.net.URLEncoder
 import kotlin.math.max
 
 
@@ -130,72 +126,14 @@ object StreamPlayExtractor : StreamPlay() {
         }
     }
 
-    /*
-    suspend fun invokeAsianHD(
-        title: String? = null,
-        year: Int? = null,
-        season: Int? = null,
-        episode: Int? = null,
-        subtitleCallback: (SubtitleFile) -> Unit,
-        callback: (ExtractorLink) -> Unit
-    ) {
-        val fixTitle = title.createSlug()
-        val url = if (season == null) {
-            "$AsianhdAPI/watch/$fixTitle-episode-$episode"
-        } else {
-            "$AsianhdAPI/watch/$fixTitle-$year-episode-$episode"
-        }
-        val host = AsianhdAPI.substringAfter("//")
-        val AsianHDepAPI = "https://api.$host/episodes/detail/"
-        val apisuburl = url.substringAfter("watch/")
-        val json = app.get(AsianHDepAPI + apisuburl).parsedSafe<AsianHDResponse>()
-        json?.data?.links?.forEach { link ->
-            if (link.url.contains("asianbxkiun")) {
-                val iframe = app.get(httpsify(link.url))
-                val iframeDoc = iframe.document
-                argamap({
-                    iframeDoc.select("#list-server-more ul li")
-                        .amap { element ->
-                            val extractorData = element.attr("data-video").substringBefore("=http")
-                            val dataprovider = element.attr("data-provider")
-                            if (dataprovider == "serverwithtoken") return@amap
-                            loadExtractor(extractorData, iframe.url, subtitleCallback, callback)
-                        }
-                }, {
-                    val iv = "9262859232435825"
-                    val secretKey = "93422192433952489752342908585752"
-                    val secretDecryptKey = secretKey
-                    GogoHelper.extractVidstream(
-                        iframe.url,
-                        "AsianHD",
-                        callback,
-                        iv,
-                        secretKey,
-                        secretDecryptKey,
-                        isUsingAdaptiveKeys = false,
-                        isUsingAdaptiveData = true,
-                        iframeDocument = iframeDoc
-                    )
-                })
-            } else if (link.url.contains("bulbasaur.online")) {
-                val href = app.get(link.url).document.selectFirst("iframe")?.attr("src") ?: ""
-                loadExtractor(href, subtitleCallback, callback)
-            } else {
-                loadExtractor(link.url, subtitleCallback, callback)
-            }
-        }
-    }
-     */
-
     suspend fun invokeMultimovies(
-        apiUrl: String,
         title: String? = null,
         season: Int? = null,
         episode: Int? = null,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ) {
-        val MultimoviesApi = app.get(apiUrl).document.selectFirst("div.sc-bdfBwQ > a")?.attr("href")
+        val MultimoviesApi = getDomains()?.multiMovies ?: return
         val fixTitle = title.createSlug()
         val url = if (season == null) {
             "$MultimoviesApi/movies/$fixTitle"
@@ -225,7 +163,7 @@ object StreamPlayExtractor : StreamPlay() {
                 val link = source.substringAfter("\"").substringBefore("\"")
                 when {
                     !link.contains("youtube") -> {
-                        loadExtractor(link, referer = apiUrl, subtitleCallback, callback)
+                        loadExtractor(link, referer = MultimoviesApi, subtitleCallback, callback)
                     }
 
                     else -> Log.d("Error", "Not Found")
@@ -935,7 +873,18 @@ object StreamPlayExtractor : StreamPlay() {
         val response =
             app.get(query, referer = privatereferer).parsedSafe<AnichiRoot>()?.data?.shows?.edges
         if (response != null) {
-            val id = response.firstOrNull()?.id ?: return
+            val normalizedQuery = name?.trim()?.lowercase() ?: return
+
+            val matched = response.find { item ->
+                item.name.trim().lowercase() == normalizedQuery ||
+                        item.englishName.trim().lowercase() == normalizedQuery
+            } ?: response.find { item ->
+                val allTitles = listOfNotNull(item.name, item.englishName).map { it.lowercase() }
+                allTitles.any { it.contains(normalizedQuery) }
+            }
+
+            val id = matched?.id ?: return
+
             val langType = listOf("sub", "dub")
             for (i in langType) {
                 val epData =
@@ -1042,14 +991,14 @@ object StreamPlayExtractor : StreamPlay() {
             val href = it.select(".episode-node")
                 .firstOrNull { element -> element.text().contains("$episode") }?.select("a")
                 ?.attr("href")
-            if (href != null)
+            if (href!= null)
                 loadCustomExtractor(
                     "AnimeOwl [$subtype]",
                     href,
                     AnimeOwlAPI,
                     subtitleCallback,
                     callback,
-                    Qualities.P1080.value
+
                 )
         }
     }
@@ -4096,7 +4045,6 @@ object StreamPlayExtractor : StreamPlay() {
             ?.replace("&", " ")
             ?.trim()
             .orEmpty()
-
         val searchTitle = fixTitle.createSlug()
         val searchUrl = if (season == null) {
             "$movieDriveAPI/search/$fixTitle $year"
@@ -4176,21 +4124,16 @@ object StreamPlayExtractor : StreamPlay() {
 
     suspend fun invokeBollyflix(
         imdbId: String? = null,
-        title: String? = null,
-        year: Int? = null,
-        season: Int? = null,
-        lastSeason: Int? = null,
-        episode: Int? = null,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit,
     ) {
+        val bollyflixAPI = getDomains()?.bollyflix ?: return
         val doc = app.get(
             "$bollyflixAPI/search/$imdbId",
             interceptor = wpRedisInterceptor
         ).document.select("#content_box article")
         val url = doc.select("a").attr("href")
         val urldoc = app.get(url).document
-        if (season == null) {
             urldoc.select("a.dl").amap {
                 val href = it.attr("href")
                 val token = href.substringAfter("id=")
@@ -4210,11 +4153,6 @@ object StreamPlayExtractor : StreamPlay() {
                     )
                 } else loadExtractor(source, "Bollyflix", subtitleCallback, callback)
             }
-        } else {
-            urldoc.select("a.maxbutton-2").forEach {
-                //TODO
-            }
-        }
     }
 
     suspend fun invokecatflix(
