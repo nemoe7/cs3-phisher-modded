@@ -86,6 +86,7 @@ import com.lagradost.cloudstream3.newMovieLoadResponse
 import com.lagradost.cloudstream3.newMovieSearchResponse
 import com.lagradost.cloudstream3.newTvSeriesLoadResponse
 import com.lagradost.cloudstream3.runAllAsync
+import com.lagradost.cloudstream3.syncproviders.SyncIdName
 import com.lagradost.cloudstream3.toRatingInt
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
@@ -104,6 +105,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
     override val instantLinkLoading = true
     override val useMetaLoadResponse = true
     override val hasQuickSearch = true
+    override val supportedSyncNames = setOf(SyncIdName.Simkl,SyncIdName.Anilist)
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -122,6 +124,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val anilistAPI = "https://graphql.anilist.co"
         const val malsyncAPI = "https://api.malsync.moe"
         const val jikanAPI = "https://api.jikan.moe/v4"
+        const val cineMetaAPI = "https://v3-cinemeta.strem.io/meta"
         private const val apiKey = BuildConfig.TMDB_API
 
         /** ALL SOURCES */
@@ -185,7 +188,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val Dramacool="https://stremio-dramacool-addon.xyz"
         const val Xprime="https://xprime.tv"
         const val Vidzee="https://vidzee.wtf"
-        const val Fourkhdhub="https://4khdhub.fans"
         const val Elevenmovies="https://111movies.com"
         fun getType(t: String?): TvType {
             return when (t) {
@@ -294,7 +296,8 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         val res = app.get(resUrl).parsedSafe<MediaDetail>()
             ?: throw ErrorLoadingException("Invalid Json Response")
 
-        val title = res.title ?: res.name ?: return null
+        val altTitle=app.get("$cineMetaAPI/${type.name.lowercase()}/${res.external_ids?.imdb_id}.json").parsedSafe<Cinemeta>()?.meta?.name
+        val title = altTitle ?: res.title ?: res.name ?: return null
         val poster = getOriImageUrl(res.posterPath)
         val bgPoster = getOriImageUrl(res.backdropPath)
         val orgTitle = res.originalTitle ?: res.originalName ?: return null
@@ -423,7 +426,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     airedDate = res.releaseDate
                         ?: res.firstAirDate,
                     isAsian = isAsian,
-                    isBollywood = isBollywood
+                    isBollywood = isBollywood,
                 ).toJson(),
             ) {
                 this.posterUrl = poster
@@ -1068,6 +1071,7 @@ val airedDate: String? = null,
 val isAsian: Boolean = false,
 val isBollywood: Boolean = false,
 val isCartoon: Boolean = false,
+val imdbtitle: String? = null
 )
 
 data class Data(
