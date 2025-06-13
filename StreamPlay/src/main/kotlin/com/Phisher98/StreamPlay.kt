@@ -95,6 +95,7 @@ import com.phisher98.StreamPlayExtractor.invoke4khdhub
 import com.phisher98.StreamPlayExtractor.invokeDramacool
 import com.phisher98.StreamPlayExtractor.invokeElevenmovies
 import com.phisher98.StreamPlayExtractor.invokeXPrimeAPI
+import com.phisher98.StreamPlayExtractor.invokehdhub4u
 import com.phisher98.StreamPlayExtractor.invokevidzeeMulti
 import com.phisher98.StreamPlayExtractor.invokevidzeeUltra
 import kotlin.math.roundToInt
@@ -133,7 +134,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val filmxyAPI = "https://www.filmxy.online"
         const val MOVIE_API = BuildConfig.MOVIE_API
         const val kimcartoonAPI = "https://kimcartoon.com.co"
-        const val hianimeAPI = "https://hianimez.to"
+        const val hianimeAPI = "https://hianime.to"
         const val AnimeKai= "https://animekai.to"
         const val MultiEmbedAPI = "https://multiembed.mov"
         const val kissKhAPI = "https://kisskh.ovh"
@@ -189,6 +190,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val Xprime="https://xprime.tv"
         const val Vidzee="https://vidzee.wtf"
         const val Elevenmovies="https://111movies.com"
+        const val FlixHQ="https://flixhq.to"
         fun getType(t: String?): TvType {
             return when (t) {
                 "movie" -> TvType.Movie
@@ -703,6 +705,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             res.year,
             res.season,
             res.episode,
+            res.imdbId,
             subtitleCallback,
             callback
         )
@@ -842,6 +845,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         res.season,
         res.episode,
         res.year,
+        res.imdbId,
         subtitleCallback,
         callback
     )
@@ -907,20 +911,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                 subtitleCallback,
                 callback
             )
-        },
-            {
-                /*
-                invokeRgshows(
-                    res.id,
-                    res.imdbId,
-                    res.title,
-                    res.season,
-                    res.episode,
-                    res.year,
-                    subtitleCallback,
-                    callback
-                )
-                 */
             },
             {
                 if(!res.isAnime && !res.isBollywood && !res.isCartoon) invokeFilm1k(
@@ -1006,7 +996,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                 )
             },
             {
-                if (!res.isBollywood) invoke4khdhub(
+                if (!res.isBollywood || !res.isAnime) invoke4khdhub(
                 res.title,
                 res.year,
                 res.season,
@@ -1021,6 +1011,16 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     res.episode,
                     subtitleCallback,
                     callback)
+            },
+            {
+                if (!res.isAnime) invokehdhub4u(
+                    res.title,
+                    res.year,
+                    res.season,
+                    res.episode,
+                    subtitleCallback,
+                    callback
+                )
             },
 
             //Subtitles Invokes
