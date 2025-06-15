@@ -38,7 +38,6 @@ import com.phisher98.StreamPlayExtractor.invokeRiveStream
 import com.phisher98.StreamPlayExtractor.invokeRogmovies
 import com.phisher98.StreamPlayExtractor.invokeSharmaflix
 import com.phisher98.StreamPlayExtractor.invokeShowflix
-import com.phisher98.StreamPlayExtractor.invokeStreamPlay
 import com.phisher98.StreamPlayExtractor.invokeSubtitleAPI
 import com.phisher98.StreamPlayExtractor.invokeSuperstream
 import com.phisher98.StreamPlayExtractor.invokeTheyallsayflix
@@ -59,6 +58,8 @@ import com.phisher98.StreamPlayExtractor.invokeZshow
 import com.phisher98.StreamPlayExtractor.invokeazseries
 import com.phisher98.StreamPlayExtractor.invokecatflix
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.lagradost.cloudstream3.Actor
 import com.lagradost.cloudstream3.ActorData
 import com.lagradost.cloudstream3.DubStatus
@@ -125,7 +126,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val anilistAPI = "https://graphql.anilist.co"
         const val malsyncAPI = "https://api.malsync.moe"
         const val jikanAPI = "https://api.jikan.moe/v4"
-        const val cineMetaAPI = "https://v3-cinemeta.strem.io/meta"
+        const val beamupAPI = "https://94c8cb9f702d-tmdb-addon.baby-beamup.club"
         private const val apiKey = BuildConfig.TMDB_API
 
         /** ALL SOURCES */
@@ -166,7 +167,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val animepaheAPI = "https://animepahe.ru"
         const val Catflix= "https://catflix.su"
         const val NyaaAPI="https://nyaa.land"
-        const val Extramovies="https://extramovies.direct"
         const val WhvxAPI=BuildConfig.WhvxAPI
         const val Sharmaflix= BuildConfig.SharmaflixApi
         const val SubtitlesAPI="https://opensubtitles-v3.strem.io"
@@ -258,7 +258,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         val adultQuery =
             if (settingsForProvider.enableAdult) "" else "&without_keywords=190370|13059|226161|195669"
         val type = if (request.data.contains("/movie")) "movie" else "tv"
-        val home = app.get("${request.data}$adultQuery&page=$page")
+        val home = app.get("${request.data}$adultQuery&page=$page", timeout = 10000)
             .parsedSafe<Results>()?.results?.mapNotNull { media ->
                 media.toSearchResponse(type)
             } ?: throw ErrorLoadingException("Invalid Json reponse")
@@ -292,11 +292,15 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         } else {
             "$tmdbAPI/tv/${data.id}?api_key=$apiKey&append_to_response=$append"
         }
-        val res = app.get(resUrl).parsedSafe<MediaDetail>()
-            ?: throw ErrorLoadingException("Invalid Json Response")
 
-        val altTitle=app.get("$cineMetaAPI/${type.name.lowercase()}/${res.external_ids?.imdb_id}.json").parsedSafe<Cinemeta>()?.meta?.name
-        val title = altTitle ?: res.title ?: res.name ?: return null
+        val res = app.get(resUrl,timeout = 10000).parsedSafe<MediaDetail>()
+            ?: throw ErrorLoadingException("Invalid Json Response")
+        val altTitle: String? = try {
+            Gson().fromJson(app.get("$beamupAPI/meta/movie/tmdb:${res.id}.json").text, Beamup::class.java)?.meta?.name
+        } catch (e: JsonSyntaxException) {
+            null
+        }
+        val title = res.title ?: res.name ?: return null
         val poster = getOriImageUrl(res.posterPath)
         val bgPoster = getOriImageUrl(res.backdropPath)
         val orgTitle = res.originalTitle ?: res.originalName ?: return null
@@ -352,7 +356,10 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                                 ?: res.firstAirDate,
                             isAsian = isAsian,
                             isBollywood = isBollywood,
-                            isCartoon = isCartoon
+                            isCartoon = isCartoon,
+                            imdbtitle=altTitle,
+                            alttitle=res.title,
+                            nametitle=res.name
                         ).toJson())
                         {
                             this.name=eps.name + if (isUpcoming(eps.airDate)) " • [UPCOMING]" else ""
@@ -426,6 +433,9 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                         ?: res.firstAirDate,
                     isAsian = isAsian,
                     isBollywood = isBollywood,
+                    imdbtitle=altTitle,
+                    alttitle=res.title,
+                    nametitle=res.name
                 ).toJson(),
             ) {
                 this.posterUrl = poster
@@ -622,16 +632,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         )
     },
     {
-        /*
-        invokewhvx(
-            res.imdbId,
-            res.season,
-            res.episode,
-            subtitleCallback
-        )
-         */
-    },
-    {
         if (!res.isAnime) invokeNinetv(
             res.id,
             res.season,
@@ -701,7 +701,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
     },
     {
         if (!res.isAnime && !res.isBollywood) invokeVegamovies(
-            res.title,
+            res.imdbtitle,
             res.year,
             res.season,
             res.episode,
@@ -712,13 +712,15 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
     },
     {
          if (!res.isAnime) invokeExtramovies(
-                    res.imdbId,
-                    subtitleCallback,
-                    callback
-                )
+             res.imdbId,
+             res.season,
+             res.episode,
+             subtitleCallback,
+             callback
+         )
     },
     {
-                if (!res.isAnime) invokeVidbinge(
+        if (!res.isAnime) invokeVidbinge(
                     res.imdbId,
                     res.id,
                     res.title,
@@ -726,7 +728,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     res.season,
                     res.episode,
                     callback
-                )
+        )
     },
     {
         invokeSharmaflix(
@@ -760,7 +762,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
     {
         invokeMultimovies(
-            res.title,
+            res.id,
             res.season,
             res.episode,
             subtitleCallback,
@@ -841,7 +843,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
     },
 {
     if (!res.isAnime) invokeMoviesdrive(
-        res.title,
+        res.imdbtitle,
         res.season,
         res.episode,
         res.year,
@@ -951,6 +953,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     callback
                 )
             },
+            /*
             {
                 invokeStreamPlay(
                     res.id,
@@ -960,6 +963,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     callback
                 )
             },
+             */
             {
                 if (!res.isAnime) invokeVidSrcXyz(
                     res.imdbId,
@@ -997,7 +1001,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isBollywood || !res.isAnime) invoke4khdhub(
-                res.title,
+                res.imdbtitle,
                 res.year,
                 res.season,
                 res.episode,
@@ -1014,6 +1018,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isAnime) invokehdhub4u(
+                    res.imdbId,
                     res.title,
                     res.year,
                     res.season,
@@ -1068,7 +1073,9 @@ val airedDate: String? = null,
 val isAsian: Boolean = false,
 val isBollywood: Boolean = false,
 val isCartoon: Boolean = false,
-val imdbtitle: String? = null
+val imdbtitle: String? = null,
+val alttitle: String? = null,
+val nametitle: String? = null
 )
 
 data class Data(
