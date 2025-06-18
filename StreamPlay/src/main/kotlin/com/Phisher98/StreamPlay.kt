@@ -619,7 +619,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isAnime && !res.isBollywood) invokeVegamovies(
-                    res.imdbtitle,
+                    res.title,
                     res.year,
                     res.season,
                     res.episode,
@@ -702,7 +702,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isAnime) invokeMoviesdrive(
-                    res.imdbtitle,
+                    res.title,
                     res.season,
                     res.episode,
                     res.year,
@@ -800,7 +800,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isBollywood || !res.isAnime) invoke4khdhub(
-                    res.imdbtitle, res.year, res.season, res.episode, subtitleCallback, callback
+                    res.title, res.year, res.season, res.episode, subtitleCallback, callback
                 )
             },
             {
@@ -861,7 +861,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         val isAsian: Boolean = false,
         val isBollywood: Boolean = false,
         val isCartoon: Boolean = false,
-        val imdbtitle: String? = null,
         val alttitle: String? = null,
         val nametitle: String? = null
     )
