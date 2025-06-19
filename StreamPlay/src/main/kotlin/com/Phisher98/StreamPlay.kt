@@ -79,7 +79,6 @@ import com.lagradost.cloudstream3.newMovieLoadResponse
 import com.lagradost.cloudstream3.newMovieSearchResponse
 import com.lagradost.cloudstream3.newTvSeriesLoadResponse
 import com.lagradost.cloudstream3.runAllAsync
-import com.lagradost.cloudstream3.syncproviders.SyncIdName
 import com.lagradost.cloudstream3.toRatingInt
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
@@ -99,7 +98,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
     override val instantLinkLoading = true
     override val useMetaLoadResponse = true
     override val hasQuickSearch = true
-    override val supportedSyncNames = setOf(SyncIdName.Simkl, SyncIdName.Anilist)
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -621,7 +619,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isAnime && !res.isBollywood) invokeVegamovies(
-                    res.imdbtitle,
+                    res.title,
                     res.year,
                     res.season,
                     res.episode,
@@ -704,7 +702,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isAnime) invokeMoviesdrive(
-                    res.imdbtitle,
+                    res.title,
                     res.season,
                     res.episode,
                     res.year,
@@ -802,7 +800,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isBollywood || !res.isAnime) invoke4khdhub(
-                    res.imdbtitle, res.year, res.season, res.episode, subtitleCallback, callback
+                    res.title, res.year, res.season, res.episode, subtitleCallback, callback
                 )
             },
             {
@@ -863,7 +861,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         val isAsian: Boolean = false,
         val isBollywood: Boolean = false,
         val isCartoon: Boolean = false,
-        val imdbtitle: String? = null,
         val alttitle: String? = null,
         val nametitle: String? = null
     )
