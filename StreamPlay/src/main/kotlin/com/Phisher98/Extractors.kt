@@ -12,6 +12,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import com.google.gson.annotations.SerializedName
 import com.lagradost.api.Log
 import com.lagradost.cloudstream3.APIHolder.getCaptchaToken
 import com.lagradost.cloudstream3.SubtitleFile
@@ -2010,7 +2011,7 @@ class Megacloud : ExtractorApi() {
             )
 
             try {
-                M3u8Helper.generateM3u8(name, m3u8, mainUrl, headers = m3u8headers).forEach(callback)
+                generateM3u8(name, m3u8, mainUrl, headers = m3u8headers).forEach(callback)
             } catch (e: Exception) {
                 Log.e("Megacloud", "Error generating M3U8: ${e.message}")
             }
@@ -2122,7 +2123,107 @@ class Cdnstreame : ExtractorApi() {
     override val mainUrl = "https://cdnstreame.net"
     override val requiresReferer = false
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override suspend fun getUrl(
+        url: String,
+        referer: String?,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        Log.d("Phisher","I'm here")
+        val headers = mapOf(
+            "Accept" to "*/*",
+            "X-Requested-With" to "XMLHttpRequest",
+            "Referer" to mainUrl,
+            "User-Agent" to USER_AGENT
+        )
+
+        val id = url.substringAfterLast("/").substringBefore("?")
+        val apiUrl = "$mainUrl/embed-1/v2/e-1/getSources?id=$id"
+
+        val response = app.get(apiUrl, headers = headers)
+            .parsedSafe<MegacloudResponse>() ?: return
+        Log.d("Phisher",response.toString())
+
+        val key = app.get("https://raw.githubusercontent.com/yogesh-hacker/MegacloudKeys/refs/heads/main/keys.json")
+            .parsedSafe<Megakey>()?.rabbit ?: return
+        Log.d("Phisher",key)
+
+        val decryptedJson = decryptOpenSSL(response.sources, key)
+        val m3u8Url = parseSourceJson(decryptedJson).firstOrNull()?.file ?: return
+
+        val m3u8Headers = mapOf("Referer" to mainUrl, "Origin" to mainUrl)
+        generateM3u8(name, m3u8Url, mainUrl, headers = m3u8Headers).forEach(callback)
+
+        response.tracks
+            .filter { it.kind in listOf("captions", "subtitles") }
+            .forEach { track ->
+                subtitleCallback(SubtitleFile(track.label, track.file))
+            }
+    }
+
+    data class MegacloudResponse(
+        val sources: String,
+        val tracks: List<MegacloudTrack>,
+        val encrypted: Boolean,
+        val intro: MegacloudIntro,
+        val outro: MegacloudOutro,
+        val server: Long
+    )
+
+    data class MegacloudTrack(val file: String, val label: String, val kind: String, val default: Boolean?)
+    data class MegacloudIntro(val start: Long, val end: Long)
+    data class MegacloudOutro(val start: Long, val end: Long)
+    data class Megakey(val mega: String, val rabbit: String)
+    data class Source2(val file: String, val type: String)
+
+    private fun parseSourceJson(json: String): List<Source2> = runCatching {
+        val jsonArray = JSONArray(json)
+        List(jsonArray.length()) {
+            val obj = jsonArray.getJSONObject(it)
+            Source2(obj.getString("file"), obj.getString("type"))
+        }
+    }.getOrElse {
+        Log.e("parseSourceJson", "Failed to parse JSON: ${it.message}")
+        emptyList()
+    }
+
+    private fun opensslKeyIv(password: ByteArray, salt: ByteArray, keyLen: Int = 32, ivLen: Int = 16): Pair<ByteArray, ByteArray> {
+        var d = ByteArray(0)
+        var d_i = ByteArray(0)
+        while (d.size < keyLen + ivLen) {
+            d_i = MessageDigest.getInstance("MD5").digest(d_i + password + salt)
+            d += d_i
+        }
+        return d.copyOfRange(0, keyLen) to d.copyOfRange(keyLen, keyLen + ivLen)
+    }
+
     @SuppressLint("NewApi")
+    private fun decryptOpenSSL(encBase64: String, password: String): String {
+        return runCatching {
+            val data = Base64.getDecoder().decode(encBase64)
+            require(data.copyOfRange(0, 8).contentEquals("Salted__".toByteArray()))
+            val salt = data.copyOfRange(8, 16)
+            val (key, iv) = opensslKeyIv(password.toByteArray(), salt)
+
+            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding").apply {
+                init(Cipher.DECRYPT_MODE, SecretKeySpec(key, "AES"), IvParameterSpec(iv))
+            }
+
+            String(cipher.doFinal(data.copyOfRange(16, data.size)))
+        }.getOrElse {
+            Log.e("decryptOpenSSL", "Decryption failed: ${it.message}")
+            ""
+        }
+    }
+}
+
+class Videostr : ExtractorApi() {
+    override val name = "Videostr"
+    override val mainUrl = "https://videostr.net"
+    override val requiresReferer = false
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun getUrl(
         url: String,
         referer: String?,
@@ -2138,73 +2239,53 @@ class Cdnstreame : ExtractorApi() {
 
         val id = url.substringAfterLast("/").substringBefore("?")
         val apiUrl = "$mainUrl/embed-1/v2/e-1/getSources?id=$id"
-        val response = app.get(apiUrl, headers = headers).parsedSafe<MegacloudResponse>() ?: return
 
-        response.sources.let { encoded ->
-            val key = app.get("https://raw.githubusercontent.com/yogesh-hacker/MegacloudKeys/refs/heads/main/keys.json")
-                .parsedSafe<Megakey>()?.rabbit
+        val json = app.get(apiUrl, headers = headers).text
+        val response = Gson().fromJson(json, MediaData::class.java)
 
-            val m3u8 = key
-                ?.let { decryptOpenSSL(encoded, it) }
-                ?.let { parseSourceJson(it).firstOrNull()?.file }
+        val key = app.get("https://raw.githubusercontent.com/yogesh-hacker/MegacloudKeys/refs/heads/main/keys.json")
+            .parsedSafe<Megakey>()?.vidstr ?: return
 
-            Log.d("Phisher", m3u8.toString())
+        val decryptedJson = decryptOpenSSL(response.sources, key)
+        val m3u8Url = parseSourceJson(decryptedJson).firstOrNull()?.file ?: return
 
-            if (m3u8 != null) {
-                val m3u8headers = mapOf(
-                    "Referer" to mainUrl,
-                    "Origin" to mainUrl
-                )
-
-                generateM3u8(
-                    name,
-                    m3u8,
-                    mainUrl,
-                    headers = m3u8headers
-                ).forEach(callback)
-            }
-        }
+        val m3u8Headers = mapOf("Referer" to mainUrl, "Origin" to mainUrl)
+        generateM3u8(name, m3u8Url, mainUrl, headers = m3u8Headers).forEach(callback)
 
         response.tracks
-            .filter { it.kind == "captions" || it.kind == "subtitles" }
+            .filter { it.kind in listOf("captions", "subtitles") }
             .forEach { track ->
                 subtitleCallback(SubtitleFile(track.label, track.file))
             }
     }
 
-    data class MegacloudResponse(
+    data class MediaData(
         val sources: String,
-        val tracks: List<MegacloudTrack>,
+        val tracks: List<Track>,
         val encrypted: Boolean,
-        val intro: MegacloudIntro,
-        val outro: MegacloudOutro,
-        val server: Long,
+        @SerializedName("_f") val f: String,
+        val server: Int
     )
 
-    data class MegacloudTrack(
+    data class Track(
         val file: String,
         val label: String,
         val kind: String,
-        val default: Boolean?,
+        @SerializedName("default") val isDefault: Boolean = false
     )
 
-    data class MegacloudIntro(val start: Long, val end: Long)
-    data class MegacloudOutro(val start: Long, val end: Long)
-
-    data class Megakey(val mega: String, val rabbit: String)
+    data class Megakey(val mega: String, val rabbit: String,val vidstr: String)
     data class Source2(val file: String, val type: String)
 
-    private fun parseSourceJson(json: String): List<Source2> {
-        return try {
-            val jsonArray = JSONArray(json)
-            List(jsonArray.length()) { i ->
-                val obj = jsonArray.getJSONObject(i)
-                Source2(obj.getString("file"), obj.getString("type"))
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            emptyList()
+    private fun parseSourceJson(json: String): List<Source2> = runCatching {
+        val jsonArray = JSONArray(json)
+        List(jsonArray.length()) {
+            val obj = jsonArray.getJSONObject(it)
+            Source2(obj.getString("file"), obj.getString("type"))
         }
+    }.getOrElse {
+        Log.e("parseSourceJson", "Failed to parse JSON: ${it.message}")
+        emptyList()
     }
 
     private fun opensslKeyIv(password: ByteArray, salt: ByteArray, keyLen: Int = 32, ivLen: Int = 16): Pair<ByteArray, ByteArray> {
@@ -2217,12 +2298,11 @@ class Cdnstreame : ExtractorApi() {
         return d.copyOfRange(0, keyLen) to d.copyOfRange(keyLen, keyLen + ivLen)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NewApi")
     private fun decryptOpenSSL(encBase64: String, password: String): String {
-        return try {
+        return runCatching {
             val data = Base64.getDecoder().decode(encBase64)
             require(data.copyOfRange(0, 8).contentEquals("Salted__".toByteArray()))
-
             val salt = data.copyOfRange(8, 16)
             val (key, iv) = opensslKeyIv(password.toByteArray(), salt)
 
@@ -2231,12 +2311,13 @@ class Cdnstreame : ExtractorApi() {
             }
 
             String(cipher.doFinal(data.copyOfRange(16, data.size)))
-        } catch (e: Exception) {
-            Log.e("DecryptOpenSSL", "Decryption failed: ${e.message}")
-            "Decryption Error"
+        }.getOrElse {
+            Log.e("decryptOpenSSL", "Decryption failed: ${it.message}")
+            ""
         }
     }
 }
+
 
 
 
@@ -2292,7 +2373,7 @@ class HUBCDN : ExtractorApi() {
                     INFER_TYPE,
                 )
                 {
-                    this.quality=Qualities.P1080.value
+                    this.quality=Qualities.Unknown.value
                 }
             )
         }

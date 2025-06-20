@@ -114,6 +114,7 @@ class StreamPlayPlugin: Plugin() {
         registerExtractorAPI(oxxxfile())
         registerExtractorAPI(Hblinks())
         registerExtractorAPI(VidStack())
+        registerExtractorAPI(Videostr())
         registerExtractorAPI(DriveleechPro())
         val activity = context as AppCompatActivity
         openSettings = {
