@@ -35,7 +35,6 @@ import com.phisher98.StreamPlayExtractor.invokeRogmovies
 import com.phisher98.StreamPlayExtractor.invokeShowflix
 import com.phisher98.StreamPlayExtractor.invokeSubtitleAPI
 import com.phisher98.StreamPlayExtractor.invokeSuperstream
-import com.phisher98.StreamPlayExtractor.invokeTheyallsayflix
 import com.phisher98.StreamPlayExtractor.invokeTom
 import com.phisher98.StreamPlayExtractor.invokeTopMovies
 import com.phisher98.StreamPlayExtractor.invokeUhdmovies
@@ -173,7 +172,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val twoEmbedAPI = "https://www.2embed.cc"
         const val filmxyAPI = "https://www.filmxy.online"
         const val MOVIE_API = BuildConfig.MOVIE_API
-        const val hianimeAPI = "https://hianime.to"
+        const val hianimeAPI = "https://hianime.nz"
         const val AnimeKai = "https://animekai.to"
         const val MultiEmbedAPI = "https://multiembed.mov"
         const val kissKhAPI = "https://kisskh.ovh"
@@ -499,10 +498,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         resetNameCount()
         runAllAsync(
             {
-                invokeEmbedsu(res.imdbId, res.season, res.episode, callback)
-            },
-            {
-                invokeTheyallsayflix(res.imdbId, res.season, res.episode, callback)
+                if (res.isAnime) invokeEmbedsu(res.imdbId, res.season, res.episode, callback)
             },
             {
                 if (res.isAnime) invokeAnimes(
@@ -519,7 +515,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             },
             {
                 if (!res.isAnime) invokeVidsrccc(
-                    res.id, res.season, res.episode, callback
+                    res.id, res.season, res.episode, subtitleCallback, callback
                 )
             },
             {
