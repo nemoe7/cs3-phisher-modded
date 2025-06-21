@@ -30,8 +30,8 @@ data class Vidsrcccm3u8(
 )
 
 data class VidsrcccData(
+    val type: String,
     val source: String,
-    val subtitles: List<VidsrcccSubtitle>,
 )
 
 data class VidsrcccSubtitle(
@@ -695,7 +695,7 @@ data class Daum(
 
 
 data class MALSyncSites(
-    @JsonProperty("Gogoanime") val Gogoanime: HashMap<String?, HashMap<String, String?>>? = hashMapOf(),
+    @JsonProperty("AniXL") val AniXL: HashMap<String?, HashMap<String, String?>>? = hashMapOf(),
     @JsonProperty("Zoro") val zoro: HashMap<String?, HashMap<String, String?>>? = hashMapOf(),
     @JsonProperty("9anime") val nineAnime: HashMap<String?, HashMap<String, String?>>? = hashMapOf(),
     @JsonProperty("animepahe") val animepahe: HashMap<String?, HashMap<String, String?>>? = hashMapOf(),
