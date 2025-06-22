@@ -23,6 +23,7 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_margin="8dp"
             android:background="?android:attr/listDivider" />
 
         <com.google.android.material.materialswitch.MaterialSwitch

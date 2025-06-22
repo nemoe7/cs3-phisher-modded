@@ -68,7 +68,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
 
             val preferJpTitle = sharedPref?.getBoolean("jpTitle", false) ?: false
             if (preferJpTitle || title.isBlank()) {
-                val html = app.get("https://animepahe.ru/anime/${entry.session}", headers = headers).text
+                val html = app.get("$mainUrl/anime/${entry.session}", headers = headers).text
                 val doc = Jsoup.parse(html)
                 title = doc.selectFirst("h2.japanese")?.text() ?: title
             }
@@ -123,7 +123,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
 
             val preferJpTitle = sharedPref?.getBoolean("jpTitle", false) ?: false
             if (preferJpTitle || title.isBlank()) {
-                val html = app.get("https://animepahe.ru/anime/${entry.session}", headers = Companion.headers).text
+                val html = app.get("$mainUrl/anime/${entry.session}", headers = Companion.headers).text
                 val doc = Jsoup.parse(html)
                 title = doc.selectFirst("h2.japanese")?.text() ?: title
             }
@@ -281,13 +281,8 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
                     data.session
                 }
             } ?: return@suspendSafeApiCall null
-            val html = app.get("$mainUrl/anime/$session",headers=headers).text
-            val doc = Jsoup.parse(html)
-            val japTitle = doc.selectFirst("h2.japanese")?.text()
-            val animeTitle = doc.selectFirst("span.sr-only.unselectable")?.text()
-            val poster = doc.selectFirst(".anime-poster a")?.attr("href")
 
-            val html = app.get("https://animepahe.ru/anime/$session", headers = headers).text
+            val html = app.get("$mainUrl/anime/$session", headers = headers).text
             val doc = Jsoup.parse(html)
             val jpTitle = doc.selectFirst("h2.japanese")?.text()
             val mainTitle = doc.selectFirst("h1.user-select-none span")?.text()
