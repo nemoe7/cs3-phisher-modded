@@ -23,11 +23,12 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     companion object {
         const val MAIN_URL = "https://animepahe.ru"
         val headers = mapOf("Cookie" to "__ddg2_=1234567890")
-
-        private fun getType(rawType: String): TvType = when {
-            rawType.contains("OVA") || rawType.contains("Special") -> TvType.OVA
-            rawType.contains("Movie") -> TvType.AnimeMovie
-            else -> TvType.Anime
+        private val Proxy="https://animepaheproxy.phisheranimepahe.workers.dev/?url="
+        //var cookies: Map<String, String> = mapOf()
+        private fun getType(t: String): TvType {
+            return if (t.contains("OVA") || t.contains("Special")) TvType.OVA
+            else if (t.contains("Movie")) TvType.AnimeMovie
+            else TvType.Anime
         }
     }
 
@@ -41,7 +42,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     )
 
     override val mainPage =
-        listOf(MainPageData("Latest Releases", "https://animepaheproxy.phisheranimepahe.workers.dev/?url=$mainUrl/api?m=airing&page=", true))
+        listOf(MainPageData("Latest Releases", "$Proxy$mainUrl/api?m=airing&page=", true))
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
 
@@ -109,10 +110,9 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
 
     override suspend fun search(query: String): List<com.lagradost.cloudstream3.SearchResponse> {
 
-        val searchUrl = "$mainUrl/api?m=search&l=8&q=$query"
-        val headers = mapOf(
-            "referer" to "$mainUrl/", "Cookie" to "__ddg2_=1234567890"
-        )
+    override suspend fun search(query: String): List<SearchResponse> {
+        val url = "$Proxy$mainUrl/api?m=search&l=8&q=$query"
+        val headers = mapOf("referer" to "$mainUrl/","Cookie" to "__ddg2_=1234567890")
 
         val res = app.get(searchUrl, headers = headers).text
         val data = parseJson<SearchResponse>(res).data
@@ -169,7 +169,18 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
         @JsonProperty("episode_session") val episodeSession: String,
         @JsonProperty("dubType") var dubType: String,
     ) {
-        val url = "$MAIN_URL/play/$session/$episodeSession"
+        private val headers = mapOf("Cookie" to "__ddg2_=1234567890")
+        suspend fun getUrl(): String? {
+            return if (is_play_page) {
+                "$Proxy$mainUrl/play/${session}/${episode_session}"
+            } else {
+                val url = "$Proxy$mainUrl/api?m=release&id=${session}&sort=episode_asc&page=${page + 1}"
+                val jsonResponse = app.get(url,headers=headers).parsedSafe<AnimePaheAnimeData>() ?: return null
+                val episode = jsonResponse.data.firstOrNull { it.episode == episode_num }?.session
+                    ?: return null
+                "$Proxy$mainUrl/play/${session}/${episode}"
+            }
+        }
     }
 
     @OptIn(DelicateCoroutinesApi::class)
