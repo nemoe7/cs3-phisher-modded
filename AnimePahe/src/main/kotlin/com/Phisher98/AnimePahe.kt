@@ -11,10 +11,10 @@ import com.lagradost.cloudstream3.mvvm.suspendSafeApiCall
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
-import org.jsoup.Jsoup
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
+import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
 
@@ -23,7 +23,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     companion object {
         const val MAIN_URL = "https://animepahe.ru"
         val headers = mapOf("Cookie" to "__ddg2_=1234567890")
-        private val Proxy="https://animepaheproxy.phisheranimepahe.workers.dev/?url="
+        private const val PROXY="https://animepaheproxy.phisheranimepahe.workers.dev/?url="
         //var cookies: Map<String, String> = mapOf()
         private fun getType(t: String): TvType {
             return if (t.contains("OVA") || t.contains("Special")) TvType.OVA
@@ -42,7 +42,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     )
 
     override val mainPage =
-        listOf(MainPageData("Latest Releases", "$Proxy$mainUrl/api?m=airing&page=", true))
+        listOf(MainPageData("Latest Releases", "$PROXY$MAIN_URL/api?m=airing&page=", true))
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
 
@@ -69,7 +69,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
 
             val preferJpTitle = sharedPref?.getBoolean("jpTitle", false) ?: false
             if (preferJpTitle || title.isBlank()) {
-                val html = app.get("$mainUrl/anime/${entry.session}", headers = headers).text
+                val html = app.get("$PROXY$MAIN_URL/anime/${entry.session}", headers = headers).text
                 val doc = Jsoup.parse(html)
                 title = doc.selectFirst("h2.japanese")?.text() ?: title
             }
@@ -109,12 +109,10 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     )
 
     override suspend fun search(query: String): List<com.lagradost.cloudstream3.SearchResponse> {
+        val url = "$PROXY$MAIN_URL/api?m=search&l=8&q=$query"
+        val headers = mapOf("referer" to "$MAIN_URL/","Cookie" to "__ddg2_=1234567890")
 
-    override suspend fun search(query: String): List<SearchResponse> {
-        val url = "$Proxy$mainUrl/api?m=search&l=8&q=$query"
-        val headers = mapOf("referer" to "$mainUrl/","Cookie" to "__ddg2_=1234567890")
-
-        val res = app.get(searchUrl, headers = headers).text
+        val res = app.get(url, headers = headers).text
         val data = parseJson<SearchResponse>(res).data
 
         return data.amap { entry ->
@@ -123,7 +121,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
 
             val preferJpTitle = sharedPref?.getBoolean("jpTitle", false) ?: false
             if (preferJpTitle || title.isBlank()) {
-                val html = app.get("$mainUrl/anime/${entry.session}", headers = Companion.headers).text
+                val html = app.get("$PROXY$MAIN_URL/anime/${entry.session}", headers = Companion.headers).text
                 val doc = Jsoup.parse(html)
                 title = doc.selectFirst("h2.japanese")?.text() ?: title
             }
@@ -163,6 +161,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     )
 
     data class EpisodeLinkData(
+        @JsonProperty("is_play_page") val isPlayPage: Boolean,
         @JsonProperty("episode_num") val episodeNum: Int,
         @JsonProperty("page") val page: Int,
         @JsonProperty("session") val session: String,
@@ -171,14 +170,17 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     ) {
         private val headers = mapOf("Cookie" to "__ddg2_=1234567890")
         suspend fun getUrl(): String? {
-            return if (is_play_page) {
-                "$Proxy$mainUrl/play/${session}/${episode_session}"
+            return if (isPlayPage) {
+                "$PROXY$MAIN_URL/play/${session}/${episodeSession}"
             } else {
-                val url = "$Proxy$mainUrl/api?m=release&id=${session}&sort=episode_asc&page=${page + 1}"
-                val jsonResponse = app.get(url,headers=headers).parsedSafe<AnimePaheAnimeData>() ?: return null
-                val episode = jsonResponse.data.firstOrNull { it.episode == episode_num }?.session
+                val url =
+                    "$PROXY$MAIN_URL/api?m=release&id=${session}&sort=episode_asc&page=${page + 1}"
+                val jsonResponse =
+                    app.get(url, headers = headers).parsedSafe<PageData>() ?: return null
+                val episode =
+                    jsonResponse.episodeList.firstOrNull { it.episode == episodeNum }?.session
                     ?: return null
-                "$Proxy$mainUrl/play/${session}/${episode}"
+                "$PROXY$MAIN_URL/play/${session}/${episode}"
             }
         }
     }
@@ -190,7 +192,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
         val semaphore = Semaphore(5) // Limit to 5 concurrent requests
 
         try {
-            val url = "$mainUrl/api?m=release&id=$session&sort=episode_asc&page=1"
+            val url = "$MAIN_URL/api?m=release&id=$session&sort=episode_asc&page=1"
             val res = app.get(url, headers = headers).text
             val pageData = parseJson<PageData>(res)
 
@@ -208,7 +210,12 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
                 episodes += pageData.episodeList.map { episodeData ->
                     newEpisode(
                         EpisodeLinkData(
-                            episodeData.episode, page = 0, session, episodeData.session, "sub"
+                            isPlayPage = true,
+                            episodeNum = episodeData.episode,
+                            page = 0,
+                            session = session,
+                            episodeSession = episodeData.session,
+                            dubType = "sub"
                         ).toJson()
                     ) {
                         addDate(episodeData.createdAt)
@@ -223,7 +230,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
                         semaphore.withPermit {
                             try {
                                 val pageUrl =
-                                    "$mainUrl/api?m=release&id=$session&sort=episode_asc&page=$page"
+                                    "$MAIN_URL/api?m=release&id=$session&sort=episode_asc&page=$page"
                                 val pageRes = app.get(pageUrl, headers = headers).text
                                 currentEpisode++
 
@@ -248,11 +255,12 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
                     episodes += resolvedPage.episodeList.map { episodeData ->
                         newEpisode(
                             EpisodeLinkData(
-                                episodeData.episode,
-                                resolvedPage.currentPage,
-                                session,
-                                episodeData.session,
-                                "sub"
+                                isPlayPage = true,
+                                episodeNum = episodeData.episode,
+                                page = resolvedPage.currentPage,
+                                session = session,
+                                episodeSession = episodeData.session,
+                                dubType = "sub"
                             ).toJson()
                         ) {
                             addDate(episodeData.createdAt)
@@ -293,7 +301,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
                 }
             } ?: return@suspendSafeApiCall null
 
-            val html = app.get("$mainUrl/anime/$session", headers = headers).text
+            val html = app.get("$MAIN_URL/anime/$session", headers = headers).text
             val doc = Jsoup.parse(html)
             val jpTitle = doc.selectFirst("h2.japanese")?.text()
             val mainTitle = doc.selectFirst("h1.user-select-none span")?.text()
@@ -370,7 +378,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     ): Boolean {
 
         val episodeLinkData = parseJson<EpisodeLinkData>(data)
-        val episodeUrl = episodeLinkData.url
+        val episodeUrl = episodeLinkData.getUrl() ?: return false
         val doc = app.get(episodeUrl, headers = headers).document
 
         fun extractInfo(element: Element): Triple<String, String, Int> {
