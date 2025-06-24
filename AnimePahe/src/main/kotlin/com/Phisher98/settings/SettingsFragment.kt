@@ -75,7 +75,7 @@ class SettingsFragment(
             }
         }
         val sourceASwitch = view.findView<MaterialSwitch>("sourceASwitch")
-        sourceASwitch.isChecked = sharedPref.getBoolean("sourceAEnabled", false)
+        sourceASwitch.isChecked = sharedPref.getBoolean("sourceAEnabled", true)
         sourceASwitch.text = getString("source_a_string")
         sourceASwitch.setOnClickListener {
             val isChecked = sourceASwitch.isChecked
@@ -85,7 +85,7 @@ class SettingsFragment(
             }
         }
         val sourceBSwitch = view.findView<MaterialSwitch>("sourceBSwitch")
-        sourceBSwitch.isChecked = sharedPref.getBoolean("sourceBEnabled", false)
+        sourceBSwitch.isChecked = sharedPref.getBoolean("sourceBEnabled", true)
         sourceBSwitch.text = getString("source_b_string")
         sourceBSwitch.setOnClickListener {
             val isChecked = sourceBSwitch.isChecked
