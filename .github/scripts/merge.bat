@@ -1,3 +1,5 @@
+@echo off
+
 :: Get directories deleted in fork
 git diff --name-only --diff-filter=D 0a82eb78dab7b698939754d21c5adf3bcc841692 > delete.txt
 findstr /R "\\build.gradle.kts" delete.txt > temp.txt
@@ -11,7 +13,7 @@ git merge upstream/master -X theirs --no-ff --quiet || rem continue even if merg
 
 :: Re-delete files deleted in fork
 for /f "usebackq delims=" %%a in (delete.txt) do (
-  git rm -f -r --ignore-unmatch "%%a"
+  git rm -f -r --ignore-unmatch "%%a" && echo Removed %%a
 )
 
 :: Restore .github directory from origin/master

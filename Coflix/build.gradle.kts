@@ -1,12 +1,12 @@
 // use an integer for version numbers
-version = 8
+version = 7
 
 
 cloudstream {
     // All of these properties are optional, you can safely remove them
 
-    description = "4K Movies Extension by HDHUB4U"
-    language    = "en"
+    description = "Movies,Series and Anime French Extension "
+    language    = "fr"
     authors = listOf("Phisher98")
 
     /**
@@ -22,7 +22,7 @@ cloudstream {
     // You can find a list of available types here:
     // https://recloudstream.github.io/cloudstream/html/app/com.lagradost.cloudstream3/-tv-type/index.html
     tvTypes = listOf("Movie","TvSeries")
-    iconUrl = "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/4KHDHUB-Bright-Logo.png"
+    iconUrl = "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/Coflix.png"
 
     isCrossPlatform = true
 }

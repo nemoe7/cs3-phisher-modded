@@ -300,11 +300,10 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
                     data.session
                 }
             } ?: return@suspendSafeApiCall null
-
-            val html = app.get("$MAIN_URL/anime/$session", headers = headers).text
+            val html = app.get("$PROXY$mainUrl/anime/$session",headers=headers).text
             val doc = Jsoup.parse(html)
             val jpTitle = doc.selectFirst("h2.japanese")?.text()
-            val mainTitle = doc.selectFirst("h1.user-select-none span")?.text()
+            val mainTitle = doc.selectFirst("span.sr-only.unselectable")?.text()
             val poster = doc.selectFirst(".anime-poster a")?.attr("href")
             val tvType = doc.selectFirst("""a[href*="/anime/type/"]""")?.text()
 
