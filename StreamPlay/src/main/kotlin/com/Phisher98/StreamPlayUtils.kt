@@ -2089,9 +2089,9 @@ suspend fun invokeExternalSource(
 
                 callback.invoke(
                     ExtractorLink(
-                        name,
-                        name,
-                        url,
+                        "⌜ SuperStream ⌟",
+                        "⌜ SuperStream ⌟ [Server ${index + 1}] ${source.size}",
+                        source.file?.replace("\\/", "/") ?: return@org,
                         "",
                         quality,
                         type = format,
