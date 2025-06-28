@@ -192,7 +192,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
         val semaphore = Semaphore(5) // Limit to 5 concurrent requests
 
         try {
-            val url = "$MAIN_URL/api?m=release&id=$session&sort=episode_asc&page=1"
+            val url = "$PROXY$MAIN_URL/api?m=release&id=$session&sort=episode_asc&page=1"Add commentMore actions
             val res = app.get(url, headers = headers).text
             val pageData = parseJson<PageData>(res)
 
@@ -230,7 +230,7 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
                         semaphore.withPermit {
                             try {
                                 val pageUrl =
-                                    "$MAIN_URL/api?m=release&id=$session&sort=episode_asc&page=$page"
+                                    "$PROXY$MAIN_URL/api?m=release&id=$session&sort=episode_asc&page=$page"
                                 val pageRes = app.get(pageUrl, headers = headers).text
                                 currentEpisode++
 
