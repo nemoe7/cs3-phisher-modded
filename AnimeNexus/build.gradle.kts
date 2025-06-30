@@ -1,11 +1,14 @@
 // use an integer for version numbers
-version = 17
+version = 3
+dependencies {
+    implementation("com.android.identity:identity-jvm:202411.1")
+}
 
 
 cloudstream {
     // All of these properties are optional, you can safely remove them
 
-    description = "Anime and Movies"
+    description = "Anime Nexus (Beta)"
     language    = "en"
     authors = listOf("Phisher98")
 
@@ -21,8 +24,8 @@ cloudstream {
     // List of video source types. Users are able to filter for extensions in a given category.
     // You can find a list of available types here:
     // https://recloudstream.github.io/cloudstream/html/app/com.lagradost.cloudstream3/-tv-type/index.html
-    tvTypes = listOf("AnimeMovie","Anime","Cartoon")
-    iconUrl = "https://animeowl.me/assets/owl-logo-white-long.webp"
+    tvTypes = listOf("Movie","Anime","AnimeMovie")
+    iconUrl="https://www.google.com/s2/favicons?domain=anime.nexus&sz=%size%"
 
     isCrossPlatform = true
 }
