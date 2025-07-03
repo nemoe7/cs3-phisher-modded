@@ -4576,10 +4576,11 @@ object StreamPlayExtractor : StreamPlay() {
         }
     }
 
-
+    //TODO
     suspend fun invokeHdmovie2(
         title: String? = null,
         year: Int? = null,
+        season: Int?=null,
         episode: Int? = null,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit,
@@ -4594,29 +4595,102 @@ object StreamPlayExtractor : StreamPlay() {
 
         val document = app.get(url, headers = headers, allowRedirects = true).document
 
-        document.select("div.wp-content p a").amap { linkElement ->
+        document.selectFirst("div.wp-content p a")?.map { linkElement ->
             val linkText = linkElement.text()
             val linkUrl = linkElement.attr("href")
-
             val isEpisodeMatch = episode?.let {
                 Regex("EP0?$it\\b", RegexOption.IGNORE_CASE).containsMatchIn(linkText)
             } ?: true
 
             if (!isEpisodeMatch && episode != null && linkText.contains("EP")) {
                 Log.d("Hdmovie2", "Episode $episode not matched in link: $linkText")
-                return@amap
+                return@map
             }
 
             val type = if (episode != null && !linkText.contains("EP")) "(Combined)" else ""
 
+            /*
             app.get(linkUrl).document.select("div > p > a").amap {
-                loadSourceNameExtractor(
-                    "Hdmovie2 $type",
-                    it.attr("href"),
-                    "",
-                    subtitleCallback,
-                    callback,
-                )
+                if (it.text().contains("GDFlix"))
+                {
+                    val href = it.attr("href")
+                    var redirectedUrl: String? = null
+                    val gg = app.get(href).url
+                    Log.d("gg", "Success on attempt ${gg + 1}gg")
+
+                    repeat(10) { attempt ->
+                        val response = app.get(href, allowRedirects = false)
+                        redirectedUrl = response.headers["location"]
+                        if (!redirectedUrl.isNullOrEmpty()) {
+                            Log.d("Retry", "Success on attempt ${attempt + 1}")
+                            return@repeat
+                        }
+                        Log.d("Retry", "Attempt ${attempt + 1}: No location header found")
+                    }
+                    redirectedUrl = redirectedUrl ?: ""
+                    Log.d("Phisher", redirectedUrl!!)
+
+                    loadSourceNameExtractor(
+                        "Hdmovie2 $type",
+                        redirectedUrl!!,
+                        "",
+                        subtitleCallback,
+                        callback,
+                    )
+                }
+            }
+
+             */
+        }
+    }
+
+    suspend fun invokeDramadrip(
+        imdbId: String? = null,
+        season: Int? = null,
+        episode: Int? = null,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        val dramadripAPI = getDomains()?.dramadrip ?: return
+        val link = app.get("$dramadripAPI/?s=$imdbId").document.selectFirst("article > a")?.attr("href") ?: return
+        val document = app.get(link).document
+        if(season != null && episode != null) {
+            val seasonLink = document.select("div.file-spoiler h2").filter { element ->
+                val text = element.text().trim().lowercase()
+                "season $season ".lowercase() in text && "zip" !in text
+            }.flatMap { h2 ->
+                val sibling = h2.nextElementSibling()
+                sibling?.select("a")?.mapNotNull { it.attr("href") } ?: emptyList()
+            }
+
+            seasonLink.amap { seasonUrl ->
+                val episodeDoc = app.get(seasonUrl).document
+
+                val episodeHref = episodeDoc.select("h3 > a,div.wp-block-button a")
+                    .firstOrNull { it.text().contains("Episode $episode") }
+                    ?.attr("href")
+                    ?: return@amap
+                val finalUrl = if ("unblockedgames" in episodeHref) { bypassHrefli(episodeHref) } else { episodeHref }
+                if (finalUrl != null) {
+                    loadSourceNameExtractor("DramaDrip", finalUrl, "", subtitleCallback, callback)
+                }
+            }
+        } else {
+            document.select("div.file-spoiler a").amap {
+                val doc = app.get(it.attr("href")).document
+                doc.select("a.wp-element-button").amap { source ->
+                    val finalUrl = if ("unblockedgames" in source.attr("href")) { bypassHrefli(source.attr("href")) } else { source.attr("href") }
+                    if (finalUrl != null) {
+                        loadSourceNameExtractor(
+                            "DramaDrip",
+                            finalUrl,
+                            "",
+                            subtitleCallback,
+                            callback
+                        )
+                    }
+
+                }
             }
         }
     }
