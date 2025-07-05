@@ -6,7 +6,6 @@ import com.phisher98.settings.SettingsFragment
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
 import com.lagradost.cloudstream3.extractors.DoodYtExtractor
 import com.lagradost.cloudstream3.extractors.FileMoon
-import com.lagradost.cloudstream3.extractors.Gofile
 import com.lagradost.cloudstream3.extractors.MixDrop
 import com.lagradost.cloudstream3.extractors.Mp4Upload
 import com.lagradost.cloudstream3.extractors.OkRuHTTP
@@ -123,6 +122,8 @@ class StreamPlayPlugin: Plugin() {
         registerExtractorAPI(Embedwish())
         registerExtractorAPI(Rubyvidhub())
         registerExtractorAPI(smoothpre())
+        registerExtractorAPI(Akirabox())
+        registerExtractorAPI(BuzzServer())
         val activity = context as AppCompatActivity
         openSettings = {
             val frag = SettingsFragment(this, sharedPref)
