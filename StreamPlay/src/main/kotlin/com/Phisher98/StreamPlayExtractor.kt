@@ -898,7 +898,7 @@ object StreamPlayExtractor : StreamPlay() {
     ) {
         fun Elements.getLinks(): List<Triple<String, String, Int>> {
             return this.flatMap { ele ->
-                ele.select("div.links a:matches(KrakenFiles|GoFile)").map {
+                ele.select("div.links a:matches(KrakenFiles|GoFile|Akirabox|BuzzHeavier)").map {
                     Triple(
                         it.attr("href"),
                         ele.select("div.size").text(),
@@ -907,7 +907,6 @@ object StreamPlayExtractor : StreamPlay() {
                 }
             }
         }
-
         val (seasonSLug, episodeSlug) = getEpisodeSlug(season, episode)
         val jikan =
             app.get("$jikanAPI/anime/$malId/full").parsedSafe<JikanResponse>()?.data
@@ -929,7 +928,7 @@ object StreamPlayExtractor : StreamPlay() {
                 )
             }.map {
                 loadCustomTagExtractor(
-                    it.second,
+                    "Animetosho",
                     it.first,
                     "$animetoshoAPI/",
                     subtitleCallback,
