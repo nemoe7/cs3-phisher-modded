@@ -1,0 +1,523 @@
+[
+    {
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/Allanime.png",
+        "jarFileSize": 320900,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 58323,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Hexated,Phisher98"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 4,
+        "internalName": "Anichi",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Anichi.jar",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Anichi.cs3",
+        "name": "Anichi"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=animekai.to&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 30792,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Anime",
+            "OVA",
+            "AnimeMovie"
+        ],
+        "version": 27,
+        "internalName": "AnimeKai",
+        "description": "Animes & Animes Movie",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/AnimeKai.cs3",
+        "name": "AnimeKai"
+    },
+    {
+        "iconUrl": "https://animenosub.com/wp-content/uploads/2024/02/Animenosub-logo.png",
+        "jarFileSize": 81479,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 17337,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "Cartoon"
+        ],
+        "version": 7,
+        "internalName": "Animenosub",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Animenosub.jar",
+        "description": "Anime and Movies",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Animenosub.cs3",
+        "name": "Animenosub"
+    },
+    {
+        "iconUrl": "https://animeowl.me/assets/owl-logo-white-long.webp",
+        "jarFileSize": 130043,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 28387,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "Cartoon"
+        ],
+        "version": 17,
+        "internalName": "AnimeOwl",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/AnimeOwl.jar",
+        "description": "Anime and Movies",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/AnimeOwl.cs3",
+        "name": "AnimeOwl"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=animepahe.ru/&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 29344,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98",
+            "nemoe7"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 12,
+        "internalName": "AnimePahe",
+        "description": "Animes (SUB/DUB)",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/AnimePahe.cs3",
+        "name": "AnimePahe"
+    },
+    {
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/animeworld.jpg",
+        "jarFileSize": 84786,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 20891,
+        "status": 1,
+        "language": "hi",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "Cartoon"
+        ],
+        "version": 3,
+        "internalName": "AnimeWorld",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/AnimeWorld.jar",
+        "description": "Anime/Cartoon in Hindi",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/AnimeWorld.cs3",
+        "name": "AnimeWorld"
+    },
+    {
+        "iconUrl": "https://animeyy.com/upload/logos/2024/03/logo_1710148637_65eecc1d2584c.png",
+        "jarFileSize": 77189,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 18618,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movie",
+            "Anime",
+            "AnimeMovie"
+        ],
+        "version": 6,
+        "internalName": "Animez",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Animez.jar",
+        "description": "Animez Animes",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Animez.cs3",
+        "name": "Animez"
+    },
+    {
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/Coflix.png",
+        "jarFileSize": 22,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "status": 1,
+        "language": "fr",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 7,
+        "internalName": "Coflix",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Coflix.jar",
+        "description": "Movies,Series and Anime French Extension ",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Coflix.cs3",
+        "name": "Coflix"
+    },
+    {
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/dramadrip-icon.png",
+        "jarFileSize": 167346,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 40911,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 1,
+        "internalName": "DramaDrip",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/DramaDrip.jar",
+        "description": "K-Drama,Dramas Extension by ModFlix Team",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/DramaDrip.cs3",
+        "name": "DramaDrip"
+    },
+    {
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/4KHDHUB-Bright-Logo.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 27787,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 9,
+        "internalName": "FourKHDHub",
+        "description": "4K Movies Extension by HDHUB4U",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/FourKHDHub.cs3",
+        "name": "FourKHDHub"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=hianime.to&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 37939,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Stormunblessed, KillerDogeEmpire,RowdyRushya,Phisher98"
+        ],
+        "tvTypes": [
+            "Anime",
+            "OVA"
+        ],
+        "version": 13,
+        "internalName": "HiAnime",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/HiAnime.cs3",
+        "name": "HiAnime"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=kdramahood.com&sz=%size%",
+        "jarFileSize": 79885,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 18329,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Cloudburst,lagradost,Phisher98"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 2,
+        "internalName": "KdramaHoodProvider",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/KdramaHoodProvider.jar",
+        "description": "Kdramas and Movies",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/KdramaHoodProvider.cs3",
+        "name": "KdramaHoodProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=www2.kickassanime.ro&sz=%size%",
+        "jarFileSize": 212521,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 44590,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98,Hexated"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 15,
+        "internalName": "Kickassanime",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Kickassanime.jar",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Kickassanime.cs3",
+        "name": "Kickassanime"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=kisskh.co&sz=%size%",
+        "jarFileSize": 110555,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 25175,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98,Hexated,Peerless"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Anime",
+            "Movie"
+        ],
+        "version": 10,
+        "internalName": "KisskhProvider",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/KisskhProvider.jar",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/KisskhProvider.cs3",
+        "name": "KisskhProvider"
+    },
+    {
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/TVVV.png",
+        "jarFileSize": 71810,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 16511,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 1,
+        "internalName": "LiveTV",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/LiveTV.jar",
+        "description": "Live TV and Live Events",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/LiveTV.cs3",
+        "name": "LiveTV"
+    },
+    {
+        "iconUrl": "https://myflixerz.to/images/group_1/theme_7/logo.png?v=0.1",
+        "jarFileSize": 85868,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 22257,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movies",
+            "TV Series"
+        ],
+        "version": 3,
+        "internalName": "MyFlixer",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/MyFlixer.jar",
+        "description": "Watch movies and series from Flixerz",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/MyFlixer.cs3",
+        "name": "MyFlixer"
+    },
+    {
+        "iconUrl": "https://cdn.bcdn.zip/wp-content/uploads/2017/04/nc-header-responsive.png",
+        "jarFileSize": 51845,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 14196,
+        "status": 1,
+        "language": "pt-br",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 1,
+        "internalName": "Netcinez",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Netcinez.jar",
+        "description": "Movies,Series and Anime Portuguese Extension ",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Netcinez.cs3",
+        "name": "Netcinez"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=noxx.to&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 13428,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "LikDev-256,Phisher98"
+        ],
+        "tvTypes": [
+            "TvSeries"
+        ],
+        "version": 2,
+        "internalName": "NOXXProvider",
+        "description": "HD TV Shows (Not all links are working because of a unsolvable issue)",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/NOXXProvider.cs3",
+        "name": "NOXXProvider"
+    },
+    {
+        "iconUrl": "https://www.thestatesman.com/wp-content/uploads/2021/05/fancode.jpg",
+        "jarFileSize": 40611,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 10334,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 2,
+        "internalName": "PublicSportsIPTV",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/PublicSportsIPTV.jar",
+        "description": "Sports Live Streams",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/PublicSportsIPTV.cs3",
+        "name": "PublicSportsIPTV"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=github.com&sz=%size%",
+        "jarFileSize": 142207,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 21466,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 5,
+        "internalName": "QuickIPTV",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/QuickIPTV.jar",
+        "description": "Includes PirateIPTV,Sports IPTV,Japanese IPTV,Sony IPTV",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/QuickIPTV.cs3",
+        "name": "QuickIPTV"
+    },
+    {
+        "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 689392,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98",
+            "Hexated"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Anime",
+            "Movie",
+            "Cartoon",
+            "AnimeMovie"
+        ],
+        "version": 338,
+        "internalName": "StreamPlay",
+        "description": "#1 best extention based on MultiAPI",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/StreamPlay.cs3",
+        "name": "StreamPlay"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=tennistream.com&sz=%size%",
+        "jarFileSize": 61644,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 13034,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 3,
+        "internalName": "Tennistream",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Tennistream.jar",
+        "description": "Tennistream",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/Tennistream.cs3",
+        "name": "Tennistream"
+    },
+    {
+        "iconUrl": "https://raw.githubusercontent.com/LikDev-256/likdev256-tamil-providers/master/UHDmoviesProvider/icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 43252,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 26,
+        "internalName": "UHDmoviesProvider",
+        "description": "Indian Multi-language 4K Provider",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/UHDmoviesProvider.cs3",
+        "name": "UHDmoviesProvider"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=watchmmafull.com/&sz=%size%",
+        "jarFileSize": 80756,
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/nemoe7/cs3-phisher-modded",
+        "fileSize": 16624,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Phisher98"
+        ],
+        "tvTypes": [
+            "Other",
+            "Live"
+        ],
+        "version": 2,
+        "internalName": "WatchMMAFull",
+        "jarUrl": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/WatchMMAFull.jar",
+        "description": "MMA Videos",
+        "url": "https://raw.githubusercontent.com/nemoe7/cs3-phisher-modded/builds/WatchMMAFull.cs3",
+        "name": "WatchMMAFull"
+    }
+]
