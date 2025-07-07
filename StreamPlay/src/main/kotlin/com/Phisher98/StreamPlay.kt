@@ -48,11 +48,12 @@ import com.phisher98.StreamPlayExtractor.invokeZshow
 import com.phisher98.StreamPlayExtractor.invokeazseries
 import com.phisher98.StreamPlayExtractor.invokecatflix
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.lagradost.api.Log
 import com.lagradost.cloudstream3.Actor
 import com.lagradost.cloudstream3.ActorData
 import com.lagradost.cloudstream3.DubStatus
-import com.lagradost.cloudstream3.Episode
 import com.lagradost.cloudstream3.ErrorLoadingException
 import com.lagradost.cloudstream3.HomePageResponse
 import com.lagradost.cloudstream3.LoadResponse
@@ -80,6 +81,7 @@ import com.lagradost.cloudstream3.runAllAsync
 import com.lagradost.cloudstream3.toRatingInt
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
+import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.phisher98.StreamPlayExtractor.invoke4khdhub
 import com.phisher98.StreamPlayExtractor.invokeDramacool
@@ -91,7 +93,6 @@ import com.phisher98.StreamPlayExtractor.invokehdhub4u
 import com.phisher98.StreamPlayExtractor.invokevidzeeMulti
 import com.phisher98.StreamPlayExtractor.invokevidzeeUltra
 import kotlinx.coroutines.delay
-import org.json.JSONObject
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.roundToInt
 
@@ -168,8 +169,8 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val anilistAPI = "https://graphql.anilist.co"
         const val malsyncAPI = "https://api.malsync.moe"
         const val jikanAPI = "https://api.jikan.moe/v4"
-        const val anizipAPI= "https://api.ani.zip"
         private const val apiKey = BuildConfig.TMDB_API
+        private const val Cinemeta = "https://v3-cinemeta.strem.io"
 
         /** ALL SOURCES */
         const val twoEmbedAPI = "https://www.2embed.cc"
@@ -421,136 +422,70 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     }
             }?.flatten() ?: listOf()
             if (isAnime) {
-                val text = app.get("$anizipAPI/mappings?themoviedb_id=${data.id}").toString()
-                val id = extractAnilistId(text)
-
-                val mainQuery = """
-    query {
-        Media(id: $id, type: ANIME) {
-            id
-            type
-            title { romaji english }
-            startDate { year }
-            genres
-            description
-            averageScore
-            bannerImage
-            coverImage { extraLarge large medium }
-            episodes
-            format
-            nextAiringEpisode { episode }
-            airingSchedule {
-                nodes {
-                    episode
-                    airingAt
-                }
-            }
-            relations {
-                edges {
-                    relationType
-                    node {
-                        id
-                        title { romaji english }
-                        type
-                        episodes
-                        startDate { year }
-                        coverImage { large }
-                    }
-                }
-            }
-        }
-    }
-""".trimIndent()
-
-                val mainMedia = anilistAPICall(mainQuery).data.media
-                    ?: throw Exception("Unable to fetch media details")
-
-                val allSeasons = collectAllSequels(mainMedia, ::anilistAPICall)
-                val seasonToMediaMap = mutableMapOf<Int, StreamPlayAnime.AnilistAPIResponse.anilistMedia>()
-
-                allSeasons.forEachIndexed { index, media ->
-                    val seasonNumber = index + 1
-                    seasonToMediaMap[seasonNumber] = media
-                }
-
-                val finalEpisodes = mutableListOf<Episode>()
-                val sortedSeasons = seasonToMediaMap.toSortedMap()
-
-                for ((seasonNum, media) in sortedSeasons) {
-                    val airDate = "${year}-01-01"
-                    val animeData = run {
-                        val syncData = app.get("$anizipAPI/mappings?anilist_id=${media.id}").toString()
-                        parseAnimeData(syncData)
-                    }
-                    val airingNodes = (media.airingSchedule as? Map<*, *>)?.get("nodes") as? List<*>
-
-                    val now = System.currentTimeMillis() / 1000
-
-                    val totalEpisodes = airingNodes
-                        ?.asSequence()
-                        ?.mapNotNull { it as? Map<*, *> }
-                        ?.filter {
-                            val airingAt = it["airingAt"] as? Number
-                            airingAt == null || airingAt.toLong() <= now
-                        }
-                        ?.mapNotNull { it["episode"] as? Int }
-                        ?.distinct()
-                        ?.sorted()
-                        ?.toList()
-                        ?: (1..(media.nextAiringEpisode?.episode?.minus(1)
-                            ?: media.episodes ?: continue)).toList()
-
-                    for (epNum in totalEpisodes) {
-                        val linkData = StreamPlayAnime.LinkData(
-                            aniId = media.id,
+                val gson = Gson()
+                val animeType = if (data.type?.contains("tv", ignoreCase = true) == true) "series" else "movie"
+                val imdbId = res.external_ids?.imdb_id.orEmpty()
+                val cineJsonText = app.get("$Cinemeta/meta/$animeType/$imdbId.json").text
+                val cinejson = runCatching {
+                    gson.fromJson(cineJsonText, CinemetaRes::class.java)
+                }.getOrNull()
+                val animeepisodes = cinejson?.meta?.videos?.filter { it.season != 0 } ?.map { video ->
+                    newEpisode(
+                        LinkData(
+                            id = data.id,
+                            imdbId = res.external_ids?.imdb_id,
+                            tvdbId = res.external_ids?.tvdb_id,
                             type = data.type,
-                            season = seasonNum,
-                            episode = epNum,
+                            season = video.season,
+                            episode = video.number,
+                            epid = null,
+                            aniId = null,
+                            animeId = null,
                             title = title,
-                            year = year,
+                            year = video.released?.split("-")?.firstOrNull()?.toIntOrNull(),
                             orgTitle = orgTitle,
                             isAnime = true,
                             airedYear = year,
-                            lastSeason = seasonNum,
-                            epsTitle = "Episode $epNum",
-                            jpTitle = orgTitle,
-                            date = airDate,
-                            airedDate = airDate,
-                            isAsian = false,
-                            isBollywood = false,
-                            isCartoon = false,
-                        )
-
-                        val epData = animeData.episodes?.get(epNum.toString())
-                        val episodeTitle = epData?.title?.get("en") ?: "Episode $epNum"
-                        val episodeImage = epData?.image ?: media.coverImage.large
-
-                        finalEpisodes.add(
-                            newEpisode(linkData.toJson()) {
-                                this.name = episodeTitle
-                                this.season = seasonNum
-                                this.episode = epNum
-                                this.posterUrl = episodeImage
-                                this.description = animeData.episodes?.get(episode?.toString())?.overview ?: "No summary available"
-                            }
-                        )
+                            lastSeason = null,
+                            epsTitle = video.name,
+                            jpTitle = res.alternative_titles?.results?.find { it.iso_3166_1 == "JP" }?.title,
+                            date = video.released,
+                            airedDate = res.releaseDate ?: res.firstAirDate,
+                            isAsian = isAsian,
+                            isBollywood = isBollywood,
+                            isCartoon = isCartoon,
+                            alttitle = res.title,
+                            nametitle = res.name
+                        ).toJson()
+                    ) {
+                        this.name = video.name + if (isUpcoming(video.released)) " • [UPCOMING]" else ""
+                        this.season = video.season
+                        this.episode = video.number
+                        this.posterUrl = video.thumbnail
+                        this.rating = video.rating.times(10).roundToInt()
+                        this.description = video.description
+                    }.apply {
+                        this.addDate(video.released)
                     }
-                }
-
-                val mainPoster = mainMedia.coverImage.extraLarge ?: mainMedia.coverImage.large
-                val bgPoster = mainMedia.bannerImage
+                } ?: emptyList()
 
                 return newAnimeLoadResponse(title, url, TvType.Anime) {
-                    addEpisodes(DubStatus.Subbed, finalEpisodes)
-                    this.posterUrl = mainPoster
+                    addEpisodes(DubStatus.Subbed, animeepisodes)
+                    this.posterUrl = poster
                     this.backgroundPosterUrl = bgPoster
                     this.year = year
-                    this.plot = mainMedia.description
-                    this.tags = genres?.map { it.replaceFirstChar(Char::titlecase) }
+                    this.plot = res.overview
+                    this.tags = keywords?.map { it.replaceFirstChar { it.titlecase() } }
+                        ?.takeIf { it.isNotEmpty() } ?: genres
                     this.rating = rating
+                    this.showStatus = getStatus(res.status)
+                    this.recommendations = recommendations
+                    this.actors = actors
+                    addTrailer(trailer)
+                    addTMDbId(data.id.toString())
+                    addImdbId(res.external_ids?.imdb_id)
                 }
-            }
-            else {
+            } else {
                 return newTvSeriesLoadResponse(title, url, TvType.TvSeries, episodes) {
                     this.posterUrl = poster
                     this.backgroundPosterUrl = bgPoster
@@ -568,9 +503,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     addImdbId(res.external_ids?.imdb_id)
                 }
             }
-        }
-        else
-        {
+        } else {
             return newMovieLoadResponse(
                 title,
                 url,
@@ -620,7 +553,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val res = parseJson<LinkData>(data)
-        Log.d("Phisher",res.toString())
         runAllAsync(
             {
                 if (res.isAnime) invokeEmbedsu(res.imdbId, res.season, res.episode, callback)
@@ -633,7 +565,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                     res.airedDate,
                     res.season,
                     res.episode,
-                    res.aniId,
                     subtitleCallback,
                     callback
                 )
@@ -918,7 +849,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                 )
             },
             {
-                if (!res.isBollywood && !res.isAnime) invoke4khdhub(
+                if (!res.isBollywood || !res.isAnime) invoke4khdhub(
                     res.title, res.year, res.season, res.episode, subtitleCallback, callback
                 )
             },
@@ -971,7 +902,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         val season: Int? = null,
         val episode: Int? = null,
         val epid: Int? = null,
-        val aniId: Int? = null,
+        val aniId: String? = null,
         val animeId: String? = null,
         val title: String? = null,
         val year: Int? = null,

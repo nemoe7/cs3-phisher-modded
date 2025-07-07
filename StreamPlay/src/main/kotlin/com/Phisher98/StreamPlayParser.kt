@@ -2078,65 +2078,90 @@ data class BeamupMeta(
     val name: String?
 )
 
+// CinemetaRes
 
-//Anilist
+data class CinemetaRes(
+    val meta: CinemetaResMeta,
+)
 
+data class CinemetaResMeta(
+    @JsonProperty("imdb_id")
+    val imdbId: String,
+    val name: String,
+    val popularities: CinemetaResPopularities,
+    val type: String,
+    val cast: List<String>,
+    val country: String,
+    val description: String,
+    val genre: List<String>,
+    val imdbRating: String,
+    val released: String,
+    val slug: String,
+    val writer: List<String>,
+    val year: String,
+    val runtime: String,
+    val status: String,
+    @JsonProperty("tvdb_id")
+    val tvdbId: Long,
+    @JsonProperty("moviedb_id")
+    val moviedbId: Long,
+    val poster: String,
+    val trailers: List<CinemetaResTrailer>,
+    val director: List<Any?>,
+    val background: String,
+    val logo: String,
+    val awards: String,
+    val popularity: Double,
+    val id: String,
+    val genres: List<String>,
+    val releaseInfo: String,
+    val videos: List<CinemetaResVideo>,
+    val trailerStreams: List<CinemetaResTrailerStream>,
+    val links: List<CinemetaResLink>,
+    val behaviorHints: CinemetaResBehaviorHints,
+)
 
-data class AniListResponse(val data: MediaData)
+data class CinemetaResPopularities(
+    val trakt: Long,
+    val moviedb: Double,
+    val stremio: Double,
+    @JsonProperty("stremio_lib")
+    val stremioLib: Long,
+)
 
-data class MediaData(val media: Media?)
+data class CinemetaResTrailer(
+    val source: String,
+    val type: String,
+)
 
-data class Media(
-    val id: Int,
-    val type: String?,
-    val title: Title,
-    val startDate: StartDate?,
-    val genres: List<String>?,
+data class CinemetaResVideo(
+    val name: String,
+    val season: Int,
+    val number: Int,
+    val firstAired: String?,
+    @JsonProperty("tvdb_id")
+    val tvdbId: Long,
+    val rating: Double,
+    val overview: String,
+    val thumbnail: String,
+    val id: String,
+    val released: String?,
+    val episode: Long,
     val description: String?,
-    val averageScore: Int?,
-    val bannerImage: String?,
-    val coverImage: CoverImage?,
-    val episodes: Int?,
-    val format: String?,
-    val nextAiringEpisode: AiringEpisode?,
-    val airingSchedule: AiringSchedule?,
-    val recommendations: RecommendationList?,
-    val relations: RelationList?
 )
 
-data class Title(val romaji: String?, val english: String?)
-data class StartDate(val year: Int?)
-data class CoverImage(val extraLarge: String?, val large: String?, val medium: String?)
-data class AiringEpisode(val episode: Int?)
-data class AiringSchedule(val nodes: List<AiringNode>?)
-data class AiringNode(val episode: Int?)
-data class RecommendationList(val edges: List<RecommendationEdge>?)
-data class RecommendationEdge(val node: RecommendationNode)
-data class RecommendationNode(val id: Int, val mediaRecommendation: MediaRecommendation?)
-data class MediaRecommendation(val id: Int, val title: Title?, val coverImage: CoverImage?)
-
-data class RelationList(val edges: List<RelationEdge>?)
-data class RelationEdge(val relationType: String?, val node: RelatedMedia)
-
-data class RelatedMedia(
-    val id: Int,
-    val title: Title,
-    val type: String?,
-    val episodes: Int?,
-    val startDate: StartDate?,
-    val coverImage: CoverImage?
+data class CinemetaResTrailerStream(
+    val title: String,
+    val ytId: String,
 )
 
-
-data class GetMalIdFromAniIdResponse(
-    @JsonProperty("data") val data: GetMalIdData?
+data class CinemetaResLink(
+    val name: String,
+    val category: String,
+    val url: String,
 )
 
-data class GetMalIdData(
-    @JsonProperty("Media") val media: AniMedia?
-)
-
-data class GetMalAniMedia(
-    @JsonProperty("id") val id: Int?,
-    @JsonProperty("idMal") val idMal: Int?
+data class CinemetaResBehaviorHints(
+    val defaultVideoId: Any?,
+    val hasScheduledVideos: Boolean,
 )
