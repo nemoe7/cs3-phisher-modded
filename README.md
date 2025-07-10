@@ -11,7 +11,7 @@
 
 ---
 
-###### shortcode: phisherrepo-nemo
+###### shortcode: phisherreponemo
 
 ## 🛠 My Modifications
 
