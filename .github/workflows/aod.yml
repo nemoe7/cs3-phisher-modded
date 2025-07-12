@@ -2,16 +2,6 @@ name: AOD Delta
 
 on:
   workflow_dispatch:
-  schedule:
-    # 08:00 Asia/Manila (UTC+8) → 00:00 UTC
-    - cron: '0 0 * * *'
-  push:
-    branches:
-      - master
-    paths:
-      - '.github/workflows/aod.yml'
-      - '.github/scripts/python/aod.py'
-      - '.github/scripts/python/requirements.txt'
 
 concurrency:
   group: "build"
