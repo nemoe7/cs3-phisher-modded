@@ -61937,6 +61937,7 @@
 11892|2|ja|少女ラムネ
 11892|2|ko|소녀 라무네
 11892|2|zh-Hans|少女波子汽水
+11892|3|x-unk|Sinbad
 11892|4|ja|小女ラムネ
 11893|1|x-jat|Seisen Cerberus: Ryuukoku no Fatalite
 11893|2|tr|Kutsal Savaş Cerberus: Ejderhanın Ölüm Zamanı
@@ -71669,7 +71670,7 @@
 14107|4|it|Demon Slayer
 14107|4|ja|鬼滅の刃
 14107|4|pl|Miecz zabójcy demonów – Kimetsu no Yaiba
-14107|4|pt|Demon Slayer - Kimetsu No Yaiba
+14107|4|pt|Demon Slayer - Kimetsu no Yaiba
 14107|4|ro|Ucigașul de demoni
 14107|4|ru|Истребитель демонов
 14107|4|th|ดาบพิฆาตอสูร
@@ -71677,6 +71678,7 @@
 14107|4|vi|Thanh gươm diệt quỷ
 14107|4|zh-Hans|鬼灭之刃
 14107|4|zh-Hant|鬼滅之刃
+14107|6|pt|Tanjiro Kamado, Arco da Determinação Inabalável
 14108|1|x-jat|Monster Strike the Movie: Sora no Kanata
 14108|4|ja|モンスターストライク THE MOVIE ソラノカナタ
 14108|4|zh-Hans|怪物弹珠 THE MOVIE 空之彼方
@@ -77793,6 +77795,7 @@
 15363|1|x-jat|Log Horizon: Entaku Houkai
 15363|2|en|Log Horizon 3
 15363|3|x-jat|loghora s3
+15363|4|de|Log Horizon: Destruction of the Roundtable
 15363|4|en|Log Horizon: Destruction of the Round Table
 15363|4|ja|ログ・ホライズン 円卓崩壊
 15363|4|ko|로그 호라이즌: 원탁붕괴
@@ -81123,6 +81126,7 @@
 16054|4|es|Guardianes de la Noche: Kimetsu no Yaiba - Arco del Barrio del Placer
 16054|4|fr|Demon Slayer: Kimetsu no Yaiba - Le quartier des plaisirs
 16054|4|ja|鬼滅の刃 遊郭編
+16054|4|pt|Demon Slayer: Kimetsu no Yaiba - Arco do Distrito do Entretenimento
 16054|4|ru|Истребитель демонов: Квартал красных фонарей
 16054|4|zh-Hans|鬼灭之刃 游郭篇
 16055|1|x-jat|Sekai Saikou no Ansatsusha, Isekai Kizoku ni Tensei Suru
@@ -83942,6 +83946,7 @@
 16803|4|fr|Demon Slayer: Kimetsu no Yaiba - Le train de l`infini
 16803|4|ja|鬼滅の刃 無限列車編
 16803|4|ko|귀멸의 칼날: 무한열차편
+16803|4|pt|Demon Slayer: Kimetsu no Yaiba - Arco do Comboio Infinito
 16803|4|ru|Истребитель демонов: Поезд «Бесконечный» (2021)
 16803|4|zh-Hans|鬼灭之刃 无限列车篇
 16804|1|x-jat|Genjitsu Shugi Yuusha no Oukoku Saikenki (2022)
@@ -91553,6 +91558,7 @@
 18439|1|x-jat|Tate no Yuusha no Nariagari Season 4
 18439|2|en|Shield Hero 4
 18439|2|x-jat|Tate no Yuusha no Nariagari S4
+18439|3|x-jat|tate4
 18439|4|de|The Rising of the Shield Hero Staffel 4
 18439|4|en|The Rising of the Shield Hero Season 4
 18439|4|ja|盾の勇者の成り上がり Season 4
@@ -92711,6 +92717,7 @@
 18693|2|en|Tokyo Revengers: War of the Three Titans Arc
 18693|4|ja|東京リベンジャーズ 三天戦争編
 18694|1|x-jat|Tensei Shitara Dai Nana Ouji Datta no de, Kimama ni Majutsu o Kiwamemasu Dai 2 Ki
+18694|2|x-jat|Dainanaoji S2
 18694|4|en|I Was Reincarnated as the 7th Prince So I Can Take My Time Perfecting My Magical Ability Season 2
 18694|4|ja|転生したら第七王子だったので, 気ままに魔術を極めます 第2期
 18695|1|x-zht|Jintian de Wancan Jiushi Ni
@@ -94925,7 +94932,7 @@
 19281|2|en|Defense Fully Open
 19281|4|zh-Hans|防御全开
 19282|1|x-jat|Oide yo Mahou Shoujo Mura (Fuhou Senkyo)
-19282|4|ja|おいでよ魔法少女村（不法占拠）
+19282|4|ja|おいでよ魔法少女村(不法占拠)
 19283|1|x-jat|Shunkashuutou Daikousha: Haru no Mai
 19283|4|ja|春夏秋冬代行者 春の舞
 19284|1|x-jat|Date a Live (Shin Project)
@@ -95004,7 +95011,7 @@
 19312|1|x-jat|OVA Yogoreta Kanojo
 19312|2|ko|더럽혀진 그녀
 19312|4|ja|OVA ヨゴレタカノジョ
-19313|1|x-jat|OVA Tonari Kanojo
+19313|1|x-jat|OVA Tonari no Kanojo
 19313|2|ko|옆집 그녀
 19313|4|ja|OVA トナリノカノジョ
 19314|1|x-jat|Kyou wa Yubiwa o Hazusu kara......
@@ -95450,3 +95457,7 @@
 19460|4|ja|ゴー！ゴー！びーくるずー のりものスター編
 19461|1|x-jat|Go! Go! Vehicle Zoo (2024)
 19461|4|ja|ゴー！ゴ―！びーくるずー
+19462|1|x-jat|Honoo no Toukyuujo: Dodge Danko
+19462|3|ja|ドッジ弾子
+19462|3|x-jat|Dodge Danko
+19462|4|ja|炎の闘球女 ドッジ弾子
