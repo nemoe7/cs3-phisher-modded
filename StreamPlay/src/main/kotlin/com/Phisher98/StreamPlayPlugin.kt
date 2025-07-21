@@ -2,7 +2,8 @@ package com.phisher98
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import com.phisher98.settings.SettingsFragment
+import com.Phisher98.settings.MainSettingsFragment
+import com.lagradost.cloudstream3.MainAPI
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
 import com.lagradost.cloudstream3.extractors.DoodYtExtractor
 import com.lagradost.cloudstream3.extractors.FileMoon
@@ -22,15 +23,69 @@ import com.lagradost.cloudstream3.extractors.Vidmolyme
 import com.lagradost.cloudstream3.extractors.Vidplay
 import com.lagradost.cloudstream3.extractors.Voe
 import com.lagradost.cloudstream3.plugins.Plugin
+import androidx.core.content.edit
+import com.lagradost.api.Log
 
 @CloudstreamPlugin
 class StreamPlayPlugin: Plugin() {
+    private val registeredMainApis = mutableListOf<MainAPI>()
+
     override fun load(context: Context) {
+
+        Log.d("StreamPlay", "Plugin loading with context: $context")
         val sharedPref = context.getSharedPreferences("StreamPlay", Context.MODE_PRIVATE)
-        registerMainAPI(StreamPlay(sharedPref))
-        registerMainAPI(StreamPlayLite())
-        // registerMainAPI(StreamPlayTest(sharedPref))
-        registerMainAPI(StreamPlayAnime())
+        val mainApis = listOf(
+            StreamPlay(sharedPref), StreamPlayLite(),
+            StreamPlayTorrent(), StreamPlayAnime(), StreamplayTorrentAnime()
+        )
+        val savedSet = sharedPref.getStringSet("enabled_plugins_saved", null)
+        val defaultEnabled = mainApis.map { it.name }.toSet()
+        val enabledSet = savedSet ?: defaultEnabled
+
+        Log.d("StreamPlay", "SavedSet: $savedSet, DefaultEnabled: $defaultEnabled")
+        Log.d("StreamPlay", "Final enabled set: $enabledSet")
+
+        for (api in mainApis) {
+            if (enabledSet.contains(api.name)) {
+                registerMainAPI(api)
+                registeredMainApis.add(api)
+                Log.d("StreamPlay", "Registered plugin: ${api.name}")
+            } else {
+                Log.d("StreamPlay", "Not enabled: ${api.name}")
+            }
+        }
+
+        sharedPref.edit { remove("enabled_plugins_set") }
+
+        //=====================Settings============================//
+/*
+        val sharedPref = context.getSharedPreferences("StreamPlay", Context.MODE_PRIVATE)
+        val mainApis = listOf(
+            StreamPlay(sharedPref),
+            StreamPlayLite(),
+            StreamPlayTorrent(),
+            StreamPlayAnime(),
+            StreamplayTorrentAnime()
+        )
+        val savedSet = sharedPref.getStringSet("enabled_plugins_saved", null)
+        val defaultEnabled = mainApis.map { it.name }.toSet()
+        val enabledSet = savedSet ?: defaultEnabled
+
+        for (api in mainApis) {
+            if (enabledSet.contains(api.name)) {
+                registerMainAPI(api)
+                registeredMainApis.add(api)
+            }
+        }
+        sharedPref.edit { remove("enabled_plugins_set") }
+ */
+
+        //=====================MainAPI============================//
+
+        //registerMainAPI(StreamPlayTest(sharedPref))
+
+        //=====================Extractors=========================//
+
         registerExtractorAPI(Animefever())
         registerExtractorAPI(Multimovies())
         registerExtractorAPI(MultimoviesSB())
@@ -126,7 +181,7 @@ class StreamPlayPlugin: Plugin() {
         registerExtractorAPI(BuzzServer())
         val activity = context as AppCompatActivity
         openSettings = {
-            val frag = SettingsFragment(this, sharedPref)
+            val frag = MainSettingsFragment(this, sharedPref)
             frag.show(activity.supportFragmentManager, "Frag")
         }
     }

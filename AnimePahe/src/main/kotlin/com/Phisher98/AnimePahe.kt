@@ -7,6 +7,7 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.APIHolder.unixTime
 import com.lagradost.cloudstream3.LoadResponse.Companion.addAniListId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addMalId
+import com.lagradost.cloudstream3.mvvm.safeAsync
 import com.lagradost.cloudstream3.mvvm.suspendSafeApiCall
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
@@ -286,21 +287,18 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
     )
 
     override suspend fun load(url: String): LoadResponse? {
-
-        // Replace with safeAsync once new stable is released
-        return suspendSafeApiCall {
-            val session = parseJson<Session>(url).let { data ->
-
-                // idk if i understood the outdated comment ~nemo
-                val isOutdated = data.sessionDate + 60 * 10 < unixTime
-                if (isOutdated) {
-                    val newUrl = search(data.name).firstOrNull()?.url ?: return@let null
-                    parseJson<Session>(newUrl).session
+        return safeAsync {
+            val session = parseJson<LoadData>(url).let { data ->
+                // Outdated
+                if (data.sessionDate + 60 * 10 < unixTime) {
+                    parseJson<LoadData>(
+                        search(data.name).firstOrNull()?.url ?: return@let null
+                    ).session
                 } else {
                     data.session
                 }
-            } ?: return@suspendSafeApiCall null
-            val html = app.get("$PROXY$mainUrl/anime/$session",headers=headers).text
+            } ?: return@safeAsync null
+            val html = app.get("$Proxy$mainUrl/anime/$session",headers=headers).text
             val doc = Jsoup.parse(html)
             val jpTitle = doc.selectFirst("h2.japanese")?.text()
             val mainTitle = doc.selectFirst("h1 > span")?.text()
