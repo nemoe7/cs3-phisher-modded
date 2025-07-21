@@ -288,17 +288,18 @@ class AnimePahe(val sharedPref: SharedPreferences? = null) : MainAPI() {
 
     override suspend fun load(url: String): LoadResponse? {
         return safeAsync {
-            val session = parseJson<LoadData>(url).let { data ->
-                // Outdated
-                if (data.sessionDate + 60 * 10 < unixTime) {
-                    parseJson<LoadData>(
-                        search(data.name).firstOrNull()?.url ?: return@let null
-                    ).session
+            val session = parseJson<Session>(url).let { data ->
+
+                // idk if i understood the outdated comment ~nemo
+                val isOutdated = data.sessionDate + 60 * 10 < unixTime
+                if (isOutdated) {
+                    val newUrl = search(data.name).firstOrNull()?.url ?: return@let null
+                    parseJson<Session>(newUrl).session
                 } else {
                     data.session
                 }
             } ?: return@safeAsync null
-            val html = app.get("$Proxy$mainUrl/anime/$session",headers=headers).text
+            val html = app.get("$PROXY$mainUrl/anime/$session",headers=headers).text
             val doc = Jsoup.parse(html)
             val jpTitle = doc.selectFirst("h2.japanese")?.text()
             val mainTitle = doc.selectFirst("h1 > span")?.text()
