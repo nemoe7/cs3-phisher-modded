@@ -57,9 +57,7 @@ class ToggleFragment(
         val apis = listOf(
             StreamPlay(sharedPref),
             StreamPlayLite(),
-            StreamPlayTorrent(),
-            StreamPlayAnime(),
-            StreamplayTorrentAnime()
+            StreamPlayAnime()
         )
 
         val savedKey = "enabled_plugins_saved"
