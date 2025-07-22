@@ -920,14 +920,23 @@ class HubCloud : ExtractorApi() {
             Log.e("HubCloud", "Invalid URL: ${e.message}")
             return
         }
-        val href = if ("hubcloud.php" in realUrl) {
-            realUrl
-        } else {
-            val scriptData = app.get(realUrl).document
-                .selectFirst("script:containsData(url)")?.toString().orEmpty()
-            Regex("var url = '([^']*)'").find(scriptData)?.groupValues?.getOrNull(1).orEmpty()
-        }
+        val baseUrl=getBaseUrl(realUrl)
 
+        val href = try {
+            if ("hubcloud.php" in realUrl) {
+                realUrl
+            } else {
+                val rawHref = app.get(realUrl).document.select("#download").attr("href")
+                if (rawHref.startsWith("http", ignoreCase = true)) {
+                    rawHref
+                } else {
+                    baseUrl.trimEnd('/') + "/" + rawHref.trimStart('/')
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("HubCloud", "Failed to extract href: ${e.message}")
+            ""
+        }
         if (href.isBlank()) {
             Log.w("HubCloud", "No valid href found")
             return
@@ -2046,7 +2055,7 @@ class Megacloud : ExtractorApi() {
         }
 
         Log.e("Megacloud", "MegacloudResponse nonce: $nonce")
-        val apiUrl = "$mainUrl/embed-1/v3/e-1/getSources?id=$id&_k=$nonce"
+        val apiUrl = "$mainUrl/embed-2/v3/e-1/getSources?id=$id&_k=$nonce"
         val gson = Gson()
 
 

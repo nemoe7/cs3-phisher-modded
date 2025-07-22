@@ -20,7 +20,6 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addMalId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addScore
 import com.lagradost.cloudstream3.MainAPI
 import com.lagradost.cloudstream3.MainPageRequest
-import com.lagradost.cloudstream3.Score
 import com.lagradost.cloudstream3.SearchResponse
 import com.lagradost.cloudstream3.ShowStatus
 import com.lagradost.cloudstream3.SubtitleFile
@@ -168,10 +167,18 @@ class HiAnime : MainAPI() {
                     subEpisodes += newEpisode(episodeData) {
                         name = ep.attr("title")
                         episode = ep.selectFirst(".ssli-order")?.text()?.toIntOrNull()
+
                         val episodeKey = episode?.toString()
-                        this.score = Score.from10(animeMetaData?.episodes?.get(episodeKey)?.rating)
+
+                        this.rating = animeMetaData?.episodes?.get(episodeKey)?.rating
+                            ?.toDoubleOrNull()
+                            ?.times(10)
+                            ?.roundToInt()
+                            ?: 0
+
                         this.posterUrl = animeMetaData?.episodes?.get(episodeKey)?.image
                             ?: return@newEpisode
+
                         this.description = animeMetaData.episodes[episodeKey]?.overview
                             ?: "No summary available"
                     }
@@ -181,11 +188,20 @@ class HiAnime : MainAPI() {
                 if (index < it) {
                     dubEpisodes += newEpisode("dub|" + ep.attr("href")) {
                         name = ep.attr("title")
+
                         episode = ep.selectFirst(".ssli-order")?.text()?.toIntOrNull()
+
                         val episodeKey = episode?.toString()
-                        this.score = Score.from10(animeMetaData?.episodes?.get(episodeKey)?.rating)
+
+                        this.rating = animeMetaData?.episodes?.get(episodeKey)?.rating
+                            ?.toDoubleOrNull()
+                            ?.times(10)
+                            ?.roundToInt()
+                            ?: 0
+
                         this.posterUrl = animeMetaData?.episodes?.get(episodeKey)?.image
                             ?: return@newEpisode
+
                         this.description = animeMetaData.episodes[episodeKey]?.overview
                             ?: "No summary available"
                     }
@@ -225,7 +241,7 @@ class HiAnime : MainAPI() {
                             duration = getDurationFromString(info.selectFirst(".name")?.text())
                     "Status" -> showStatus = getStatus(info.selectFirst(".name")?.text().toString())
                     "Genres" -> tags = info.select("a").map { it.text() }
-                    "MAL Score" -> score = Score.from10(info.selectFirst(".name")?.text())
+                    "MAL Score" -> rating = info.selectFirst(".name")?.text().toRatingInt()
                     else -> {}
                 }
             }
