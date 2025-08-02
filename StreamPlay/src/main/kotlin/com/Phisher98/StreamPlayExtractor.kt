@@ -568,7 +568,6 @@ object StreamPlayExtractor : StreamPlay() {
             { kaasSlug?.let { invokeKickAssAnime(it, episode, subtitleCallback, callback) } },
             { animepaheUrl?.let { invokeAnimepahe(it, episode, subtitleCallback, callback) } },
             { invokeAnichi(zorotitle,anititle, tmdbYear, episode, subtitleCallback, callback) },
-            { invokeAnimeOwl(zorotitle, episode, subtitleCallback, callback) },
             { invokeTokyoInsider(jptitle, title, episode, callback) },
             { invokeAnizone(jptitle, episode, callback) },
             {
@@ -777,39 +776,6 @@ object StreamPlayExtractor : StreamPlay() {
                         }
                     }
                 }
-            }
-        }
-    }
-
-
-    suspend fun invokeAnimeOwl(
-        name: String? = null,
-        episode: Int? = null,
-        subtitleCallback: (SubtitleFile) -> Unit,
-        callback: (ExtractorLink) -> Unit
-    ) {
-        val slug = name?.createSlug() ?: return
-        val url = "$AnimeOwlAPI/anime/$slug"
-
-        val document = app.get(url).document
-
-        val contentBlocks = document.select("#anime-cover-sub-content, #anime-cover-dub-content")
-
-        contentBlocks.forEach { block ->
-            val type = if (block.id().contains("sub", ignoreCase = true)) "SUB" else "DUB"
-
-            val episodeLink = block.select("a.episode-node")
-                .firstOrNull { it.attr("title") == episode?.toString() }
-                ?.attr("href")
-
-            if (!episodeLink.isNullOrEmpty()) {
-                loadCustomExtractor(
-                    name = "AnimeOwl [$type]",
-                    url = episodeLink,
-                    referer = AnimeOwlAPI,
-                    subtitleCallback = subtitleCallback,
-                    callback = callback
-                )
             }
         }
     }
@@ -1143,52 +1109,107 @@ object StreamPlayExtractor : StreamPlay() {
         val href = "$KickassAPI/api/show/$slug/episode/ep-$episode-$matchedSlug"
         val servers = app.get(href).parsedSafe<ServersResKAA>()?.servers ?: return
 
-        servers.firstOrNull { it.name.contains("VidStreaming") }?.let { server ->
-            val host = getBaseUrl(server.src)
-            val headers = mapOf(
-                "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-            )
-
-            val key = "e13d38099bf562e8b9851a652d2043d3".toByteArray()
-            val query = server.src.substringAfter("?id=").substringBefore("&")
-            val html = app.get(server.src).toString()
-
-            val (sig, timeStamp, route) = getSignature(html, server.name, query, key) ?: return
-            val sourceUrl = "$host$route?id=$query&e=$timeStamp&s=$sig"
-
-            val encJson =
-                app.get(sourceUrl, headers = headers).parsedSafe<EncryptedKAA>()?.data ?: return
-            val (encryptedData, ivHex) = encJson.substringAfter(":\"").substringBefore('"')
-                .split(":")
-            val decrypted = tryParseJson<m3u8KAA>(
-                CryptoAES.decrypt(encryptedData, key, ivHex.decodeHex()).toJson()
-            ) ?: return
-
-            val m3u8 = httpsify(decrypted.hls)
-            val videoHeaders = mapOf(
-                "Accept" to "*/*",
-                "Accept-Language" to "en-US,en;q=0.5",
-                "Origin" to host,
-                "Sec-Fetch-Dest" to "empty",
-                "Sec-Fetch-Mode" to "cors",
-                "Sec-Fetch-Site" to "cross-site"
-            )
-
-            callback(
-                ExtractorLink(
-                    "VidStreaming", "VidStreaming", m3u8, "", Qualities.P1080.value,
-                    type = ExtractorLinkType.M3U8, headers = videoHeaders
+        servers.forEach { server ->
+            if (server.name.contains("VidStreaming")) {
+                val host = getBaseUrl(server.src)
+                val headers = mapOf(
+                    "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
                 )
-            )
 
-            decrypted.subtitles.forEach { subtitle ->
-                subtitleCallback(SubtitleFile(subtitle.name, subtitle.src))
+                val key = "e13d38099bf562e8b9851a652d2043d3".toByteArray()
+                val query = server.src.substringAfter("?id=").substringBefore("&")
+                val html = app.get(server.src).toString()
+
+                val (sig, timeStamp, route) = getSignature(html, server.name, query, key)
+                    ?: return@forEach
+                val sourceUrl = "$host$route?id=$query&e=$timeStamp&s=$sig"
+
+                val encJson = app.get(sourceUrl, headers = headers).parsedSafe<EncryptedKAA>()?.data
+                    ?: return@forEach
+
+                val (encryptedData, ivHex) = encJson
+                    .substringAfter(":\"")
+                    .substringBefore('"')
+                    .split(":")
+                val decrypted = tryParseJson<m3u8KAA>(
+                    CryptoAES.decrypt(encryptedData, key, ivHex.decodeHex()).toJson()
+                ) ?: return@forEach
+
+                val m3u8 = httpsify(decrypted.hls)
+                val videoHeaders = mapOf(
+                    "Accept" to "*/*",
+                    "Accept-Language" to "en-US,en;q=0.5",
+                    "Origin" to host,
+                    "Sec-Fetch-Dest" to "empty",
+                    "Sec-Fetch-Mode" to "cors",
+                    "Sec-Fetch-Site" to "cross-site"
+                )
+
+                callback(
+                    ExtractorLink(
+                        server.name, server.name, m3u8, "", Qualities.P1080.value,
+                        type = ExtractorLinkType.M3U8, headers = videoHeaders
+                    )
+                )
+
+                decrypted.subtitles.forEach { subtitle ->
+                    subtitleCallback(SubtitleFile(subtitle.name, subtitle.src))
+                }
+            } else if (server.name.contains("CatStream")) {
+                val headers = mapOf(
+                    "User-Agent" to "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+                )
+
+                val res = app.get(
+                    "https://thingproxy.freeboard.io/fetch/${server.src}",
+                    headers = headers
+                ).text
+
+                val regex = Regex("""props="(.*?)"""")
+                val match = regex.find(res)
+                val encodedJson = match?.groupValues?.get(1)
+
+                if (encodedJson != null) {
+                    val unescapedJson = org.jsoup.parser.Parser.unescapeEntities(encodedJson, false)
+                    val json = JSONObject(unescapedJson)
+
+                    val videoUrl = "https:" + json.getJSONArray("manifest").getString(1)
+                    callback.invoke(
+                        ExtractorLink(
+                            "CatStream",
+                            "CatStream HLS",
+                            videoUrl,
+                            "",
+                            Qualities.P1080.value,
+                            type = ExtractorLinkType.M3U8,
+                        )
+                    )
+
+                    val subtitleArray = json.getJSONArray("subtitles").getJSONArray(1)
+
+                    for (i in 0 until subtitleArray.length()) {
+                        val sub = subtitleArray.getJSONArray(i).getJSONObject(1)
+
+                        val src = sub.getJSONArray("src").getString(1)
+                        val name = sub.getJSONArray("name").getString(1)
+                        subtitleCallback.invoke(
+                            SubtitleFile(
+                                name,  // Use label for the name
+                                src    // Use extracted URL
+                            )
+                        )
+                    }
+
+                } else {
+                    println("Could not find embedded JSON in props attribute")
+                }
             }
-        } ?: Log.d("Error:", "Not Found")
+        }
     }
 
 
-    suspend fun invokeLing(
+
+        suspend fun invokeLing(
         title: String? = null,
         year: Int? = null,
         season: Int? = null,
@@ -3329,14 +3350,15 @@ object StreamPlayExtractor : StreamPlay() {
 
             val json = tryParseJson<AllMovielandPlaylist>("{$resData}") ?: return
             val headers = mapOf(("X-CSRF-TOKEN" to "${json.key}"))
-
+            val jsonfile=if (json.file?.startsWith("http") == true) json.file else host+json.file
             val serverJson = app.get(
-                fixUrl(json.file ?: return, host),
+                jsonfile,
                 headers = headers,
                 referer = "$allmovielandAPI/"
             ).text.replace(Regex(""",\\s*\\/"""), "")
+            val cleanedJson = serverJson.replace(Regex(",\\s*\\[\\s*]"), "")
 
-            val servers = tryParseJson<ArrayList<AllMovielandServer>>(serverJson)?.let { list ->
+            val servers = tryParseJson<ArrayList<AllMovielandServer>>(cleanedJson)?.let { list ->
                 if (season == null) {
                     list.mapNotNull { it.file?.let { file -> file to it.title.orEmpty() } }
                 } else {
@@ -3842,7 +3864,7 @@ object StreamPlayExtractor : StreamPlay() {
             }
         }
     }
-
+    //TODO //API Dead
     suspend fun invokeFlixAPIHQ(
         title: String?,
         season: Int? = null,
@@ -3883,7 +3905,7 @@ object StreamPlayExtractor : StreamPlay() {
         serverList.amap { server ->
             val sourceUrl = runCatching {
                 val endpoint = server.url.substringAfterLast(".")
-                val proxyUrl = "https://proxy.phisher2.workers.dev/?url=$FlixHQ/ajax/episode/sources/$endpoint"
+                val proxyUrl = "$FlixHQ/ajax/episode/sources/$endpoint"
                 app.get(proxyUrl, timeout = 3000).parsedSafe<FlixHQLinks>()?.link
             }.getOrNull()
             sourceUrl?.let {
@@ -3924,7 +3946,6 @@ object StreamPlayExtractor : StreamPlay() {
     }
 
 
-    @SuppressLint("NewApi")
     suspend fun invokeRiveStream(
         id: Int? = null,
         season: Int? = null,
@@ -4608,11 +4629,10 @@ object StreamPlayExtractor : StreamPlay() {
         }
     }
 
-    //TODO
     suspend fun invokeHdmovie2(
         title: String? = null,
         year: Int? = null,
-        season: Int?=null,
+        season: Int? = null,
         episode: Int? = null,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit,
@@ -4626,53 +4646,78 @@ object StreamPlayExtractor : StreamPlay() {
         )
 
         val document = app.get(url, headers = headers, allowRedirects = true).document
+        val ajaxUrl = "$hdmovie2API/wp-admin/admin-ajax.php"
 
-        document.selectFirst("div.wp-content p a")?.map { linkElement ->
-            val linkText = linkElement.text()
-            val linkUrl = linkElement.attr("href")
-            val isEpisodeMatch = episode?.let {
-                Regex("EP0?$it\\b", RegexOption.IGNORE_CASE).containsMatchIn(linkText)
-            } ?: true
+        val commonHeaders = headers + mapOf(
+            "Accept" to "*/*",
+            "X-Requested-With" to "XMLHttpRequest"
+        )
 
-            if (!isEpisodeMatch && episode != null && linkText.contains("EP")) {
-                Log.d("Hdmovie2", "Episode $episode not matched in link: $linkText")
-                return@map
+        suspend fun String.getIframe(): String = Jsoup.parse(this).select("iframe").attr("src")
+
+        suspend fun fetchSource(post: String, nume: String, type: String): String {
+            val response = app.post(
+                url = ajaxUrl,
+                data = mapOf(
+                    "action" to "doo_player_ajax",
+                    "post" to post,
+                    "nume" to nume,
+                    "type" to type
+                ),
+                referer = hdmovie2API,
+                headers = commonHeaders
+            ).parsed<ResponseHash>()
+            return response.embed_url.getIframe()
+        }
+
+        var link: String? = null
+
+        if (episode != null) {
+            document.select("ul#playeroptionsul > li").getOrNull(1)?.let { ep ->
+                val post = ep.attr("data-post")
+                val nume = (episode + 1).toString()
+                link = fetchSource(post, nume, "movie")
             }
+        } else {
+            document.select("ul#playeroptionsul > li")
+                .firstOrNull { it.text().contains("v2", ignoreCase = true) }
+                ?.let { mv ->
+                    val post = mv.attr("data-post")
+                    val nume = mv.attr("data-nume")
+                    link = fetchSource(post, nume, "movie")
+                }
+        }
 
-            val type = if (episode != null && !linkText.contains("EP")) "(Combined)" else ""
-
-            /*
-            app.get(linkUrl).document.select("div > p > a").amap {
-                if (it.text().contains("GDFlix"))
-                {
+        // If ajax link failed, fallback to legacy anchors
+        if (link.isNullOrEmpty()) {
+            val type = if (episode != null) "(Combined)" else ""
+            document.select("a[href*=dwo]").forEach { anchor ->
+                val innerDoc = app.get(anchor.attr("href")).document
+                innerDoc.select("div > p > a").forEach {
                     val href = it.attr("href")
-                    var redirectedUrl: String? = null
-                    val gg = app.get(href).url
-                    Log.d("gg", "Success on attempt ${gg + 1}gg")
+                    if (href.contains("GDFlix")) {
+                        val redirectedUrl = (1..10).mapNotNull {
+                            app.get(href, allowRedirects = false).headers["location"]
+                        }.firstOrNull() ?: href
 
-                    repeat(10) { attempt ->
-                        val response = app.get(href, allowRedirects = false)
-                        redirectedUrl = response.headers["location"]
-                        if (!redirectedUrl.isNullOrEmpty()) {
-                            Log.d("Retry", "Success on attempt ${attempt + 1}")
-                            return@repeat
-                        }
-                        Log.d("Retry", "Attempt ${attempt + 1}: No location header found")
+                        loadSourceNameExtractor(
+                            "Hdmovie2$type",
+                            redirectedUrl,
+                            "",
+                            subtitleCallback,
+                            callback
+                        )
                     }
-                    redirectedUrl = redirectedUrl ?: ""
-                    Log.d("Phisher", redirectedUrl!!)
-
-                    loadSourceNameExtractor(
-                        "Hdmovie2 $type",
-                        redirectedUrl!!,
-                        "",
-                        subtitleCallback,
-                        callback,
-                    )
                 }
             }
-
-             */
+        } else {
+            loadSourceNameExtractor(
+                "Hdmovie2",
+                link!!,
+                hdmovie2API,
+                subtitleCallback,
+                callback
+            )
         }
     }
 
