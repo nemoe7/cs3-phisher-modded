@@ -4510,7 +4510,6 @@
 332|1|x-jat|Hotaru no Haka
 332|2|ar|قبر اليرعات
 332|2|ar|هوتارو نو هاكا
-332|2|cs|Hrob světlušek
 332|2|de|Das Grab der Leuchtkäfer
 332|2|en|Tombstone for Fireflies
 332|2|it|La tomba delle lucciole
@@ -4522,6 +4521,7 @@
 332|3|en|GotF
 332|3|x-jat|HnH
 332|4|ar|سيتا الحنون
+332|4|cs|Hrob světlušek
 332|4|da|Ildfluernes grav
 332|4|de|Die letzten Glühwürmchen
 332|4|el|Ο Τάφος των Πυγολαμπίδων
@@ -91930,6 +91930,7 @@
 18504|2|en|Nights with a Cat (2024)
 18504|4|ja|夜は猫といっしょ (2024)
 18505|1|x-jat|Gekijouban Nintama Rantarou: Dokutake Ninja Tai Saikyou no Gunshi
+18505|4|en|Nintama Rantaro: Invincible Master of the Dokutake Ninja
 18505|4|ja|劇場版 忍たま乱太郎 ドクタケ忍者隊最強の軍師
 18506|1|x-jat|Douse, Koishite Shimaunda.
 18506|4|en|Anyway, I`m Falling in Love with You.
@@ -92778,6 +92779,7 @@
 18689|4|zh-Hant|聖騎士之戰 奮戰：DUAL RULERS
 18690|1|x-jat|Princession Orchestra
 18690|2|x-jat|Princess Session Orchestra
+18690|3|x-jat|priorche
 18690|4|ja|プリンセッション・オーケストラ
 18691|1|x-zht|Shixiong A Shixiong 3
 18691|2|en|My Senior Brother Is Too Steady 3rd Season
@@ -94065,8 +94067,6 @@
 18986|1|x-jat|Tensui no Sakuna-hime (Zokuhen)
 18986|2|en|Sakuna: Of Rice and Ruin (Sequel)
 18986|4|ja|天穂のサクナヒメ (続編)
-18987|1|x-jat|Keroro Gunsou (Anime Shin Project)
-18987|4|ja|ケロロ軍曹 アニメ新プロジェクト
 18988|1|x-jat|Amayo no Tsuki
 18988|2|en|The Moon on a Rainy Night
 18988|4|ja|雨夜の月
@@ -94358,7 +94358,7 @@
 19056|1|x-jat|Bukiyou na Senpai.
 19056|2|en|My Awkward Senpai
 19056|4|ja|不器用な先輩.
-19057|1|x-jat|Nonohara Yuzuka no Himitsu no Haishin
+19057|1|x-jat|Nonohara Yuka no Himitsu no Haishin
 19057|2|ko|OVA 노노하라 유카의 비밀 방송
 19057|4|ja|野々原柚花のヒミツのハイシン
 19058|1|x-jat|Koupen-chan
@@ -95383,8 +95383,6 @@
 19388|4|zh-Hans|神国之上
 19389|1|x-jat|Shinsei Galverse
 19389|4|ja|新星ギャルバース
-19390|1|en|First Line
-19390|4|ja|ファーストライン
 19391|1|x-jat|Never Give Up
 19391|4|ja|ネバー・ギブ・アップ
 19392|1|x-kot|Pyramid Game
@@ -95814,3 +95812,5 @@
 19525|2|en|Legend of the Ethereal Sword-Immortal
 19525|2|en|Legend of the Misty Sword Immortal
 19525|4|zh-Hans|缥缈剑仙传
+19526|1|x-jat|Dungeons & Television
+19526|4|ja|ダンジョン&テレビジョン
