@@ -1,7 +1,11 @@
 package com.phisher98
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
@@ -12,13 +16,13 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lagradost.cloudstream3.CommonActivity.showToast
-import com.phisher98.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private var selectedSection: UltimaUtils.SectionInfo? = null
 
 class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
     private var param1: String? = null
@@ -41,6 +45,7 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
         return inflater.inflate(res.getLayout(id), container, false)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun getDrawable(name: String): Drawable {
         val id = res.getIdentifier(name, "drawable", BuildConfig.LIBRARY_PACKAGE_NAME)
         return res.getDrawable(id, null)
@@ -52,25 +57,25 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
         return res.getString(id)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun <T : View> View.findView(name: String): T {
         val id = res.getIdentifier(name, "id", BuildConfig.LIBRARY_PACKAGE_NAME)
         return findViewById(id)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun View.makeTvCompatible() {
         val outlineId = res.getIdentifier("outline", "drawable", BuildConfig.LIBRARY_PACKAGE_NAME)
         background = res.getDrawable(outlineId, null)
     }
-    // endregion
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val root = getLayout("reorder", inflater, container)
 
-        // Save button
         val saveBtn = root.findView<ImageView>("save")
         saveBtn.setImageDrawable(getDrawable("save_icon"))
         saveBtn.makeTvCompatible()
@@ -86,7 +91,6 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
             }
         }
 
-
         val noSectionWarning = root.findView<TextView>("no_section_warning")
         val sectionsListView = root.findView<LinearLayout>("section_list")
         updateSectionList(sectionsListView, inflater, container, noSectionWarning)
@@ -99,14 +103,18 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         noSectionWarning: TextView? = null,
+        currentSections: List<UltimaUtils.SectionInfo>? = null,
         focusingSection: Int? = null,
-        focusOn: String? = null
+        focusOn: String? = null,
     ) {
         sectionsListView.removeAllViews()
 
-        var sections = emptyList<UltimaUtils.SectionInfo>()
-        extensions.forEach { ext ->
-            ext.sections?.filter { it.enabled }?.let { sections += it }
+        val sections = currentSections ?: run {
+            var freshSections = emptyList<UltimaUtils.SectionInfo>()
+            extensions.forEach { ext ->
+                ext.sections?.filter { it.enabled }?.let { freshSections += it }
+            }
+            freshSections
         }
 
         if (sections.isEmpty()) {
@@ -114,85 +122,159 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
             return
         }
 
-        var counter = sections.size
         val sortedSections = sections.sortedByDescending { it.priority }
+        var counter = sortedSections.size
 
-        sortedSections.forEach { section ->
+        val displaySections = (currentSections ?: run {
+            val freshSections = emptyList<UltimaUtils.SectionInfo>().toMutableList()
+            extensions.forEach { ext ->
+                ext.sections?.filter { it.enabled }?.let { freshSections += it }
+            }
+            freshSections
+        }).sortedByDescending { it.priority }
+
+        if (displaySections.isEmpty()) {
+            noSectionWarning?.visibility = View.VISIBLE
+            return
+        }
+
+        displaySections.forEach { section ->
             val sectionView = getLayout("list_section_reorder_item", inflater, container)
             val sectionName = sectionView.findView<TextView>("section_name")
+
+            if (section.priority == 0) section.priority = counter
+            sectionName.text = "${section.pluginName}: ${section.name}"
+
+            sectionView.background = LayerDrawable(
+                arrayOf(
+                    ColorDrawable(if (section == selectedSection) 0x2200FF00.toInt() else Color.TRANSPARENT),
+                    getDrawable("outline")
+                )
+            )
+
+            sectionView.setOnClickListener {
+                when (selectedSection) {
+                    null -> {
+                        selectedSection = section
+                        showToast("Picked! Now tap a target.")
+                        updateSectionList(
+                            sectionsListView,
+                            inflater,
+                            container,
+                            noSectionWarning,
+                            displaySections
+                        )
+                    }
+                    section -> {
+                        selectedSection = null
+                        updateSectionList(
+                            sectionsListView,
+                            inflater,
+                            container,
+                            noSectionWarning,
+                            displaySections
+                        )
+                    }
+                    else -> {
+                        val selected = selectedSection!!
+                        val sectionsMutable = displaySections.toMutableList()
+
+                        val selectedIndex = sectionsMutable.indexOf(selected)
+                        val targetIndex = sectionsMutable.indexOf(section)
+
+                        if (selectedIndex == targetIndex) {
+                            showToast("Already in this position")
+                            return@setOnClickListener
+                        }
+
+                        sectionsMutable.removeAt(selectedIndex)
+                        sectionsMutable.add(targetIndex, selected)
+
+                        sectionsMutable.forEachIndexed { index, sec ->
+                            sec.priority = sectionsMutable.size - index
+                        }
+
+                        selectedSection = null
+                        updateSectionList(
+                            sectionsListView,
+                            inflater,
+                            container,
+                            noSectionWarning,
+                            sectionsMutable
+                        )
+                        showToast("Section moved to position ${targetIndex + 1}")
+                    }
+                }
+
+                sectionsListView.post {
+                    for (i in 0 until sectionsListView.childCount) {
+                        val child = sectionsListView.getChildAt(i)
+                        val nameView = child.findView<TextView>("section_name")
+                        if (nameView.text.contains(section.name, ignoreCase = true)) {
+                            child.requestFocus()
+                            break
+                        }
+                    }
+                }
+            }
+
             val increaseBtn = sectionView.findView<ImageView>("increase")
             val decreaseBtn = sectionView.findView<ImageView>("decrease")
-
             increaseBtn.setImageDrawable(getDrawable("triangle"))
             decreaseBtn.setImageDrawable(getDrawable("triangle"))
             decreaseBtn.rotation = 180f
 
-            if (section.priority == 0) section.priority = counter
-
-            sectionName.text = "${section.pluginName}: ${section.name}"
-
             increaseBtn.makeTvCompatible()
-            increaseBtn.setOnClickListener {
-                if (section.priority < sections.size) {
-                    val nextSection = sections.find { it.priority == section.priority + 1 }
-                    if (nextSection == null) {
-                        showToast("Cannot increase priority further")
-                        return@setOnClickListener
-                    }
-
-                    // Swap priorities
-                    nextSection.priority -= 1
-                    section.priority += 1
-
-                    // Normalize priorities to ensure consistency
-                    normalizePriorities(sections)
-
-                    // Update UI
-                    updateSectionList(
-                        sectionsListView,
-                        inflater,
-                        container,
-                        null,
-                        section.priority,
-                        "increase"
-                    )
-                }
-            }
-
-
             decreaseBtn.makeTvCompatible()
-            decreaseBtn.setOnClickListener {
-                if (section.priority > 1) {
-                    val prevSection = sections.find { it.priority == section.priority - 1 }
-                    if (prevSection == null) {
-                        showToast("Cannot decrease priority further")
-                        return@setOnClickListener
+
+            increaseBtn.setOnClickListener {
+                val idx = displaySections.indexOf(section)
+                if (idx > 0) {
+                    val newList = displaySections.toMutableList()
+                    newList.removeAt(idx)
+                    newList.add(idx - 1, section)
+                    newList.forEachIndexed { index, sec -> sec.priority = newList.size - index }
+                    increaseBtn.contentDescription = "Move ${section.name} up"
+                    updateSectionList(sectionsListView, inflater, container, noSectionWarning, newList)
+
+                    sectionsListView.post {
+                        for (i in 0 until sectionsListView.childCount) {
+                            val child = sectionsListView.getChildAt(i)
+                            val nameView = child.findView<TextView>("section_name")
+                            if (nameView.text.contains(section.name, ignoreCase = true)) {
+                                child.findView<ImageView>("increase").requestFocus()
+                                break
+                            }
+                        }
                     }
-
-                    // Swap priorities
-                    prevSection.priority += 1
-                    section.priority -= 1
-
-                    // Re-normalize the full list to keep priorities clean
-                    normalizePriorities(sections)
-
-                    // Update UI
-                    updateSectionList(
-                        sectionsListView,
-                        inflater,
-                        container,
-                        null,
-                        section.priority,
-                        "decrease"
-                    )
+                } else {
+                    showToast("Already at the top")
                 }
             }
 
+            decreaseBtn.setOnClickListener {
+                val idx = displaySections.indexOf(section)
+                if (idx < displaySections.lastIndex) {
+                    val newList = displaySections.toMutableList()
+                    newList.removeAt(idx)
+                    newList.add(idx + 1, section)
+                    newList.forEachIndexed { index, sec -> sec.priority = newList.size - index }
+                    decreaseBtn.contentDescription = "Move ${section.name} down"
+                    updateSectionList(sectionsListView, inflater, container, noSectionWarning, newList)
 
-            if (counter == focusingSection) {
-                when (focusOn) {
-                    "increase" -> increaseBtn.requestFocus()
-                    "decrease" -> decreaseBtn.requestFocus()
+                    sectionsListView.post {
+                        for (i in 0 until sectionsListView.childCount) {
+                            val child = sectionsListView.getChildAt(i)
+                            val nameView = child.findView<TextView>("section_name")
+                            if (nameView.text.contains(section.name, ignoreCase = true)) {
+                                // Focus back to decrease button inside this row
+                                child.findView<ImageView>("decrease").requestFocus()
+                                break
+                            }
+                        }
+                    }
+                } else {
+                    showToast("Already at the bottom")
                 }
             }
 
@@ -212,13 +294,4 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
             ""
         )
     }
-
-    private fun normalizePriorities(sections: List<UltimaUtils.SectionInfo>) {
-        sections
-            .sortedByDescending { it.priority }
-            .forEachIndexed { index, section ->
-                section.priority = sections.size - index
-            }
-    }
-
 }

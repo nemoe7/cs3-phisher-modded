@@ -2,6 +2,8 @@ package com.PublicSportsIPTV
 
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
+import com.lagradost.cloudstream3.utils.AppUtils.toJson
+import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
 
 class PublicSportsIPTV : MainAPI() {
     override var mainUrl: String = com.phisher98.BuildConfig.FanCode_API
@@ -20,10 +22,10 @@ class PublicSportsIPTV : MainAPI() {
     }
 
     private fun Match.toSearchResult(): SearchResponse {
-        val title = this.matchName
-        val href = this.streamLink
-        val posterUrl = this.banner
-        return newMovieSearchResponse(title, href, TvType.Live) {
+        val title = this.title
+        val href = LoadURL(this.streamingCdn.primaryPlaybackUrl,this.streamingCdn.fancodeCdn,this.streamingCdn.daiGoogleCdn,this.streamingCdn.cloudfrontCdn)
+        val posterUrl = this.image
+        return newMovieSearchResponse(title, href.toJson(), TvType.Live) {
             this.posterUrl = posterUrl
         }
     }
@@ -47,17 +49,33 @@ class PublicSportsIPTV : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit,
     ): Boolean {
-        callback.invoke(
-            newExtractorLink(
-                name,
-                name,
-                url = data,
-                INFER_TYPE
-            ) {
-                this.referer = ""
-                this.quality = getQualityFromName("")
-            }
-        )
+
+        val parsed = tryParseJson<LoadURL>(data) ?: return false
+
+        val urls = listOfNotNull(
+            parsed.primaryPlaybackUrl,
+            parsed.fancodeCdn,
+            parsed.daiGoogleCdn,
+            parsed.cloudfrontCdn
+        ).distinct().toMutableList()
+
+        if (urls.isEmpty()) return false
+
+        urls.forEachIndexed { index, url ->
+            if (url.startsWith("http"))
+            callback.invoke(
+                newExtractorLink(
+                    name,
+                    "$name ${index+1}",
+                    url = url,
+                    INFER_TYPE
+                ) {
+                    this.referer = ""
+                    this.quality = Qualities.P1080.value
+                }
+            )
+        }
+
         return true
     }
 }

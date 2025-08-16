@@ -1,14 +1,12 @@
 // use an integer for version numbers
-version = 3
-
+version = 1
 
 cloudstream {
     // All of these properties are optional, you can safely remove them
 
-    description = "K-Drama,Dramas Extension by ModFlix Team"
-    language    = "en"
-    authors = listOf("Phisher98")
-
+    description = "Movies & Series"
+    authors = listOf("rockhero1234")
+    language    = "ta"
     /**
     * Status int as the following:
     * 0: Down
@@ -21,8 +19,6 @@ cloudstream {
     // List of video source types. Users are able to filter for extensions in a given category.
     // You can find a list of available types here:
     // https://recloudstream.github.io/cloudstream/html/app/com.lagradost.cloudstream3/-tv-type/index.html
-    tvTypes = listOf("Movie","TvSeries","AsianDrama")
-    iconUrl = "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/dramadrip-icon.png"
-
-    isCrossPlatform = true
+    tvTypes = listOf("Movie","TvSeries")
+    iconUrl = "https://i.postimg.cc/FRwFFtyT/logo.png"
 }
