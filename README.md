@@ -52,17 +52,38 @@ We respect the intellectual property laws of all jurisdictions and will review a
 
 Thank you for your understanding and cooperation.
 
-[contributors-shield]: https://img.shields.io/github/contributors/nemoe7/cs3-phisher-modded.svg?style=for-the-badge
-[contributors-url]: https://github.com/nemoe7/cs3-phisher-modded/graphs/contributors
-[license-shield]: https://img.shields.io/github/license/nemoe7/cs3-phisher-modded.svg?style=for-the-badge
-[license-url]: https://github.com/nemoe7/cs3-phisher-modded/blob/master/LICENSE
-[kotlin-shield]: https://img.shields.io/badge/kotlin-7F52FF?style=for-the-badge&logo=nextdotjs&logoColor=white
-[kotlin-url]: https://kotlinlang.org
-[android-studio-shield]: https://img.shields.io/badge/android%20studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white
-[android-studio-url]: https://developer.android.com/studio
-[gradle-shield]: https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white
-[gradle-url]: https://gradle.org
-[github-shield]: https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white
-[github-url]: https://github.com/
-[github-actions-shield]: https://img.shields.io/badge/github%20actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white
-[github-actions-url]: https://github.com/features/actions
+📘 [View YouTube guide →](https://cloudstream.miraheze.org/wiki/Ultima)
+
+This guide will show you how to use a **private GitHub project** and a **personal access token** to sync playback history across devices.
+
+---
+
+## 💬 Feedback
+
+![Feedback](https://github.com/user-attachments/assets/9f7dfe73-f11d-41fe-996c-072de0f6853b)
+
+---
+
+## 📄 License
+
+[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
+
+These extensions are **free software**: you can use, study, share, and modify them as you wish.
+
+They are distributed under the terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl.html) version 3 or later, published by the Free Software Foundation.
+
+---
+
+## ⚖️ DMCA Disclaimer
+
+We hereby issue this notice to clarify that these extensions function similarly to a standard web browser by fetching video files from the internet.
+
+- **No content is hosted by this repository or the Cloudstream 3 application.**
+- Any content accessed is hosted by third-party websites.
+- Users are solely responsible for their usage and must comply with their local laws.
+
+If you believe content is violating copyright laws, please contact the **actual file hosts**, **not** the developers of this repository or the Cloudstream 3 app.
+
+---
+
+**Thank You for using Phisher Repo!**
