@@ -1,12 +1,22 @@
-// use an integer for version numbers
-version = 3
+import org.jetbrains.kotlin.konan.properties.Properties
 
+// use an integer for version numbers
+version = 6
+
+
+android {
+    defaultConfig {
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        android.buildFeatures.buildConfig=true
+        buildConfigField("String", "DaddyLive", "\"${properties.getProperty("DaddyLive")}\"")
+    }
+}
 
 cloudstream {
     // All of these properties are optional, you can safely remove them
 
-    description = "K-Drama,Dramas Extension by ModFlix Team"
-    language    = "en"
+    description = "Indian TV"
     authors = listOf("Phisher98")
 
     /**
@@ -21,8 +31,8 @@ cloudstream {
     // List of video source types. Users are able to filter for extensions in a given category.
     // You can find a list of available types here:
     // https://recloudstream.github.io/cloudstream/html/app/com.lagradost.cloudstream3/-tv-type/index.html
-    tvTypes = listOf("Movie","TvSeries","AsianDrama")
-    iconUrl = "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/dramadrip-icon.png"
+    tvTypes = listOf("Live")
+    iconUrl = "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/daddylive.png"
 
-    isCrossPlatform = true
+    isCrossPlatform = false
 }

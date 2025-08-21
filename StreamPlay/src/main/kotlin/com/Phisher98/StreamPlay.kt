@@ -49,7 +49,6 @@ import com.phisher98.StreamPlayExtractor.invokeazseries
 import com.phisher98.StreamPlayExtractor.invokecatflix
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.lagradost.api.Log
 import com.lagradost.cloudstream3.Actor
 import com.lagradost.cloudstream3.ActorData
@@ -89,6 +88,7 @@ import com.phisher98.StreamPlayExtractor.invokeElevenmovies
 import com.phisher98.StreamPlayExtractor.invokeHdmovie2
 import com.phisher98.StreamPlayExtractor.invokeDramadrip
 import com.phisher98.StreamPlayExtractor.invokeEmbedlc
+import com.phisher98.StreamPlayExtractor.invokeMovieBox
 import com.phisher98.StreamPlayExtractor.invokeVidfast
 import com.phisher98.StreamPlayExtractor.invokeXPrimeAPI
 import com.phisher98.StreamPlayExtractor.invokehdhub4u
@@ -232,6 +232,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         const val Watch32 = "https://watch32.sx"
         const val Vidfast = "https://vidfast.pro"
         const val Embedlc = "https://embed.lc"
+        const val movieBox= "https://api.inmoviebox.com"
         fun getType(t: String?): TvType {
             return when (t) {
                 "movie" -> TvType.Movie
@@ -318,7 +319,7 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             TvType.Movie,
         ) {
             this.posterUrl = getImageUrl(posterPath)
-            this.score= Score.from10(voteAverage)
+            // this.score= Score.from10(voteAverage)
         }
     }
 
@@ -432,45 +433,49 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                 val cinejson = runCatching {
                     gson.fromJson(cineJsonText, CinemetaRes::class.java)
                 }.getOrNull()
-                val animeepisodes = cinejson?.meta?.videos?.filter { it.season != 0 } ?.map { video ->
-                    newEpisode(
-                        LinkData(
-                            id = data.id,
-                            imdbId = res.external_ids?.imdb_id,
-                            tvdbId = res.external_ids?.tvdb_id,
-                            type = data.type,
-                            season = video.season,
-                            episode = video.number,
-                            epid = null,
-                            aniId = null,
-                            animeId = null,
-                            title = title,
-                            year = video.released?.split("-")?.firstOrNull()?.toIntOrNull(),
-                            orgTitle = orgTitle,
-                            isAnime = true,
-                            airedYear = year,
-                            lastSeason = null,
-                            epsTitle = video.name,
-                            jpTitle = res.alternative_titles?.results?.find { it.iso_3166_1 == "JP" }?.title,
-                            date = video.released,
-                            airedDate = res.releaseDate ?: res.firstAirDate,
-                            isAsian = isAsian,
-                            isBollywood = isBollywood,
-                            isCartoon = isCartoon,
-                            alttitle = res.title,
-                            nametitle = res.name
-                        ).toJson()
-                    ) {
-                        this.name = video.name + if (isUpcoming(video.released)) " • [UPCOMING]" else ""
-                        this.season = video.season
-                        this.episode = video.number
-                        this.posterUrl = video.thumbnail
-                        this.rating = video.rating.times(10).roundToInt()
-                        this.description = video.description
-                    }.apply {
-                        this.addDate(video.released)
-                    }
-                } ?: emptyList()
+                val animevideos = cinejson?.meta?.videos
+                val animeepisodes = animevideos
+                    ?.filter { it.season!= 0 }
+                    ?.map { video ->
+                        Log.d("Phisher Anime", "video: season=${video.season}, ep=${video.number}, released=${video.released}, name=${video.name}")
+                        newEpisode(
+                            LinkData(
+                                id = data.id,
+                                imdbId = res.external_ids?.imdb_id,
+                                tvdbId = res.external_ids?.tvdb_id,
+                                type = data.type,
+                                season = video.season,
+                                episode = video.number,
+                                epid = null,
+                                aniId = null,
+                                animeId = null,
+                                title = title,
+                                year = video.released?.split("-")?.firstOrNull()?.toIntOrNull(),
+                                orgTitle = orgTitle,
+                                isAnime = true,
+                                airedYear = year,
+                                lastSeason = null,
+                                epsTitle = video.name,
+                                jpTitle = res.alternative_titles?.results?.find { it.iso_3166_1 == "JP" }?.title,
+                                date = video.released,
+                                airedDate = res.releaseDate ?: res.firstAirDate,
+                                isAsian = isAsian,
+                                isBollywood = isBollywood,
+                                isCartoon = isCartoon,
+                                alttitle = res.title,
+                                nametitle = res.name
+                            ).toJson()
+                        ) {
+                            this.name = video.name + if (isUpcoming(video.released)) " • [UPCOMING]" else ""
+                            this.season = video.season
+                            this.episode = video.number
+                            this.posterUrl = video.thumbnail
+                            this.rating = video.rating.toIntOrNull()
+                            this.description = video.description
+                        }.apply {
+                            this.addDate(video.released)
+                        }
+                    } ?: emptyList()
 
                 return newAnimeLoadResponse(title, url, TvType.Anime) {
                     addEpisodes(DubStatus.Subbed, animeepisodes)
@@ -595,12 +600,24 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                 add { invokeMoviesdrive(res.title, res.season, res.episode, res.year, res.imdbId, subtitleCallback, callback) }
                 add { invokeWatch32APIHQ(res.title, res.season, res.episode,res.year, subtitleCallback, callback) }
                 add { invokeVidSrcViP(res.id, res.season, res.episode, callback) }
-                add { invokePrimeWire(res.id, res.imdbId, res.title, res.season, res.episode, res.year, subtitleCallback, callback) }
-                add { invokeFilm1k(res.id, res.imdbId, res.title, res.season, res.episode, res.year, subtitleCallback, callback) }
+                add { invokePrimeWire(
+                    res.imdbId,
+                    res.season,
+                    res.episode,
+                    subtitleCallback,
+                    callback
+                ) }
+                add { invokeFilm1k(
+                    res.title,
+                    res.season,
+                    res.year,
+                    subtitleCallback,
+                    callback
+                ) }
                 add { invokeSuperstream(token, res.imdbId, res.season, res.episode, callback) }
                 add { invokePlayer4U(res.title, res.season, res.episode, res.year, callback) }
                 add { invokeVidSrcXyz(res.imdbId, res.season, res.episode, callback) }
-                add { invokeXPrimeAPI(res.title, res.year, res.imdbId, res.season, res.episode, subtitleCallback, callback) }
+                add { invokeXPrimeAPI(res.title, res.year, res.imdbId,res.id, res.season, res.episode, subtitleCallback, callback) }
                 add { invokevidzeeUltra(res.id, res.season, res.episode, callback) }
                 add { invokevidzeeMulti(res.id, res.season, res.episode, callback) }
                 add { invoke4khdhub(res.title, res.year, res.season, res.episode, subtitleCallback, callback) }
@@ -610,6 +627,8 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
                 add { invokeDramadrip(res.imdbId, res.season, res.episode, subtitleCallback, callback) }
                 add { invokeVidfast(res.imdbId, res.season, res.episode, callback) }
                 add { invokeEmbedlc(res.imdbId, res.season, res.episode, subtitleCallback, callback) }
+                add { invokeRiveStream(res.id, res.season, res.episode, callback) }
+                add { invokeMovieBox(res.title, res.season, res.episode, subtitleCallback, callback) }
             }
 
             if (!res.isAnime && res.isBollywood) {
@@ -626,7 +645,6 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
             }
 
             add { invokeDahmerMovies(dahmerMoviesAPI, res.title, res.year, res.season, res.episode, callback) }
-            add { invokeRiveStream(res.id, res.season, res.episode, callback) }
             add { invokeSubtitleAPI(res.imdbId, res.season, res.episode, subtitleCallback) }
             add { invokeWyZIESUBAPI(res.imdbId, res.season, res.episode, subtitleCallback) }
         }
@@ -799,6 +817,4 @@ open class StreamPlay(val sharedPref: SharedPreferences? = null) : TmdbProvider(
         @JsonProperty("alternative_titles") val alternative_titles: ResultsAltTitles? = null,
         @JsonProperty("production_countries") val production_countries: ArrayList<ProductionCountries>? = arrayListOf(),
     )
-
-
 }
