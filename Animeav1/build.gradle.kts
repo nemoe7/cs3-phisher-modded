@@ -6,7 +6,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
     description = "(Mexican) Anime Extension"
-    language    = "es"
+    language    = "mx"
     authors = listOf("Phisher98")
 
     /**
