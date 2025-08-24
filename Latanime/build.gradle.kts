@@ -1,12 +1,12 @@
 // use an integer for version numbers
-version = 2
+version = 1
 
 
 cloudstream {
     // All of these properties are optional, you can safely remove them
 
-    description = "Movies/Series/Anime"
-    language    = "hi"
+    description = "(Mexican) Anime Extension"
+    language    = "mx"
     authors = listOf("Phisher98")
 
     /**
@@ -21,15 +21,8 @@ cloudstream {
     // List of video source types. Users are able to filter for extensions in a given category.
     // You can find a list of available types here:
     // https://recloudstream.github.io/cloudstream/html/app/com.lagradost.cloudstream3/-tv-type/index.html
-    tvTypes = listOf(
-        "AsianDrama",
-        "TvSeries",
-        "Anime",
-        "Movie",
-        "Cartoon",
-        "AnimeMovie"
-    )
-    iconUrl="https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/streamflare.png"
+    tvTypes = listOf("Movie","Anime","AnimeMovie")
+    iconUrl = "https://latanime.org/public/img/logito.png"
 
-    isCrossPlatform = true
+    isCrossPlatform = false
 }
