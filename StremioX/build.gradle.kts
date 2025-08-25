@@ -1,8 +1,7 @@
 import org.jetbrains.kotlin.konan.properties.Properties
 
 // use an integer for version numbers
-version = 33
-
+version = 1
 
 android {
     buildFeatures {
@@ -13,9 +12,10 @@ android {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
         android.buildFeatures.buildConfig=true
-        buildConfigField("String", "KAISVA", "\"${properties.getProperty("KAISVA")}\"")
+        buildConfigField("String", "TMDB_API", "\"${properties.getProperty("TMDB_API")}\"")
     }
 }
+
 dependencies {
     implementation("com.google.android.material:material:1.12.0")
 }
@@ -23,8 +23,10 @@ dependencies {
 cloudstream {
     language = "en"
     // All of these properties are optional, you can safely remove them
-    description = "Animes & Animes Movie"
-    authors = listOf("Phisher98")
+
+     description = "[!] Requires Setup \n- StremioX allows you to use stream addons \n- StremioC allows you to use catalog addons"
+     authors = listOf("Hexated,phisher98")
+
     /**
      * Status int as the following:
      * 0: Down
@@ -34,13 +36,9 @@ cloudstream {
      * */
     status = 1 // will be 3 if unspecified
     tvTypes = listOf(
-        "Anime",
-        "OVA",
-        "AnimeMovie"
+        "TvSeries",
+        "Movie",
     )
-
-    iconUrl = "https://www.google.com/s2/favicons?domain=animekai.to&sz=%size%"
-
     requiresResources = true
-    isCrossPlatform = false
+    iconUrl = "https://raw.githubusercontent.com/hexated/cloudstream-extensions-hexated/master/StremioX/icon.png"
 }
