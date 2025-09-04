@@ -977,6 +977,7 @@
 68|4|en|Bubblegum Crisis
 68|4|fr|Bubblegum Crisis
 68|4|ja|バブルガムクライシス
+68|4|pt|Bubblegum Crisis
 69|1|x-jat|One Piece
 69|2|bg|Едно Цяло
 69|2|bg|Уан Пийс
@@ -2524,6 +2525,7 @@
 184|4|it|I cieli di Escaflowne
 184|4|ja|天空のエスカフローネ
 184|4|pl|Vision of Escaflowne
+184|4|pt|Escaflowne
 184|4|zh-Hans|天空之艾斯嘉科尼
 185|1|x-jat|Top o Nerae!
 185|2|en|Aim for the top!
@@ -2909,6 +2911,7 @@
 215|4|en|New Cutey Honey
 215|4|fr|Cutey Honey
 215|4|ja|新・キューティーハニー
+215|4|pt|Cutey Honey
 216|1|x-jat|Uchuu no Kishi Tekkaman Blade II
 216|2|en|Space Knight Tekkaman Blade 2
 216|2|en|Space Knight Tekkaman Blade OVA
@@ -3032,7 +3035,6 @@
 225|4|ja|フィギュア17 つばさ&ヒカル
 225|4|zh-Hans|代号17
 226|1|x-jat|Weiss Kreuz Gluhen
-226|2|ja|Weiß Kreuz Glühen
 226|2|ru|Белый крест II
 226|2|uk|Білий хрест: полум`я
 226|3|uk|Білий хрест II
@@ -3041,7 +3043,7 @@
 226|3|x-jat|wkreuz s2
 226|4|en|Knight Hunters Eternity
 226|4|fr|Weiß Kreuz Brillance
-226|4|ja|Weiss Kreuz Glühen
+226|4|ja|Weiß Kreuz Glühen
 226|5|ja|ヴァイスクロイツ グリーエン
 227|1|x-jat|Princess Nine: Kisaragi Joshikou Yakyuubu
 227|2|en|Princess Nine: Kisaragi Female Baseball Club
@@ -5116,6 +5118,7 @@
 372|4|fr|Brain Powerd
 372|4|it|Brain Powerd
 372|4|ja|ブレンパワード
+372|4|pt|Brain Powered
 373|1|x-jat|Slayers Gorgeous
 373|2|en|Slayers Movie 4
 373|2|ko|슬레이어즈 고저스
@@ -6366,6 +6369,7 @@
 505|2|fr|Olive et Tom
 505|2|pl|Kapitan Hawk
 505|2|pl|Kapitan Tsubasa
+505|2|pt|Capitão Falcão
 505|2|ru|Капитан Цубаса
 505|2|tr|Kaptan Tsubasa
 505|2|x-other|Captain Majed
@@ -6610,6 +6614,7 @@
 524|4|fr|Capitaine Flam
 524|4|it|Capitan Futuro
 524|4|ja|キャプテンフューチャー
+524|4|pt|Capitão Futuro
 525|1|x-jat|Chou Robot Seimeitai Transformers Micron Densetsu
 525|2|en|Transformers: Legend of Micron
 525|3|en|TLoM
@@ -6688,6 +6693,7 @@
 532|4|ja|ドクタースランプ
 532|4|zh-Hans|阿拉蕾(1997)
 533|1|x-jat|Space Pirate Captain Herlock: Outside Legend - The Endless Odyssey
+533|2|pt|Capitão Herlock, Odisseia Infinita
 533|2|x-jat|Captain Herlock
 533|3|x-jat|herlock
 533|4|de|Space Pirate Captain Herlock: Outside Legend - The Endless Odyssey
@@ -7790,6 +7796,7 @@
 648|4|it|Star Blazers
 648|4|ja|宇宙戦艦ヤマト
 648|4|pt-BR|Patrulha Estelar
+648|4|pt|Star Blazers
 648|4|zh-Hans|宇宙战舰大和号
 649|1|x-jat|Kamyla
 649|2|ko|카밀라
@@ -11044,6 +11051,7 @@
 1025|4|fr|Signé Cat`s Eye
 1025|4|it|Occhi di Gatto
 1025|4|ja|キャッツ・アイ
+1025|4|pt|Olhos de Gato
 1026|1|x-jat|Vicious
 1026|2|ja|ヴィシャス
 1026|2|ja|罪恶 VICIOUS -ウィシャス-
@@ -11500,6 +11508,7 @@
 1072|4|fr|Jeu, set et match!
 1072|4|it|Jenny la tennista
 1072|4|ja|エースをねらえ!
+1072|4|pt|Jenny!
 1073|1|x-jat|Shin Ace o Nerae!
 1073|2|en|Aim for the Ace! TV 2
 1073|2|ru|Бей эйс! [ТВ-2]
@@ -11671,6 +11680,7 @@
 1091|4|en|Space Adventure Cobra
 1091|4|fr|Cobra
 1091|4|ja|スペースコブラ
+1091|4|pt|Cobra
 1092|1|x-jat|Binzume Yousei
 1092|2|ru|Феи из бутылки
 1092|2|x-jat|Bindzume Yousei
@@ -14245,6 +14255,7 @@
 1457|3|x-jat|anj
 1457|4|it|Rocky Joe
 1457|4|ja|あしたのジョー
+1457|4|pt|O Campeão
 1457|4|zh-Hans|明日之丈
 1458|1|x-jat|Ashita no Joe 2
 1458|2|en|Tomorrow`s Joe 2
@@ -14530,6 +14541,7 @@
 1496|4|it|Kimba, il leone bianco
 1496|4|ja|ジャングル大帝
 1496|4|pt-BR|Kimba, o Leão Branco
+1496|4|pt|Leo, o Leão Branco
 1497|1|x-jat|Jungle Taitei (1966)
 1497|2|en|Jungle Emperor (1966)
 1497|4|ja|ジャングル大帝 (1966)
@@ -16013,11 +16025,10 @@
 1721|2|ko|노예개호
 1721|4|en|Slave Nurses
 1721|4|ja|奴隷介護
-1722|1|x-jat|Megami Kyoujyu
+1722|1|x-jat|Megami Kyouju
 1722|2|en|Woman Wolf Mania
 1722|2|es|La leyenda de la mujer lobo
 1722|2|ko|여랑광유
-1722|2|x-jat|Megami Kyouju
 1722|4|en|Legend of the Wolf Woman
 1722|4|ja|女狼狂濡
 1724|1|x-jat|Initial D Fourth Stage
@@ -16810,7 +16821,7 @@
 1836|4|fr|Embrasse-moi, Lucile
 1836|4|it|Kiss Me, Licia
 1836|4|ja|愛してナイト
-1836|4|pt|A Minha Amiga Licia
+1836|4|pt|A Minha Amiga Lícia
 1837|1|x-jat|Natsu e no Tobira
 1837|2|en|Door to Summer
 1837|2|en|Opening to Summer
@@ -16905,6 +16916,7 @@
 1848|4|it|Palla al centro per Rudy
 1848|4|ja|がんばれ! キッカーズ
 1848|4|pl|Piłkarze
+1848|4|pt|O Ponta de Lança
 1849|1|x-jat|Captain Future: Karei Naru Taiyoukei Race
 1849|2|en|Captain Future - The Brilliant Solar System Race
 1849|2|en|Captain Future: The Great Race in the Solar System
@@ -18676,6 +18688,7 @@
 2130|4|es-419|Kid Músculo: El Legado Kinnikuman
 2130|4|ja|キン肉マンII世 second generations (2002)
 2130|4|pt-BR|Músculo Total
+2130|4|pt|Músculo Total
 2130|4|th|คินนิคุแมน จอมพลัง ภาค 2
 2131|1|x-jat|Kinnikuman II-sei
 2131|2|ja|キン肉マン second generations
@@ -19027,6 +19040,7 @@
 2178|4|de|Kakurenbo: Hide and Seek
 2178|4|en|Kakurenbo: Hide & Seek
 2178|4|ja|カクレンボ
+2178|4|pt|Kakurenbo
 2178|4|ru|Kakurenbo: игра в прятки
 2178|4|sv|Kakurenbo
 2178|4|tr|Saklambaç
@@ -19611,6 +19625,7 @@
 2247|4|en|Parasol Henbe
 2247|4|he|עלילות בבאי
 2247|4|ja|パラソルヘンべえ
+2247|4|pt|Henbei
 2248|1|x-jat|Akuma to Himegimi
 2248|2|en|The Devil and the Princess
 2248|4|ja|悪魔と姫君
@@ -19953,6 +19968,7 @@
 2299|4|it|Le avventure della dolce Kati
 2299|4|ja|牧場の少女カトリ
 2299|4|nl|Nathalie
+2299|4|pt|Catarina
 2300|1|x-jat|Alps Monogatari: Watashi no Annette
 2300|2|en|The Alps Story: My Annette
 2300|2|fa|داستان های آلپ: آنت من
@@ -19968,6 +19984,7 @@
 2300|4|it|Là sui monti con Annette
 2300|4|ja|アルプス物語 わたしのアンネット
 2300|4|pl|Anette
+2300|4|pt|Uma Casa nos Alpes
 2301|1|x-jat|Minami no Niji no Lucy
 2301|2|en|Lucy-May of the Southern Rainbow
 2301|4|ar|لوسي
@@ -19982,6 +19999,7 @@
 2302|1|x-jat|Kazoku Robinson Hyouryuuki: Fushigi na Shima no Flone
 2302|2|de|Die schweizer Familie Robinson
 2302|2|en|Robinson Family Lost at Sea: Flone of the Marvelous Island
+2302|2|pt|Flora
 2302|2|x-jat|Fushigi na Shima no Flone
 2302|4|ar|فلونة
 2302|4|de|Familie Robinson
@@ -20788,7 +20806,7 @@
 2427|4|en|Animated Classics of Japanese Literature
 2427|4|fr|Anthologie de la littérature japonaise
 2427|4|ja|青春アニメ全集
-2427|4|pt|Antologia da literatura japonesa
+2427|4|pt|Antologia da Literatura Japonesa
 2429|1|x-jat|Yakitate!! Japan
 2429|2|en|Freshly Baked!! Ja-pan!
 2429|2|he|ישר מהתנור! יפן!
@@ -23680,6 +23698,7 @@
 2923|4|fr|Les aventures de Claire et Tipoune
 2923|4|it|Hello Spank!
 2923|4|ja|おはよう! スパンク
+2923|4|pt|Olá, Spanky!
 2923|4|zh-Hans|小狗亚斑
 2924|1|x-jat|Gakuen Tokusou Hikaruon
 2924|2|en|Campus Special Investigator Hikaruon
@@ -24694,6 +24713,7 @@
 3184|1|x-jat|Tezuka Osamu no Kyuuyaku Seisho Monogatari: In the Beginning
 3184|2|en|In the Beginning: Stories from the Old Testament
 3184|2|ja|手塚治虫の旧約聖書物語
+3184|2|pt|No Início, Histórias da Bíblia
 3184|2|x-jat|Seisho Monogatari
 3184|4|de|Der kleine Bibelfuchs
 3184|4|en|In the Beginning: Stories from the Bible
@@ -24846,6 +24866,7 @@
 3208|4|es|F. A Todo Gas
 3208|4|it|F: Motori in Pista
 3208|4|ja|F-エフ
+3208|4|pt|F: A Todo o Gás
 3208|4|zh-Hans|我要冲线F
 3208|4|zh-Hant|赛车小子
 3208|4|zh|极速悍将
@@ -26439,7 +26460,7 @@
 3520|4|ar|قرية التوت
 3520|4|en|Chirorin Village Story
 3520|4|ja|チロリン村物語
-3520|4|pt|A Aldeia dos amendoins
+3520|4|pt|A Aldeia dos Amendoins
 3520|4|zh-Hans|蔬果村的故事
 3522|1|x-jat|Tactical Roar
 3522|2|x-jat|Tactical Rawr
@@ -26600,6 +26621,7 @@
 3555|4|fr|Montana
 3555|4|it|Caccia al tesoro con Montana
 3555|4|ja|モンタナ・ジョーンズ
+3555|4|pt|Montana
 3555|4|zh-Hans|飞虎奇兵
 3556|1|x-jat|Uchuu Kazoku Carlvinson
 3556|2|en|Space Family Carlvinson
@@ -31094,6 +31116,7 @@
 4575|4|th|อภินิหารหุ่นทะลวงสวรรค์ กุเร็นลากันน์
 4575|4|zh-Hans|天元突破 红莲螺岩
 4576|1|x-jat|Ranma 1/2
+4576|2|es-419|Ranma y medio
 4576|2|pt|Ranma ½
 4576|2|ru|Ранма 1/2
 4576|2|x-jat|Ranma
@@ -31576,6 +31599,7 @@
 4678|4|en|Tama of Third Street: Have You Seen My Tama?
 4678|4|fr|Tama et ses amis
 4678|4|ja|3丁目のタマ うちのタマ知りませんか? (1994)
+4678|4|pt|Tama e os Seus Amigos
 4678|4|zh|猫狗宠物街 第2期
 4679|1|x-jat|Asobo Toy-chan
 4679|4|ja|あそぼトイちゃん
@@ -31610,6 +31634,7 @@
 4686|4|en|Inspector Fabre
 4686|4|es|Inspector Fabre
 4686|4|ja|ファーブル先生は名探偵
+4686|4|pt|Dr. Fabre
 4686|4|zh-Hans|法布尔先生是名侦探
 4687|1|x-jat|Heli-Tako Puu-chan
 4687|4|ja|ヘリタコぷーちゃん
@@ -31924,7 +31949,7 @@
 4744|4|es-GA|Tony reporteira
 4744|4|fr|Reporter Blues
 4744|4|ja|レポーターブルース
-4744|4|pt|Tony, a reporter blues
+4744|4|pt|Tony, a Repórter Blues
 4746|1|x-jat|Sango Shou Densetsu: Aoi Umi no Elfie
 4746|2|en|Coral Reef Legend: Elfie of the Blue Sea
 4746|2|en|Elfie - The Legend of Coral Island
@@ -34301,6 +34326,7 @@
 5235|4|ja|君が主で執事が俺で
 5235|6|ja|君が主で執事が俺で They are my noble Masters
 5238|1|x-jat|Hoshi no Ko Chobin
+5238|2|pt|Chobin, o Filho das Estrelas
 5238|4|fr|Chobin
 5238|4|it|Chobin, il principe stellare
 5238|4|ja|星の子チョビン
@@ -34956,6 +34982,7 @@
 5411|4|ar|مغامرات جامبا
 5411|4|it|Le avventure di Gamba
 5411|4|ja|ガンバの冒険
+5411|4|pt|Ganba
 5414|1|x-jat|Suteki Tantei Labyrinth
 5414|2|en|Wonderful Detective Labyrinth
 5414|2|ru|Удивительный детектив Лабиринт
@@ -37196,6 +37223,7 @@
 6030|2|pl|Kuba Guzik
 6030|4|de|Jim Knopf
 6030|4|ja|ジムボタン
+6030|4|pt|Jim Button
 6031|1|x-jat|Goku Sayonara Zetsubou-sensei
 6031|2|bg|Сбогом, отчаян учителю: Тишина
 6031|2|ru|Прощай, безрадостный учитель OVA-1
@@ -68680,7 +68708,7 @@
 13468|2|en|Way of Choices Season 3
 13468|4|pt|O Escolhido do Céu 3T
 13468|4|zh-Hans|择天记 第三季
-13469|1|x-zht|Quanzhi Fashi 2
+13469|1|x-zht|Quanzhi Fashi II
 13469|2|en|Full-Time Magister Season 2
 13469|2|x-zht|Quan Zhi Fa Shi II
 13469|2|zh|全职法师 II
@@ -74157,6 +74185,7 @@
 14582|4|fr|Signé Cat`s Eye (1984)
 14582|4|it|Occhi di Gatto (1984)
 14582|4|ja|キャッツ・アイ (1984)
+14582|4|pt|Olhos de Gato (1984)
 14583|1|x-jat|Virtual-san wa Mite Iru
 14583|4|en|Virtualsan - Looking
 14583|4|ja|バーチャルさんはみている
@@ -96059,3 +96088,10 @@
 19554|1|x-jat|Niku ni Matsuwaru Nichijou no Hanashi
 19554|4|ja|肉にまつわる日常の話
 19555|1|en|Parking Area
+19556|1|x-jat|Natsu no Hako
+19556|4|ja|夏と箱
+19557|1|x-jat|Fujimoto Tatsuki 17-26
+19557|4|en|Tatsuki Fujimoto 17-26
+19557|4|ja|藤本タツキ17-26
+19558|1|x-kot|Chuldong! Super Wings 4
+19558|4|ko|출동! 슈퍼윙스4
