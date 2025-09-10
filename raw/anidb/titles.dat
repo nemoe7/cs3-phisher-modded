@@ -33835,6 +33835,7 @@
 5115|2|ja|アリア The OVA ~ARIETTA~
 5115|3|x-jat|aria3
 5115|4|en|Aria the OVA: Arietta
+5115|4|es-419|ARIA The OVA～ARIETTA~
 5115|4|it|Aria the OVA: Arietta
 5115|4|ja|ARIA The OVA ~ARIETTA~
 5115|4|ko|아리아 The OVA ~ARIETTA~
@@ -93871,9 +93872,9 @@
 18886|4|ja|葬送のフリーレン (2026)
 18887|1|x-jat|Early English With Doraemon
 18888|1|en|Beginning English with Doraemon
-18889|1|x-jat|Tsue to Tsurugi no Wistoria (2026)
-18889|2|en|Wistoria: Wand and Sword (2026)
-18889|4|ja|杖と剣のウィストリア (2026)
+18889|1|x-jat|Tsue to Tsurugi no Wistoria Season 2
+18889|2|en|Wistoria: Wand and Sword Season 2
+18889|4|ja|杖と剣のウィストリア Season2
 18889|4|zh-Hans|杖与剑的魔剑谭 第二季
 18890|1|x-jat|Gekijouban Boku no Kokoro no Yabai Yatsu
 18890|2|en|The Dangers in My Heart the Movie
@@ -94139,11 +94140,11 @@
 18951|2|ko|그녀의 얼굴 The Animation
 18951|4|ja|彼女フェイス THE ANIMATION
 18952|1|x-zht|Ludi Jian Xian
-18952|2|en|Keyboard Immortal
 18952|2|en|Land Key Fairy
 18952|2|en|Land Key Immortal
 18952|2|en|Land of the Keyboard Immortal
 18952|2|zh-Hant|Lu Di Jian Xian
+18952|4|en|Keyboard Immortal
 18952|4|zh-Hans|陆地键仙
 18953|1|x-zht|Wo Neng Wuxian Dunwu
 18953|2|en|I Can Experience Limitless Enlightements
@@ -95442,7 +95443,7 @@
 19342|1|x-zht|Tun Tian Ji
 19342|2|en|Heaven Swallow
 19342|2|en|Heaven Swallowing Record
-19342|2|en|Swallowing the Heavens
+19342|4|en|Swallowing the Heavens
 19342|4|zh-Hans|吞天记
 19343|1|x-jat|Gekijouban Kurimuzon Abisu
 19343|4|en|Crimson Abyss: The Movie
@@ -96138,3 +96139,6 @@
 19568|1|x-jat|Chikyuu no Latair
 19568|2|en|Latair the Earth
 19568|4|ja|地球のラテール
+19569|1|x-jat|Sekai Saikyou no Kouei: Meikyuukoku no Shinjin Tansakusha
+19569|2|en|The World`s Strongest Rearguard: Labyrinth Country`s Novice Seeker
+19569|4|ja|世界最強の後衛 ~迷宮国の新人探索者~
