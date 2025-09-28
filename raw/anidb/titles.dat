@@ -55206,8 +55206,9 @@
 10319|4|zh-Hans|皮卡丘，这是什么的钥匙？
 10320|1|x-jat|Uchuu Kyoudai: Number Zero
 10320|2|en|Space Brothers #0
-10320|4|ja|宇宙兄弟#0[ナンバー・ゼロ]
+10320|4|ja|宇宙兄弟#0
 10320|4|zh-Hans|宇宙兄弟#0
+10320|5|ja|うちゅうきょうだい ナンバー・ゼロ
 10321|1|x-jat|Senki Zesshou Symphogear GX
 10321|3|en|Symphogear 3
 10321|4|en|Symphogear GX
@@ -86509,6 +86510,7 @@
 17349|2|en|Face on Lie
 17349|4|zh-Hans|谎颜
 17350|1|x-zht|Shen Yin Wangzuo
+17350|4|de|Throne of Seal
 17350|4|en|Throne of Seal
 17350|4|zh-Hans|神印王座
 17351|1|x-jat|Uma Musume: Pretty Derby - Road to the Top
@@ -91890,6 +91892,7 @@
 18458|2|en|Throne of Seal 2nd Season
 18458|2|x-zht|Shen Yin Wangzuo 2nd Season
 18458|2|x-zht|Shen Yin Wangzuo Di Er Ji
+18458|4|de|Throne of Seal 2
 18458|4|zh-Hans|神印王座 第二季
 18459|1|x-jat|Nukitashi the Animation
 18459|4|de|Nukitashi: Welcome to Love Island!
@@ -94196,7 +94199,7 @@
 18956|1|x-jat|Kaya-chan wa Kowakunai
 18956|2|en|Kaya-chan Isn`t Scary
 18956|4|ja|カヤちゃんはコワくない
-18957|1|x-jat|Kidou Senshi Gundam ALC Encounter
+18957|1|x-jat|Kidou Senshi Gundam: ALC Encounter
 18957|4|ja|機動戦士ガンダム ALC ENCOUNTER
 18958|1|x-jat|Kidou Senshi Gundam SEED Freedom Zero
 18958|4|ja|機動戦士ガンダムSEED FREEDOM ZERO
@@ -94363,6 +94366,7 @@
 19004|1|x-jat|Cat`s Eye (2025)
 19004|2|en|Cat`s Eye 2025
 19004|2|ja|キャッツ♥アイ (2025)
+19004|4|de|Cat`s Eye – Ein Supertrio
 19004|4|ja|CAT`S EYE (2025)
 19005|1|x-jat|Star Wars: Visions (2025)
 19005|2|en|Star Wars: Visions 2025
@@ -96309,3 +96313,5 @@
 19614|1|x-jat|Dr. Stone: Science Future (2026)
 19614|2|en|Dr. Stone: Science Future (2026)
 19614|4|ja|Dr.STONE SCIENCE FUTURE (2026)
+19615|1|x-zht|Balala Xiaomoxian: Xing Yuan Die Qi 2
+19615|4|zh-Hans|巴啦啦小魔仙之星缘蝶启2
