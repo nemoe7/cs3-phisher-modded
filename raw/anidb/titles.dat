@@ -57670,6 +57670,7 @@
 10885|4|ja|閃乱カグラ ESTIVAL VERSUS -水着だらけの前夜祭-
 10885|4|zh-Hans|闪乱神乐 ESTIVAL VERSUS -泳装满载的前夜祭-
 10886|1|x-jat|Hana to Alice: Satsujin Jiken
+10886|2|en|The Murder Case of Hana & Alice
 10886|2|ja|花とアリス殺人事件
 10886|4|en|The Case of Hana & Alice
 10886|4|it|Hana e Alice - Il caso di omicidio
@@ -89346,6 +89347,7 @@
 17918|4|zh-Hant|偶像大師 閃耀色彩
 17919|1|x-jat|Gintama: 3-nen Z-gumi Ginpachi-sensei
 17919|2|ja|銀魂まるちばーすアニメ『3年Z組銀八先生』
+17919|4|en|Gintama: Mr.Ginpachi`s Zany Class
 17919|4|ja|銀魂 3年Z組銀八先生
 17920|1|x-jat|Ryza no Atelier: Tokoyami no Joou to Himitsu no Kakurega
 17920|2|zh-Hant|萊莎的鍊金工房 ～常闇女王與秘密藏身處～
@@ -89730,6 +89732,7 @@
 17998|1|x-jat|Girls Band Cry
 17998|2|zh-Hant|少女樂團 吶喊吧
 17998|3|en|gbc
+17998|4|en|Girls Band Cry
 17998|4|ja|ガールズバンドクライ
 17998|4|zh-Hans|少女乐队的呐喊
 17999|1|x-jat|Oroka na Tenshi wa Akuma to Odoru
@@ -93582,6 +93585,7 @@
 18811|1|x-jat|Chitose-kun wa Ramune Bin no Naka
 18811|3|ja|チラムネ
 18811|3|x-jat|Chiramune
+18811|4|en|Chitose Is in the Ramune Bottle
 18811|4|ja|千歳くんはラムネ瓶のなか
 18812|1|x-jat|Maso Mesu Soap de Aimashou!
 18812|2|ko|마조암컷소프에서 만납시다!
@@ -94589,7 +94593,7 @@
 19055|2|x-jat|Onii-san... Ohitori desu ka?
 19055|4|ja|お兄さん…おひとりですか？
 19056|1|x-jat|Bukiyou na Senpai.
-19056|2|en|My Awkward Senpai
+19056|4|en|My Awkward Senpai
 19056|4|ja|不器用な先輩.
 19057|1|x-jat|Nonohara Yuka no Himitsu no Haishin
 19057|2|ko|OVA 노노하라 유카의 비밀 방송
@@ -94770,7 +94774,7 @@
 19106|4|en|Sea in a Box
 19106|4|zh-Hans|盒中之海
 19107|1|x-jat|Kimi to Koete Koi ni Naru
-19107|2|en|With You, Our Love Will Make It Through
+19107|4|en|With You, Our Love Will Make It Through
 19107|4|ja|キミと越えて恋になる
 19108|1|x-jat|Akogare no Onna Joushi ga, Aibeya Shucchou no Tonari no Bed de Zetsurin Otoko ni Netorarete Iru
 19108|2|ko|동경하던 여상사를 출장지 옆방 불륜남에게 빼앗겼다
@@ -95177,6 +95181,7 @@
 19229|1|x-jat|Tomb Raider King
 19230|1|x-jat|Digimon BeatBreak
 19230|2|ja|デジモンビートブレイク
+19230|4|en|Digimon Beatbreak
 19230|4|ja|DIGIMON BEATBREAK
 19231|1|x-jat|Mikata ga Yowa Sugite Hojo Mahou ni Tesshite Ita Kyuutei Mahoushi, Tsuihou Sarete Saikyou o Mezasu
 19231|3|ja|補助魔法
@@ -95345,7 +95350,7 @@
 19294|4|en|Ancient War Soul
 19294|4|zh-Hans|太古战魂
 19295|1|x-jat|Kingdom (2025)
-19295|2|en|Kingdom Season 6
+19295|4|en|Kingdom Season 6
 19295|4|ja|キングダム (2025)
 19296|1|x-zht|huhuan shaonu
 19296|4|zh|呼唤少女
@@ -95574,6 +95579,7 @@
 19368|2|en|Whoever Steals This Book
 19368|4|ja|この本を盗む者は
 19369|1|x-jat|Let`s Play: Quest Darake no My Life
+19369|2|x-jat|Let`s Play: Quest-darake no My Life
 19369|4|en|Let`s Play
 19369|4|ja|Let`s Play クエストだらけのマイライフ
 19370|1|x-zht|Huangshen Lu Zhi Linglong Shan
@@ -95626,7 +95632,7 @@
 19384|1|x-jat|Ninja Kamui: Red Vendetta
 19384|4|ja|NINJA KAMUI RED VENDETTA
 19385|1|x-jat|Isekai Quartet 3
-19385|2|en|Isekai Quartet 3
+19385|4|en|Isekai Quartet 3
 19385|4|ja|異世界かるてっと3
 19386|1|x-zht|Zhu Xian 3
 19386|2|en|Jade Dynasty 3
@@ -95703,6 +95709,7 @@
 19414|2|ko|퓨어 퓨어 페로 페로 프린세스
 19414|4|ja|OVA ピュアピュア ぺろぺろ プリンセス
 19415|1|x-jat|Towa no Yuugure
+19415|2|en|Towa no Yugure
 19415|4|en|Dusk Beyond the End of the World
 19415|4|ja|永久のユウグレ
 19416|1|x-jat|Gon, The Little Fox
@@ -96359,3 +96366,23 @@
 19626|2|en|Recycling Scrap in the Celestial Court
 19626|4|en|Heaven Scrap Master
 19626|4|zh-Hans|我在天庭收废品
+19627|1|x-jat|Marika Kanri Den
+19627|2|en|The Tale of the Scholar-Official Matsurika
+19627|4|ja|茉莉花官吏伝
+19628|1|x-jat|Otaku ni Yasashii Gal wa Inai!?
+19628|2|en|Gals Can`t Be Kind to Otaku!?
+19628|4|ja|オタクに優しいギャルはいない!?
+19629|1|x-jat|Ikyou no Tsume Nuri Minarai
+19629|2|en|Apprentice Nail Artist in a Foreign Land
+19629|4|ja|異郷の爪塗り見習い
+19630|1|x-kot|Chuldong! Super Wings 8
+19630|4|ko|출동! 슈퍼윙스8
+19631|1|x-jat|Youchien Wars
+19631|2|en|Kindergarten Wars
+19631|4|ja|幼稚園WARS
+19632|1|x-jat|Tetsuryo! Meet with Tetsudou Musume
+19632|4|ja|てつりょー! meet with 鉄道むすめ
+19633|1|x-jat|Potion, Wagami o Tasukeru
+19633|4|ja|ポーション, わが身を助ける
+19634|1|x-jat|MafiosA
+19634|4|ja|マフィオーザ
