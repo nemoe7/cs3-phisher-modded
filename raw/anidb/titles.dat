@@ -42517,6 +42517,7 @@
 7287|1|x-jat|Konchuu Monogatari Mitsubachi Hutch: Yuuki no Melody
 7287|2|pl|Hutch Miodowe Serce: Melodia odwagi (2010)
 7287|3|x-jat|hutch movie
+7287|4|ar|رحلة نحول
 7287|4|it|La grande avventura dell`Ape Magà - Il Film
 7287|4|ja|昆虫物語 みつばちハッチ~勇気のメロディ~
 7287|4|pl|Hutch miodowe serce
@@ -48814,6 +48815,7 @@
 8791|1|x-jat|Kingdom
 8791|2|en|Kingdom (2012)
 8791|2|ru|Царство
+8791|4|de|Kingdom
 8791|4|en|Kingdom
 8791|4|ja|キングダム
 8791|4|zh-Hans|王者天下
@@ -52741,6 +52743,7 @@
 9672|2|ja|キングダム 第2シリーズ
 9672|2|ru|Царство [ТВ-2]
 9672|2|x-jat|Kingdom: Dai 2 Series
+9672|4|de|Kingdom Staffel 2
 9672|4|en|Kingdom Season 2
 9672|4|ja|キングダム (2013)
 9672|4|zh-Hans|王者天下 第二季
@@ -77348,6 +77351,7 @@
 15259|2|ja|キングダム 第3シリーズ
 15259|2|x-jat|Kingdom: Dai 3 Series
 15259|2|x-unk|Kingdom 3
+15259|4|de|Kingdom Staffel 3
 15259|4|en|Kingdom Season 3
 15259|4|ja|キングダム (2020)
 15259|4|zh-Hans|王者天下 第三季
@@ -84474,6 +84478,7 @@
 16912|1|x-jat|Kingdom (2022)
 16912|2|x-jat|Kingdom 4
 16912|2|zh-Hans|王者天下 第四季
+16912|4|de|Kingdom Staffel 4
 16912|4|en|Kingdom Season 4
 16912|4|ja|キングダム (2022)
 16912|4|ru|Царство 4
@@ -87600,10 +87605,12 @@
 17575|4|ru|Ведьма и зверь
 17575|4|zh-Hans|魔女与野兽
 17576|1|x-jat|One Punch Man (2025)
+17576|2|en|One-Punch Man S3
 17576|2|en|One-Punch Man Season 3
 17576|2|en|one punch man s3
 17576|2|ja|ワンパンマン3
 17576|3|x-jat|opm s3
+17576|4|de|One Punch Man Staffel 3
 17576|4|en|One Punch Man (2025)
 17576|4|ja|ONE PUNCH MAN (2025)
 17578|1|en|Tekken: Bloodline
@@ -91809,8 +91816,9 @@
 18436|2|en|The Success of Empyrean Xuan Emperor 5
 18436|4|zh-Hans|九天玄帝诀 第五季
 18437|1|x-jat|Chichi wa Eiyuu, Haha wa Seirei, Musume no Watashi wa Tensei-sha.
-18437|2|en|Dad is a Hero, Mom is a Spirit, I`m a Reincarnator
 18437|2|en|Reincarnated as the Daughter of the Legendary Hero and the Queen of Spirits
+18437|2|x-jat|Chichi wa Eiyuu, Haha wa Seirei, Musume no Watashi wa Tenseisha
+18437|4|en|Dad Is a Hero, Mom Is a Spirit, I`m a Reincarnator
 18437|4|ja|父は英雄, 母は精霊, 娘の私は転生者.
 18438|1|x-jat|Hazure Waku no "Joutai Ijou Skill" de Saikyou ni Natta Ore ga Subete o Juurin Suru made
 18438|2|en|I Became the Strongest with the Failure Frame "Abnormal State Skill" as i Devastated Everything
@@ -93519,7 +93527,6 @@
 18794|4|zh-Hans|拜托请穿上，鹰峰同学
 18794|4|zh-Hant|拜託請穿上，鷹峰同學
 18795|1|x-jat|Silent Witch: Chinmoku no Majo no Kakushigoto
-18795|2|x-jat|Silent Witch
 18795|2|zh-Hans|Silent Witch 沉默魔女的秘密
 18795|4|en|Secrets of the Silent Witch
 18795|4|ja|サイレント・ウィッチ 沈黙の魔女の隠しごと
@@ -93844,7 +93851,7 @@
 18867|4|pl|Kaoru i Rin: Rozkwitając z tobą
 18867|4|tr|Güzel Kokulu Çiçekler Zarafetle Açar
 18867|4|zh-Hans|薰香花朵凛然绽放
-18868|1|x-jat|Saigo ni Hitotsu dake Onegai Shite mo Yoroshii Deshou ka
+18868|1|x-jat|Saigo ni Hitotsu dake Onegai Shite mo Yoroshii Deshouka
 18868|2|x-jat|Saigo ni Hitotsu dake Onegai Shitemo Yoroshii Deshou ka
 18868|3|ja|最ひと
 18868|3|x-jat|saihito
@@ -94052,6 +94059,7 @@
 18919|4|en|Another Journey to the West
 18919|4|zh-Hans|缉妖录之启程篇
 18920|1|x-zht|Dan Dao Zhizun
+18920|2|en|Supreme Alchemy
 18920|4|en|Alchemy Supreme
 18920|4|zh-Hans|丹道至尊
 18921|1|x-jat|Boku no Hero Academia (2025)
@@ -96022,6 +96030,7 @@
 19500|1|x-zht|Fei Ren Zai Di San Ji
 19500|4|zh-Hans|非人哉 第三季
 19501|1|x-jat|Si-Vis: The Sound of Heroes
+19501|2|en|SI-VIS - The Sound of Heroes
 19501|4|en|Si-Vis: The Sound of Heroes
 19501|4|ja|SI-VIS: The Sound of Heroes
 19502|1|x-zht|Zaixia "Yingtai"
@@ -96422,3 +96431,6 @@
 19639|1|x-jat|Eiga Sumikko Gurashi: Sora no Oukoku to Futari no Ko
 19639|2|en|Sumikko Gurashi the Movie: The Kingdom of the Sky and Two Children
 19639|4|ja|映画 すみっコぐらし 空の王国とふたりのコ
+19640|1|x-jat|Witch Watch 2
+19640|2|en|Witch Watch 2
+19640|4|ja|WITCH WATCH 2
