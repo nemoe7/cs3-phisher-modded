@@ -89365,6 +89365,7 @@
 17918|4|zh-Hant|偶像大師 閃耀色彩
 17919|1|x-jat|Gintama: 3-nen Z-gumi Ginpachi-sensei
 17919|2|ja|銀魂まるちばーすアニメ『3年Z組銀八先生』
+17919|2|x-jat|Gintama - 3-nen Z-gumi Ginpachi-sensei
 17919|4|de|Gintama: Mr. Ginpachi`s Zany Class
 17919|4|en|Gintama: Mr.Ginpachi`s Zany Class
 17919|4|ja|銀魂 3年Z組銀八先生
@@ -90950,6 +90951,7 @@
 18256|1|x-jat|suma Netori Kan: Bijutsu Kyoushi no Baai
 18256|4|ja|suma Netori Kan: Bijutsu Kyoushi no Baai
 18257|1|x-jat|Tondemo Skill de Isekai Hourou Meshi 2
+18257|2|x-jat|Tondemo Skill de Isekai Hourou Meshi S2
 18257|4|en|Campfire Cooking in Another World with My Absurd Skill Season 2
 18257|4|ja|とんでもスキルで異世界放浪メシ2
 18258|1|x-zht|Shi Cao Lao Long Bei Guan Yi E Long Zhi Ming 2
@@ -91827,6 +91829,7 @@
 18437|1|x-jat|Chichi wa Eiyuu, Haha wa Seirei, Musume no Watashi wa Tensei-sha.
 18437|2|en|Reincarnated as the Daughter of the Legendary Hero and the Queen of Spirits
 18437|2|x-jat|Chichi wa Eiyuu, Haha wa Seirei, Musume no Watashi wa Tenseisha
+18437|3|en|Hahanoha
 18437|4|en|Dad Is a Hero, Mom Is a Spirit, I`m a Reincarnator
 18437|4|ja|父は英雄, 母は精霊, 娘の私は転生者.
 18438|1|x-jat|Hazure Waku no "Joutai Ijou Skill" de Saikyou ni Natta Ore ga Subete o Juurin Suru made
@@ -94960,9 +94963,9 @@
 19144|1|x-jat|Ore dake Level Up na Ken: ReAwakening
 19144|4|ja|俺だけレベルアップな件 -ReAwakening-
 19145|1|x-jat|Taiyou yori mo Mabushii Hoshi
-19145|2|en|A Star Brighter Than the Sun
 19145|3|ja|たまほし
 19145|3|x-jat|tamahoshi
+19145|4|en|A Star Brighter Than the Sun
 19145|4|es|Una estrella más radiante que el Sol
 19145|4|ja|太陽よりも眩しい星
 19146|1|x-zht|Yinhe Zhi Xin
@@ -96387,7 +96390,10 @@
 19618|1|x-jat|Hikaru ga Shinda Natsu 2
 19618|2|en|The Summer Hikaru Died 2
 19618|4|ja|光が死んだ夏 2
-19619|1|x-jat|Heika Watashi wo Wasurete Kudasai
+19619|1|x-jat|Heika Watashi o Wasurete Kudasai
+19619|3|ja|陛下
+19619|3|x-jat|heika
+19619|4|en|Forget That Night, Your Majesty.
 19619|4|ja|陛下わたしを忘れてください
 19620|1|x-jat|Blue Lock (Shin Series)
 19620|2|en|Blue Lock (New Series)
@@ -96453,3 +96459,5 @@
 19640|1|x-jat|Witch Watch 2
 19640|2|en|Witch Watch 2
 19640|4|ja|WITCH WATCH 2
+19641|1|en|Little Astro Boy
+19641|4|ja|ろぼっとアトム
