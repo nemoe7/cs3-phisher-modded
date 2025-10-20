@@ -2955,7 +2955,6 @@
 219|2|it|CB Movie
 219|2|it|Cowboy Bebop The Movie - Knockin` on Heaven`s Door
 219|2|pl|Cowboy Bebop: Pukając do nieba bram
-219|2|pl|Kowboj Bebop
 219|2|pl|Kowboj Bebop the Movie
 219|2|pl|Kowboj Bebop: Pukając do nieba bram
 219|2|ru|Ковбой Бибоп: Достучаться до небес
@@ -2977,6 +2976,7 @@
 219|4|ja|カウボーイビバップ天国の扉
 219|4|ko|카우보이 비밥 - 천국의 문
 219|4|lt|Kaubojus Bibopas: Filmas
+219|4|pl|Kowboj Bebop
 219|4|pt-BR|Cowboy Bebop - O Filme
 219|4|pt|Cowboy Bebop - O Filme
 219|4|ru|Ковбой Бибоп
@@ -3318,7 +3318,7 @@
 238|2|en|Legendary Gambler Tetsuya
 238|2|x-jat|Shoubushi Densetsu Tetsuya
 238|3|en|tetsuya
-238|4|ja|勝負師[ギャンブラー]伝説 哲也
+238|4|ja|勝負師伝説 哲也
 238|4|zh-Hans|胜负师传说 哲也
 238|5|ja|ギャンブラーでんせつ てつや
 239|1|x-jat|Naruto
@@ -93235,18 +93235,18 @@
 18703|4|en|Purgatory Walkers
 18703|4|zh-Hans|从姑获鸟开始之龙城风云
 18704|1|x-zht|Shi Wangzhe A?
-18704|2|en|Is It the King?
+18704|2|en|Is it the King?
 18704|4|zh-Hans|是王者啊?
 18705|1|x-zht|Shi Wangzhe A? Di 2 Ji: Yun Zhong Bu Wanquan Jiao Fei Riji
-18705|2|en|Is It the King? 2nd Season
-18705|2|en|Is It the King? Season 2
+18705|2|en|Is it the King? 2nd Season
+18705|2|en|Is it the King? Season 2
 18705|2|x-zht|Shi Wangzhe A? 2nd Season
 18705|2|x-zht|Shi Wangzhe A? Season 2
 18705|2|zh-Hans|是王者啊? 第二季
 18705|4|zh-Hans|是王者啊？第2季 云中不完全剿匪日记
 18706|1|x-zht|Shi Wangzhe A? Di 3 Ji: Youqiubiying Xingzhi Dui
-18706|2|en|Is It the King? 3rd Season
-18706|2|en|Is It the King? Season 3
+18706|2|en|Is it the King? 3rd Season
+18706|2|en|Is it the King? Season 3
 18706|2|x-zht|Shi Wangzhe A? 3rd Season
 18706|2|x-zht|Shi Wangzhe A? Season 3
 18706|2|zh-Hans|是王者啊？ 第三季
@@ -94216,6 +94216,7 @@
 18921|1|x-jat|Boku no Hero Academia (2025)
 18921|2|en|Hero Academia 8
 18921|2|en|My Hero Academia (2025)
+18921|2|en|My Hero Academia Season 8
 18921|2|ja|僕のヒーローアカデミア FINAL SEASON
 18921|2|x-jat|Boku no Hero Academia Final Season
 18921|3|en|heroaca8
@@ -94984,8 +94985,8 @@
 19113|1|x-jat|Eiga Kimi to Idol Precure
 19113|4|ja|映画キミとアイドルプリキュア♪
 19114|1|x-zht|Shi Wangzhe A? Di 4 Ji: Mudan Xiang You Dali Si
-19114|2|en|Is It the King? 4th Season
-19114|2|en|Is It the King? Season 4
+19114|2|en|Is it the King? 4th Season
+19114|2|en|Is it the King? Season 4
 19114|2|x-zht|Shi Wangzhe A? 4th Season
 19114|2|x-zht|Shi Wangzhe A? Season 4
 19114|2|zh-Hans|是王者啊？ 第四季
@@ -95105,6 +95106,7 @@
 19141|2|en|Vampires-chan Can`t Suck Properly
 19141|4|en|Li`l Miss Vampire Can`t Suck Right
 19141|4|ja|ちゃんと吸えない吸血鬼ちゃん
+19141|4|zh-Hans|不擅吸血的吸血鬼
 19142|1|x-jat|Mezametara Saikyou Soubi to Uchuusen Mochi Datta no de, Ikkodate Mezashite Youhei to Shite Jiyuu ni Ikitai
 19142|2|en|Reborn as a Space Mercenary: I Woke Up Piloting the Strongest Starship!
 19142|3|ja|最強宇宙船
@@ -96641,6 +96643,7 @@
 19637|4|zh-Hans|考拉绘日记
 19638|1|x-kot|Super Wings The Movie: Maximum Speed
 19638|4|ko|극장판 슈퍼윙스: 맥시멈 스피드
+19638|4|zh-Hans|超级飞侠：乐迪加速
 19639|1|x-jat|Eiga Sumikko Gurashi: Sora no Oukoku to Futari no Ko
 19639|2|en|Sumikko Gurashi the Movie: The Kingdom of the Sky and Two Children
 19639|4|ja|映画 すみっコぐらし 空の王国とふたりのコ
@@ -96686,8 +96689,8 @@
 19653|2|en|The Supreme Dantian
 19653|4|zh-Hans|启运丹田：开局签到至尊丹田
 19654|1|x-zht|Shi Wangzhe A? Di 5 Ji: Feng Wu Leiting Chang`an Juan
-19654|2|en|Is It the King? 5th Season
-19654|2|en|Is It the King? Season 5
+19654|2|en|Is it the King? 5th Season
+19654|2|en|Is it the King? Season 5
 19654|2|x-zht|Shi Wangzhe A? 5th Season
 19654|2|x-zht|Shi Wangzhe A? Season 5
 19654|2|zh-Hans|是王者啊？第五季
@@ -96709,3 +96712,10 @@
 19660|4|zh-Hans|谷围南亭
 19661|1|x-jat|Isshiki-san wa Koi o Shiritai.
 19661|4|ja|一式さんは恋を知りたい.
+19662|1|x-jat|Jungle Taitei / Honnouji no Hen
+19662|4|ja|ジャングル大帝／本能寺の変
+19663|1|x-jat|Kimi no Koto ga Dai Dai Dai Dai Daisuki na Hyakunin no Kanojo (2026)
+19663|2|en|The 100 Girlfriends Who Really, Really, Really, Really, Really Love You (2026)
+19663|4|ja|君のことが大大大大大好きな100人の彼女 (2026)
+19664|1|x-zht|Super Wings: China Culture
+19664|4|zh-Hans|超级飞侠文化中华
