@@ -12121,15 +12121,16 @@
 1159|2|en|Classmates: at the end of summer
 1159|4|en|End of Summer (2)
 1159|4|ja|同級生 夏の終わりに (1994)
-1161|1|x-jat|Kikou Ryouhei Mellowlink
+1161|1|x-jat|Kikou Ryouhei Merowlink
+1161|2|en|Armor Hunter Mellowlink
 1161|2|en|Armor Soldier Merrowlink
 1161|2|en|Leechers Army Merowlink
 1161|2|pt|Mellowlink o Caçador de Armaduras
 1161|2|ru|Бронебойщик Меллоулинк
 1161|2|tr|Zırh Avcısı Mellowlink
+1161|2|x-jat|Kikou Ryouhei Mellowlink
 1161|3|x-jat|Mellowlink
 1161|3|x-jat|krm
-1161|4|en|Armor Hunter Mellowlink
 1161|4|ja|機甲猟兵メロウリンク
 1162|1|x-jat|Youjuu Kyoushitsu Gaiden
 1162|4|el|Η Ανάσταση των Νεκρών
@@ -26755,6 +26756,7 @@
 3573|2|ru|Глядя на полумесяц
 3573|2|x-jat|Hantsuki
 3573|2|zh-Hans|仰望半月之空
+3573|2|zh-Hans|仰望半月的夜空
 3573|2|zh-Hans|升起半月的天空
 3573|3|x-jat|hntgns
 3573|4|en|Looking up at the Half-Moon
@@ -57373,6 +57375,7 @@
 10823|1|x-jat|Kuni-chan no Ikka Ranran
 10823|4|ja|邦ちゃんの一家ランラン
 10824|1|x-jat|Koukaku Kidoutai: Shin Gekijouban
+10824|2|cs|Ghost in the Shell: nový film
 10824|2|en|Ghost in the Shell New Movie (2015)
 10824|3|x-jat|GitS: Shin Gekijouban
 10824|4|bg|Дух в броня (2015)
@@ -58494,6 +58497,7 @@
 11022|2|ko|제비뽑기! 트라이앵글: 후타바는 허겁지겁
 11022|4|ja|ふくびき! トライアングル~双葉はあたふた~♥~ 小悪魔イタズラっ娘の壁ドン哀歌
 11023|1|x-jat|Koukaku Kidoutai Arise: Alternative Architecture
+11023|2|cs|Ghost in the Shell: Arise
 11023|2|ja|攻殻機動隊ARISE ALTERNATIVE ARCHITECTURE
 11023|2|pt|O Fantasma do Futuro: Rebelião - Arquitetura Alternativa
 11023|3|ja|攻殻機動隊AAA
@@ -58738,6 +58742,7 @@
 11082|4|fr|Shirayuki aux cheveux rouges
 11082|4|ja|赤髪の白雪姫 Snow White with the Red Hair
 11082|4|ko|빨강머리 백설공주
+11082|4|pt|A Branca de Neve com Cabelos Ruivos
 11082|4|zh-Hans|赤发白雪姬
 11083|1|x-jat|Allargando The Animation
 11083|2|ko|알라르간도
@@ -59910,6 +59915,7 @@
 11348|3|x-jat|akagamihime 2
 11348|4|en|Snow White with the Red Hair (2016)
 11348|4|ja|赤髪の白雪姫 Snow White with the Red Hair (2016)
+11348|4|pt|A Branca de Neve com Cabelos Ruivos (2016)
 11348|4|zh-Hans|赤发白雪姬 第二季
 11349|1|x-jat|Yakyuubu Aruaru
 11349|4|ja|野球部あるある
@@ -78799,6 +78805,7 @@
 15505|4|en|How a Realist Hero Rebuilt the Kingdom
 15505|4|es|Crónica de la restauración de un reino
 15505|4|ja|現実主義勇者の王国再建記
+15505|4|pt|As Crónicas da Restauração de um Reino
 15505|4|zh-Hans|现实主义勇者的王国再建记
 15506|1|x-jat|Kidou Senshi Gundam: Hikaru Inochi Chronicle U.C.
 15506|4|en|Mobile Suit Gundam: The Light of Life Chronicle U.C.
@@ -79438,6 +79445,9 @@
 15624|4|ja|ぴったんこ!! ねこざかな (2020)
 15625|1|x-jat|The Idolmaster Million Live!
 15625|2|ja|アイドルマスター ミリオンライブ!
+15625|2|zh-Hans|偶像大师 百万现场！
+15625|2|zh-Hans|偶像大师百万现场！
+15625|2|zh-Hans|百万现场！
 15625|4|ja|THE iDOLM@STER MILLION LIVE!
 15625|4|ru|Тот, кто зажигает звёзды: Миллионный концерт!
 15626|1|x-jat|PokeToon
@@ -84231,6 +84241,7 @@
 16804|4|en|How a Realist Hero Rebuilt the Kingdom (2022)
 16804|4|es|Crónica de la restauración de un reino. Segunda parte
 16804|4|ja|現実主義勇者の王国再建記 (2022)
+16804|4|pt|As Crónicas da Restauração de um Reino (2022)
 16804|4|zh-Hans|现实主义勇者的王国再建记 第二季
 16806|1|x-jat|Yamitsuki Pheromone The Animation
 16806|2|en|Addictive Pheromone
@@ -86897,6 +86908,7 @@
 17431|4|en|Konosuba: God`s Blessing on This Wonderful World! 3
 17431|4|es|Konosuba! Un mundo maravilloso 3
 17431|4|ja|この素晴らしい世界に祝福を! 3
+17431|4|pt|Konosuba: A Bênção de Deus Para Este Maravilhoso Mundo! 3
 17431|4|zh-Hans|为美好的世界献上祝福！ 第三季
 17432|1|x-jat|Kitsune Musume no Ecchi na Oyado
 17432|2|en|Kitsune`s Naughty Inn
@@ -93986,6 +93998,7 @@
 18865|4|en|Konosuba: God`s Blessing on This Wonderful World! 3 Bonus Stage
 18865|4|es|Konosuba! Un mundo maravilloso 3 - Bonus Stage
 18865|4|ja|この素晴らしい世界に祝福を! 3 -BONUS STAGE-
+18865|4|pt|Konosuba: A Bênção de Deus Para Este Maravilhoso Mundo! 3 - Bónus
 18866|1|x-jat|Virgin Punk
 18866|4|en|Virgin Punk
 18866|4|ja|ヴァージン・パンク
@@ -94761,6 +94774,8 @@
 19053|2|en|Skeleton Knight in Another World II
 19053|4|ja|骸骨騎士様, 只今異世界へお出掛け中II
 19054|1|x-jat|Tsuihousha Shokudou e Youkoso!
+19054|3|en|WTTOR
+19054|3|ja|TSY
 19054|4|en|Welcome to the Outcast`s Restaurant!
 19054|4|id|Kedai Makan sang Buangan
 19054|4|ja|追放者食堂へようこそ!
@@ -95953,7 +95968,7 @@
 19418|2|x-jat|Kimetsu no Yaiba: Hashira Geiko Kaimaku hen
 19418|4|ja|鬼滅の刃 柱稽古編 特別編集版
 19419|1|x-jat|Uma Musume: Cinderella Gray (2025)
-19419|2|en|Umamusume: Cinderella Gray (2025)
+19419|4|en|Umamusume: Cinderella Gray (2025)
 19419|4|ja|ウマ娘 シンデレラグレイ (2025)
 19420|1|x-jat|Higeki no Genkyou to Naru Saikyou Gedou Last Boss Joou wa Tami no Tame ni Tsukushimasu. Season 2
 19420|2|en|The Most Heretical Last Boss Queen: From Villainess to Savior Season 2
@@ -96719,3 +96734,7 @@
 19663|4|ja|君のことが大大大大大好きな100人の彼女 (2026)
 19664|1|x-zht|Super Wings: China Culture
 19664|4|zh-Hans|超级飞侠文化中华
+19665|1|x-jat|Chou Futsuu Mahou Shoujo Asumi Toruverse
+19665|4|ja|超普通マホウ少女アスミトルバース
+19666|1|x-jat|Anila to Cocora
+19666|4|ja|アニラとココラ
