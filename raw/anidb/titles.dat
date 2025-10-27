@@ -727,6 +727,8 @@
 46|3|x-jat|NieA 7
 46|4|de|NieA_7
 46|4|en|NieA Under 7
+46|4|es-CA|NieA Under 7
+46|4|es|NieA Under 7
 46|4|fr|NieA_7
 46|4|ja|ニア アンダーセブン
 47|1|x-jat|Scryed
@@ -72535,8 +72537,9 @@
 14234|4|ja|この音とまれ!
 14234|4|ru|Задержи этот звук!
 14234|4|zh-Hans|一弦定音!
-14236|1|x-jat|Nijuuseiki Denki Mokuroku
-14236|4|ja|二十世紀電氣目録
+14236|1|x-jat|Nijuuseiki Denki Mokuroku: Eureka Evrika
+14236|2|en|Sparks of Tomorrow
+14236|4|ja|二十世紀電氣目録-ユーレカ・エヴリカ-
 14237|1|x-jat|Ken En Ken: Aoki Kagayaki
 14237|2|ja|軒轅剣・蒼き曜
 14237|4|en|Xuan Yuan Sword Luminary
@@ -91000,9 +91003,9 @@
 18239|4|ja|エルフェンリート 通り雨にて 或いは、少女はいかにしてその心情に至ったか?（REGENSCHAUER）
 18240|1|x-jat|Iwata-kun Chi no Obaa-chan
 18240|4|ja|いわたくんちのおばあちゃん
-18241|1|x-jat|Isekai de Cheat Skill o Te ni Shita Ore wa, Genjitsu Sekai o mo Musou Suru: Level Up wa Jinsei o Kaeta (Shin Anime Kikaku)
-18241|2|en|I Got a Cheat Skill in Another World and Became Unrivaled in the Real World, Too (New Anime Project)
-18241|4|ja|異世界でチート能力を手にした俺は, 現実世界をも無双する~レベルアップは人生を変えた~ (新アニメ企画)
+18241|1|x-jat|Isekai de Cheat Skill o Te ni Shita Ore wa, Genjitsu Sekai o mo Musou Suru: Level Up wa Jinsei o Kaeta (2026)
+18241|2|en|I Got a Cheat Skill in Another World and Became Unrivaled in the Real World, Too (2026)
+18241|4|ja|異世界でチート能力を手にした俺は, 現実世界をも無双する~レベルアップは人生を変えた~ (2026)
 18242|1|x-jat|Koujo Denka no Kateikyoushi
 18242|2|en|Tutor of the His Imperial Highness Princess
 18242|4|en|Private Tutor to the Duke`s Daughter
@@ -94840,6 +94843,7 @@
 19066|2|en|Ramen Akaneko 2
 19066|4|ja|ラーメン赤猫 2
 19067|1|x-jat|Ranma 1/2 (2025)
+19067|2|en|Ranma 1/2 (2024) Season 2
 19067|2|en|Ranma 1/2 S2
 19067|4|ja|らんま1/2 (2025)
 19068|1|x-zht|Bai Yao Pu: Luoyang Pian
@@ -96789,3 +96793,8 @@
 19676|4|ko|레인보우 버블젬
 19677|1|x-kot|Rainbow Bubblegem 2: Secret
 19677|4|ko|레인보우 버블젬 2 시크릿
+19678|1|x-jat|Ha-i! Myaku Myaku Desu
+19678|4|ja|はーい! ミャクミャクです
+19679|1|x-jat|Ousama no Proposal
+19679|2|en|King`s Proposal
+19679|4|ja|王様のプロポーズ
