@@ -19487,9 +19487,12 @@
 2226|4|ru|Принцы-лебеди
 2227|1|x-jat|Sekai Meisaku Douwa: Oyayubi Hime
 2227|2|en|Fairy Tales for Children: Tezuka Osamu`s Thumbelina
+2227|2|en|Tezuka Osamu’s Thumbelina
 2227|2|en|World`s Famous Stories for Children: Thumb Princess
 2227|2|fr|Poucelina
+2227|2|ja|手塚治虫のおやゆび姫
 2227|2|pt|Polegarzinha
+2227|2|x-jat|Tezuka Osamu no Oyayubi Hime
 2227|2|x-unk|Oyayubi-Hime
 2227|4|de|Däumelinchen
 2227|4|el|Η Τοσοδούλα
@@ -31969,7 +31972,7 @@
 4744|4|es-GA|Tony reporteira
 4744|4|fr|Reporter Blues
 4744|4|ja|レポーターブルース
-4744|4|pt|Tony, a Repórter Blues
+4744|4|pt|Tony, a Repórter
 4746|1|x-jat|Sango Shou Densetsu: Aoi Umi no Elfie
 4746|2|en|Coral Reef Legend: Elfie of the Blue Sea
 4746|2|en|Elfie - The Legend of Coral Island
@@ -61800,6 +61803,7 @@
 11829|3|en|Your Name
 11829|3|uk|Твоє ім’я
 11829|3|x-jat|Kimi no Na wa
+11829|4|cs|Tvoje jméno.
 11829|4|de|Your Name. Gestern, heute und für immer
 11829|4|en|Your Name.
 11829|4|et|Sinu nimi on...
@@ -83449,6 +83453,10 @@
 16567|1|x-jat|Tora to Mike Animation
 16567|4|ja|トラとミケ あにめーしょん
 16568|1|x-zht|Jian Wang 3: Xia Gan Yi Dan Shen Jianxin Season 3
+16568|2|en|JX3: Chivalrous Hero Shen Jianxin 3rd Season
+16568|2|zh-Hans|侠肝义胆沈剑心 3（上部）
+16568|2|zh-Hans|剑网3·侠肝义胆沈剑心 第三季（上卷）
+16568|4|en|JX Online3: The Adventure of Shen Jianxin 3rd Season
 16568|4|zh-Hans|剑网3·侠肝义胆沈剑心 第三季
 16572|1|x-jat|Akai Hoshi Aoi Hoshi: Tenmon Carat no Hoshi kara
 16572|4|ja|赤い星 青い星 ~天文カラットの星から~
@@ -95463,7 +95471,7 @@
 19216|1|x-jat|Disney: Twisted-Wonderland the Animation - Episode of Octavinelle
 19216|4|ja|ディズニー ツイステッドワンダーランド ザ アニメーション エピソード オブ オクタヴィネル
 19217|1|x-jat|Tensei Shitara Dragon no Tamago Datta: Saikyou Igai Mezasa Nee
-19217|2|en|Reincarnated as a Dragon Hatchling
+19217|4|en|Reincarnated as a Dragon Hatchling
 19217|4|ja|転生したらドラゴンの卵だった~最強以外目指さねぇ~
 19218|1|x-jat|Kao ni Denai Kashiwada-san to Kao ni Deru Oota-kun
 19218|4|en|Inexpressive Kashiwada and Expressive Oota
@@ -96875,8 +96883,10 @@
 19675|4|ja|霧尾ファンクラブ
 19676|1|x-kot|Rainbow Bubblegem
 19676|4|ko|레인보우 버블젬
+19676|4|zh-Hans|我的同学是美人鱼
 19677|1|x-kot|Rainbow Bubblegem 2: Secret
 19677|4|ko|레인보우 버블젬 2 시크릿
+19677|4|zh-Hans|我的同学是美人鱼 第二季
 19678|1|x-jat|Ha-i! Myaku Myaku Desu
 19678|4|ja|はーい! ミャクミャクです
 19679|1|x-jat|Ousama no Proposal
@@ -96940,3 +96950,15 @@
 19703|4|ja|ギヴン 10th mix
 19704|1|x-jat|OVA Kegareboshi
 19704|4|ja|OVA ケガレボシ
+19705|1|x-jat|Ojisan wa Kawaii Mono ga Osuki.
+19705|4|ja|おじさんはカワイイものがお好き.
+19706|1|x-kot|Sinnaneun Gwahak Aenimeisyeon Why?
+19706|4|ko|신나는 과학 애니메이션 Why?
+19707|1|x-jat|Kidou Senshi Gundam: Tekketsu no Orphans - Urdr Hunt: Chiisana Chousensha no Kiseki
+19707|4|ja|機動戦士ガンダム 鉄血のオルフェンズ ウルズハント 小さな挑戦者の軌跡
+19708|1|x-zht|Jian Wang 3: Shen Jianxin de 365 Tian
+19708|4|zh-Hans|剑网3·沈剑心的365天
+19709|1|x-jat|Kidou Senshi Gundam: Tekketsu no Orphans - Makuai no Kusabi
+19709|4|ja|機動戦士ガンダム 鉄血のオルフェンズ 幕間の楔
+19710|1|x-zht|Jian Wang 3: Xia Gan Yi Dan Shen Jianxin Season 3 (2024)
+19710|4|zh-Hans|剑网3·侠肝义胆沈剑心 第三季 (2024)
