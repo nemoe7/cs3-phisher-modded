@@ -14193,6 +14193,7 @@
 1445|4|it|Kyashan il mito
 1445|4|ja|キャシャーン
 1446|1|x-jat|Tetsuwan Atom (1980)
+1446|2|ko|우주소년 아톰
 1446|2|lt|Robotukas Marsas
 1446|3|x-jat|Atom (1980)
 1446|4|de|Astroboy
@@ -14200,6 +14201,7 @@
 1446|4|fr|Astro le petit robot
 1446|4|it|Astroboy
 1446|4|ja|鉄腕アトム (1980)
+1446|4|ko|철완 아톰
 1447|1|x-jat|Youkai Ningen Bem
 1447|2|en|Humanoid Monster Bem (1968)
 1447|2|en|Monster-man Bem
@@ -20516,6 +20518,7 @@
 2372|3|x-jat|fap
 2372|4|ja|Φなる・あぷろーち
 2373|1|x-jat|Yuuguu Settai: Kotou no Gokuraku e Youkoso
+2373|2|ja|優遇接待 ~孤島の楽園へようこそ~
 2373|2|ko|우대접대
 2373|2|zh-Hant|優遇接待 歡迎來到孤島的極樂
 2373|4|de|Yogusettai
@@ -39341,6 +39344,7 @@
 6484|2|x-jat|Karutagura Tsuki Kyou Ino Byou
 6484|2|zh-Hans|恋狱～月狂病～
 6484|4|ja|カルタグラ ツキ狂イノ病
+6484|4|zh-Hans|恋狱 ~月狂病~
 6485|1|x-jat|Kimihagu
 6485|2|en|Forbidden Love Club
 6485|2|ko|널 벗긴다
@@ -46263,6 +46267,7 @@
 8168|4|en|Nichijou: My Ordinary Life
 8168|4|fr|Nichijō
 8168|4|ja|日常
+8168|4|ko|일상
 8168|4|zh-Hans|日常
 8168|4|zh-Hant|日常
 8169|1|x-jat|Everlasting Note
@@ -95197,8 +95202,10 @@
 19126|1|x-zht|Wu Dong Qiankun Di Wu Ji
 19126|2|en|Martial Universe 5
 19126|2|en|Martial Universe 5th Season
+19126|2|en|Martial Universe S5
 19126|2|x-zht|Wu Dong Qian Kun 5th Season
 19126|2|x-zht|Wu Dong Qiankun 5
+19126|2|zh-Hans|武动乾坤 第5季
 19126|4|zh-Hans|武动乾坤 第五季
 19127|1|x-zht|Huo Feng Liao Yuan 2
 19127|2|x-zht|Huo Feng Liao Yuan 2nd Season
@@ -97059,7 +97066,7 @@
 19723|1|x-jat|Dai Kaijuu Gaea-Tima
 19723|2|en|Gaea-Tima the Gigantis
 19723|4|ja|大怪獣ゲァーチマ
-19724|1|x-jat|Wareware wa Uchuubito
+19724|1|x-jat|Wareware wa Uchuujin
 19724|2|en|We Are Aliens
 19724|4|ja|我々は宇宙人
 19725|1|x-jat|Hoppe-chan: Sun Oukoku to Kuro Hoppe-dan no Himitsu
@@ -97069,3 +97076,16 @@
 19726|4|ja|魔術を極めて旅に出た転生エルフ, 持て余した寿命で生ける伝説となる
 19727|1|en|The Monkey King 3D: Uproar in Heaven
 19727|4|zh-Hant|大闹天宫3D
+19728|1|x-jat|Kami no Shizuku
+19728|2|en|Drops of God
+19728|4|ja|神の雫
+19729|1|x-zht|Wu Dong Qiankun Di Liu Ji
+19729|2|en|Martial Universe 6
+19729|2|en|Martial Universe 6th Season
+19729|2|en|Martial Universe S6
+19729|2|x-zht|Wu Dong Qian Kun 6th Season
+19729|2|x-zht|Wu Dong Qiankun 6
+19729|2|zh-Hans|武动乾坤 第6季
+19729|4|zh-Hans|武动乾坤 第六季
+19730|1|x-jat|Marika-chan no Koukando wa Bukkowarete Iru
+19730|4|ja|茉莉花ちゃんの好感度はぶっ壊れている
