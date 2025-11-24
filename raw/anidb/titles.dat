@@ -731,6 +731,7 @@
 46|4|es|NieA Under 7
 46|4|fr|NieA_7
 46|4|ja|ニア アンダーセブン
+46|4|ko|니아 언더 세븐
 47|1|x-jat|Scryed
 47|2|bg|s-Cry-ed
 47|2|ru|Скрайд
@@ -1471,6 +1472,7 @@
 98|4|th|นักรบวิปลาส
 99|1|x-jat|Serial Experiments Lain
 99|2|he|סדרת הניסויים ליין
+99|2|ko|시리얼 익스페리먼츠 레인
 99|2|lt|Serijiniai Eksperimentai Lain
 99|2|uk|Серійні експерименти Лейн
 99|3|uk|Лейн
@@ -1484,6 +1486,7 @@
 99|4|fr|Serial Experiments Lain
 99|4|it|Serial Experiments Lain
 99|4|ja|シリアルエクスペリメンツレイン
+99|4|ko|레인
 99|4|pl|Wirtualna Lain
 99|4|pt-BR|Serial Experiments Lain
 99|4|ru|Эксперименты Лэйн
@@ -42309,11 +42312,13 @@
 7248|4|ja|さらい屋 五葉
 7248|4|ru|Дом пяти листьев
 7249|1|x-jat|Eve no Jikan Gekijouban
+7249|2|ko|이브의 시간 극장판
 7249|2|lt|Evos metas Filmas
 7249|3|en|EnJ Movie
 7249|4|en|Time of Eve: The Movie
 7249|4|fa|فیلم زمان عصرگاهی
 7249|4|ja|イヴの時間 劇場版
+7249|4|ko|이브의 시간: 당신은, 이브의 시간을 즐기고 있습니까?
 7249|4|uk|Час Єви
 7249|4|zh-Hans|夏娃的时间 剧场版
 7250|1|x-jat|Meitantei Conan: Tenkuu no Lost Ship
@@ -45196,6 +45201,7 @@
 7949|2|en|Wandering Son
 7949|2|ru|Блудный сын
 7949|4|ja|放浪息子
+7949|4|ko|방랑소년
 7949|4|zh-Hans|放浪男孩
 7950|1|x-jat|Sora no Otoshimono: Project Pink
 7950|2|ja|そらのおとしもの プロジェクトピンク
@@ -52424,11 +52430,13 @@
 9582|2|en|It`s Not My Fault That I`m Not Popular!
 9582|2|fa|هر جور نگاه کنی، طرفدار نداشتن من تقصیر شماها است!
 9582|2|id|Bagaimanapun Juga, Aku Tidak Populer Karena Salah Kalian Semua!
+9582|2|ko|내가 인기 없는 건 아무리 생각해도 너희들 탓이야!
 9582|2|tr|Popüler Olmamam Nasıl Düşünürsem Düşüneyim Sizin Suçunuz!
 9582|3|x-jat|Watamote
 9582|4|en|Watamote: No Matter How I Look at It, It`s You Guys` Fault I`m Not Popular!
 9582|4|hu|Kétség sincs afelől, hogy miattatok nem vagyok népszerű!
 9582|4|ja|私がモテないのはどう考えてもお前らが悪い!
+9582|4|ko|내가 인기 없는 건 아무리 생각해도 너희들이 나빠!
 9582|4|zh-Hans|我不受欢迎, 怎么想都是你们的错!
 9582|4|zh-Hant|我不受歡迎，怎麼想都是你們的錯！
 9583|1|x-jat|Ganbare! Oden-kun
@@ -54488,6 +54496,7 @@
 10111|4|en|Barakamon
 10111|4|fa|باراکامون
 10111|4|ja|ばらかもん
+10111|4|ko|바라카몬
 10111|4|zh-Hans|元气囝仔
 10113|1|x-jat|Yuusha ni Narenakatta Ore wa Shibushibu Shuushoku o Ketsui Shimashita.: Yuusha ni Narenakatta Ore no Imouto ga Joukyou Shite Kimashita.
 10113|2|en|Yusibu: I Couldn`t Become a Hero, So I Reluctantly Decided to Get a Job - My Sister Came to the Capital to See Me, Her Brother Who Could Not Become a Hero.
@@ -56322,6 +56331,7 @@
 10576|4|en|Garakowa: Restore the World
 10576|4|fr|Garakowa: Restore the World
 10576|4|ja|ガラスの花と壊す世界
+10576|4|ko|유리의 꽃과 부수는 세계
 10576|4|zh-Hans|玻璃之花与崩坏的世界
 10577|1|x-jat|Gudetama
 10577|4|ja|ぐでたま
@@ -69574,6 +69584,7 @@
 13612|4|es|Made in Abyss: El amanecer del Alma Profunda
 13612|4|fr|Made in Abyss : L`aurore de l`âme des profondeurs
 13612|4|ja|劇場版メイドインアビス 深き魂の黎明
+13612|4|ko|메이드 인 어비스: 깊은 영혼의 여명
 13612|4|ru|Созданный в Бездне: Заря глубинной души
 13612|4|zh-Hans|来自深渊 深沉灵魂的黎明
 13612|4|zh-Hant|劇場版 來自深淵 深沉靈魂的黎明
@@ -76236,6 +76247,7 @@
 14969|4|en|Interspecies Reviewers
 14969|4|es|Críticos de Interespecies
 14969|4|ja|異種族レビュアーズ
+14969|4|ko|이종족 리뷰어스
 14969|4|ru|Рецензенты других рас
 14969|4|zh-Hans|异种族风俗娘评鉴指南
 14969|4|zh-Hant|異種族風俗娘評鑑指南
@@ -77378,6 +77390,7 @@
 15235|4|en|The Stranger by the Shore
 15235|4|es|Un extraño a la orilla del mar
 15235|4|ja|海辺のエトランゼ
+15235|4|ko|해변의 에트랑제
 15235|4|zh-Hant|海邊的異邦人
 15236|1|x-zht|Hulu Xiongdi (2008)
 15236|4|zh-Hans|葫芦兄弟 (2008)
@@ -78089,6 +78102,7 @@
 15359|4|es|Made in Abyss: La ciudad dorada del sol abrasador
 15359|4|fr|Made in Abyss : La ville d`or incandescente
 15359|4|ja|メイドインアビス 烈日の黄金郷
+15359|4|ko|메이드 인 어비스: 열일의 황금향
 15359|4|ru|Сделано в бездне: Солнце, вспыхнувшее в Золотом городе
 15360|1|x-zht|Nizhuan Ciyuan: AI Jueqi
 15360|2|en|Reversal Dimension
@@ -81509,11 +81523,13 @@
 16062|1|x-jat|Shin Gengou Nyankogelion
 16062|4|ja|新元号にゃんこゲリオン
 16063|1|x-jat|Bocchi the Rock!
+16063|2|ko|봇치 더 록!
 16063|2|zh-Hant|孤獨搖滾
 16063|3|ja|ぼざろ
 16063|3|x-jat|Bozaro
 16063|4|en|Bocchi the Rock!
 16063|4|ja|ぼっち・ざ・ろっく!
+16063|4|ko|외톨이 THE ROCK!
 16063|4|ru|РОК-ТИХОНЯ!
 16063|4|zh-Hans|孤独摇滚！
 16063|4|zh-Hant|孤獨搖滾！
@@ -85337,6 +85353,7 @@
 17041|4|en|Suzume
 17041|4|fr|Suzume
 17041|4|ja|すずめの戸締まり
+17041|4|ko|스즈메의 문단속
 17041|4|pl|Suzume
 17041|4|pt|Suzume
 17041|4|ru|Судзумэ
@@ -86082,9 +86099,11 @@
 17220|4|zh-Hans|灰色:幻影扳机
 17221|1|x-jat|Ookami to Koushinryou: Merchant Meets the Wise Wolf
 17221|2|en|Spice and Wolf (2024)
+17221|2|ko|늑대와 향신료 MERCHANT MEETS THE WISE WOLF
 17221|4|de|Spice and Wolf: Merchant Meets the Wise Wolf
 17221|4|en|Spice and Wolf: Merchant Meets the Wise Wolf
 17221|4|ja|狼と香辛料 MERCHANT MEETS THE WISE WOLF
+17221|4|ko|늑대와 향신료: 행상인 늑대 신을 만나다
 17221|4|ru|Волчица и пряности: Торговец встречает мудрую волчицу
 17221|4|zh-Hans|狼与香辛料 行商邂逅贤狼
 17222|1|x-jat|Noumin Kanren no Skill Bakka Agetetara Naze ka Tsuyoku Natta.
@@ -87596,6 +87615,7 @@
 17547|4|en|The Dangers in My Heart
 17547|4|es|Peligros en Mi Corazón
 17547|4|ja|僕の心のヤバイやつ
+17547|4|ko|내 마음의 위험한 녀석
 17547|4|pl|Czarne chmury w moim sercu
 17547|4|zh-Hans|我心里危险的东西
 17548|1|x-zht|Zhu Xian
@@ -88441,6 +88461,7 @@
 17689|4|en|Campfire Cooking in Another World with My Absurd Skills
 17689|4|fr|Hero Skill - Achats en ligne
 17689|4|ja|とんでもスキルで異世界放浪メシ
+17689|4|ko|터무니없는 스킬로 이세계 방랑 밥
 17689|4|ru|Кулинар со странными навыками в параллельном мире
 17689|4|uk|Готування просто неба з абсурдними здібностями
 17689|4|zh-Hans|拥有超常技能的异世界流浪美食家
@@ -89509,6 +89530,7 @@
 17909|4|en|The Elusive Samurai
 17909|4|fr|The Elusive Samurai
 17909|4|ja|逃げ上手の若君
+17909|4|ko|도망을 잘 치는 도련님
 17909|4|zh-Hans|擅长逃跑的殿下
 17909|4|zh-Hant|擅長逃跑的殿下
 17910|1|x-jat|Mahou Shoujo ni Akogarete
@@ -90269,6 +90291,7 @@
 18066|4|en|The Dangers in My Heart (2024)
 18066|4|es|Peligros en Mi Corazón (2024)
 18066|4|ja|僕の心のヤバイやつ (2024)
+18066|4|ko|내 마음의 위험한 녀석 2기
 18066|4|pl|Czarne chmury w moim sercu Sezon 2
 18066|4|ru|Опасность в моём сердце 2
 18066|4|zh-Hans|我心里危险的东西 第二季
@@ -91190,6 +91213,7 @@
 18257|4|de|Campfire Cooking in Another World with My Absurd Skill Staffel 2
 18257|4|en|Campfire Cooking in Another World with My Absurd Skill Season 2
 18257|4|ja|とんでもスキルで異世界放浪メシ2
+18257|4|ko|터무니없는 스킬로 이세계 방랑 밥 2
 18257|4|zh-Hans|拥有超常技能的异世界流浪美食家 第二季
 18258|1|x-zht|Shi Cao Lao Long Bei Guan Yi E Long Zhi Ming 2
 18258|2|x-jat|Yowai 5000-nen no Soushoku Dragon Season 2
@@ -91583,6 +91607,7 @@
 18317|3|x-jat|makeine
 18317|4|en|Makeine: Too Many Losing Heroines!
 18317|4|ja|負けヒロインが多すぎる!
+18317|4|ko|패배 히로인이 너무 많아!
 18317|4|zh-Hans|败犬女主太多了！
 18317|4|zh-Hant|敗北女角太多了！
 18318|1|x-jat|Anime-ban Toukaidou Yotsuya Kaidan
@@ -94119,6 +94144,7 @@
 18859|2|en|Introduction to Mineralogy
 18859|4|en|Ruri Rocks
 18859|4|ja|瑠璃の宝石
+18859|4|ko|루리의 보석
 18859|4|zh-Hans|琉璃的宝石
 18859|4|zh-Hant|琉璃的寶石
 18860|1|x-jat|Oni Chichi Harem
@@ -94197,7 +94223,9 @@
 18873|2|en|Miss Kobayashi`s Dragon Maid: A Lonely Dragon Wants to Be Loved
 18873|4|ja|映画 小林さんちのメイドラゴン さみしがりやの竜
 18874|1|x-jat|City the Animation
+18874|2|ko|시티 디 애니메이션
 18874|4|ja|CITY THE ANIMATION
+18874|4|ko|CITY THE ANIMATION
 18874|4|zh-Hans|小城日常
 18875|1|x-jat|Kinnikuman: Perfect Origin Hen (2025)
 18875|2|en|Kinnikuman: Perfect Origin Arc (2025)
@@ -94866,6 +94894,7 @@
 19038|1|x-jat|Takopii no Genzai
 19038|4|en|Takopi`s Original Sin
 19038|4|ja|タコピーの原罪
+19038|4|ko|타코피의 원죄
 19038|4|zh-Hans|章鱼哔的原罪
 19038|4|zh-Hant|章魚嗶的原罪
 19039|1|x-zht|Tunshi Xingkong Movie: Xueluo Dalu
@@ -95701,9 +95730,9 @@
 19279|1|x-jat|Tamaranai no wa Koi na no ka
 19279|2|en|A Love Too Captivating
 19279|4|ja|たまらないのは恋なのか
-19280|1|x-jat|Watashi no Shiawase na Kekkon (Shinsaku Anime)
-19280|2|en|My Happy Marriage (New Anime)
-19280|4|ja|わたしの幸せな結婚 (新作アニメ)
+19280|1|x-jat|Watashi no Shiawase na Kekkon (2026)
+19280|2|en|My Happy Marriage (2026)
+19280|4|ja|わたしの幸せな結婚 (2026)
 19281|1|x-zht|Fangyu Quan Kai
 19281|2|en|Defense Fully Open
 19281|4|zh-Hans|防御全开
