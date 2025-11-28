@@ -9918,13 +9918,13 @@
 906|2|it|Dragon Ball Z: L`irriducibile bio-combattente
 906|2|ja|ドラゴンボールZ 超戦士撃破!! 勝つのはオレだ
 906|2|pl|Dragon Ball Z: Bio-Brolly
-906|2|pt|Dragon Ball Z - O Ataque do Super Guerreiro
 906|3|en|DBZ Movie 11
 906|4|de|Dragonball Z - The Movie: Angriff der Bio-Kämpfer
 906|4|en|Dragon Ball Z: Bio-Broly
 906|4|fr|Dragon Ball Z 11 - Attaque super warrior
 906|4|it|Dragon Ball Z - L`irriducibile bio-combattente
 906|4|ja|DRAGON BALL Z 超[スーパー]戦士撃破!! 勝つのはオレだ
+906|4|pt|Dragon Ball Z - O Ataque do Super Guerreiro
 907|1|x-jat|Otenki Onee-san
 907|2|ko|기상캐스터 언니
 907|2|zh-Hans|天气预报小姐
@@ -11488,7 +11488,6 @@
 1070|2|fr|Dragon Ball Z 10 - Le retour de Broly
 1070|2|it|Dragon Ball Z: Sfida alla leggenda
 1070|2|ja|ドラゴンボールZ 危険なふたり! 超戦士はねむれない
-1070|2|pt|Dragon Ball Z - Rivais Perigosos
 1070|3|en|DBZ Movie 10
 1070|4|de|Dragon Ball Z - The Movie: Brolys Rückkehr
 1070|4|en|Dragon Ball Z: Broly - Second Coming
@@ -11496,6 +11495,7 @@
 1070|4|fr|Dragon Ball Z 10 - Rivaux dangereux
 1070|4|it|Dragon Ball Z - Sfida alla leggenda
 1070|4|ja|DRAGON BALL Z 危険なふたり! 超[スーパー]戦士はねむれない
+1070|4|pt|Dragon Ball Z - Rivais Perigosos
 1071|1|x-jat|Dragon Ball Z: Fukkatsu no Fusion!! Gokuu to Vegeta
 1071|2|en|Dragon Ball Z: Fusion Revival!! Goku and Vegeta
 1071|2|fr|Dragon Ball Z 12 - Janemba
@@ -82978,6 +82978,7 @@
 16420|4|cs|Star Wars: Vize
 16420|4|ja|STAR WARS VISIONS
 16420|4|pl|Gwiezdne wojny: Wizje
+16420|4|pt|Star Wars: Visões
 16421|1|x-jat|Lord El-Melloi II-sei no Jikenbo: Rail Zeppelin Grace Note - Tokubetsu Hen
 16421|2|x-jat|Fate: Lord El-Melloi II-sei no Jikenbo: Rail Zeppelin Grace Note - Tokubetsu Hen
 16421|2|x-jat|Lord El-Melloi II Sei no Jikenbo: Rail Zeppelin Grace Note - Tokubetsu Hen
@@ -94769,6 +94770,7 @@
 19005|2|en|Star Wars: Visions 3
 19005|2|ja|ビジョンズ
 19005|4|ja|STAR WARS VISIONS (2025)
+19005|4|pt|Star Wars: Visões (2025)
 19006|1|x-jat|Tottoko Hamtarou: Best Hit Ham-chan`zu Music Clip
 19006|4|ja|とっとこハム太郎 ベストヒットハムちゃんず ミュージッククリップ
 19007|1|x-jat|Ikuiku Succubus Saikyouiku
@@ -95684,6 +95686,7 @@
 19258|2|en|Blue Miburo: Serizawa Assassination
 19258|4|ja|青のミブロ 芹沢暗殺編
 19259|1|x-jat|Arisugawa Ren tte Honto wa Onna Nanda yo ne.
+19259|4|en|Ren Arisugawa Is Actually a Girl
 19259|4|ja|有栖川煉ってホントは女なんだよね.
 19260|1|x-jat|Medalist (2026)
 19260|2|en|Medalist (2026)
@@ -96065,7 +96068,10 @@
 19378|2|en|The Ogre`s Bride
 19378|4|ja|鬼の花嫁
 19379|1|x-zht|Ke Jin Wanjia
+19379|2|en|Gold Player
 19379|2|en|Rich Player
+19379|2|en|The Rich Player
+19379|2|en|Welcome to the Era
 19379|4|en|Wealth and Wonder
 19379|4|zh-Hans|克金玩家
 19380|1|x-jat|Yoroi Shin Den Samurai Troopers
@@ -97152,3 +97158,18 @@
 19736|1|x-jat|Tadaima, Ojama Saremasu!
 19736|2|en|Pardon the Intrusion, I`m Home!
 19736|4|ja|ただいま, おじゃまされます!
+19737|1|x-jat|L`amour fou de l`automate
+19737|4|ja|L`amour fou de l`automate
+19738|1|x-jat|Kenki Virgo
+19738|4|ja|剣鬼バルゴ
+19739|1|x-zht|Xuan Jie Zhi Men
+19739|4|en|The Gate of Mystical Realm
+19739|4|zh-Hans|玄界之门
+19740|1|x-zht|Zongmen Li Chule Wo Dou Shi Wodi (2025)
+19740|2|en|Spy x Sect Part 2
+19740|2|zh-Hans|宗门里除了我都是卧底 第二部
+19740|4|en|Spy x Sect (2025)
+19740|4|zh-Hans|宗门里除了我都是卧底 (2025)
+19741|1|x-jat|Girl Crush
+19741|2|en|Girl Crush
+19741|4|ja|ガールクラッシュ
